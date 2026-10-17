@@ -1,0 +1,22 @@
+{
+  "nome": "liu-b",
+  "fonte": "Liu e Tsyvinski (2021), NBER w24877. Replica pre-registrata in registro/esperimenti.md, risultati nel commit f68f365.",
+  "stato": "candidata: non in esecuzione. Il giro non legge questa cartella.",
+  "regola": {
+    "rendimento": "settimana da domenica a domenica, UTC: chiusura di domenica / chiusura della domenica precedente − 1",
+    "segnale": "la settimana appena chiusa supera l'80° percentile, metodo R7, dei rendimenti di tutte le settimane precedenti della stessa coppia",
+    "percentile": 0.8,
+    "metodoPercentile": "R7",
+    "storia": "tutte le settimane precedenti, dal primo dato Kraken disponibile",
+    "dentro": "una settimana",
+    "lato": "solo lungo, altrimenti fuori"
+  },
+  "coppie": ["XBTUSD", "XBTEUR"],
+  "scostamenti": [
+    "XBTEUR è una coppia operativa dichiarata: nella replica era solo di confronto, fuori dal giudizio."
+  ],
+  "costi": {
+    "commissionePercentoPerLato": 0.1,
+    "slippagePercento": 0.05
+  }
+}
