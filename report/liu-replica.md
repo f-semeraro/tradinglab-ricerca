@@ -44,4 +44,12 @@ Simulazione su carta. Nessuna operazione reale, nessuna chiave, nessuna consulen
 
 Pianificata prima dell'esecuzione: seme 20261020, 100.000 permutazioni per A, B e C. Solo informativa: il verdetto pre-registrato non cambia, qualunque sia il risultato.
 
-Stato: in attesa di esecuzione.
+Eseguita il 2026-10-17 23:39, con seme 20261020 e 100000 permutazioni, come pianificato.
+
+| variante | p (100.000 perm.) | errore standard Monte Carlo | soglia | esito informativo | verdetto pre-registrato |
+|---|---:|---:|---:|---|---|
+| A | 3.62e-1 | 1.52e-3 | 0.0167 | non passa | non passa (invariato) |
+| B | 1.66e-2 | 4.04e-4 | 0.0167 | passa | passa (invariato) |
+| C | 6.50e-2 | 7.80e-4 | 0.0167 | non passa | non passa (invariato) |
+
+Il verdetto pre-registrato non cambia, qualunque sia il risultato: B passa con p 0,0160 su 10.000 permutazioni e seme 20261019, come scritto nei risultati sopra. Questa sezione misura solo quanto il p dipende dal caso.
