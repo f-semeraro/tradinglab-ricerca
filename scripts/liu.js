@@ -42,6 +42,7 @@ const COPPIA = "XBTUSD";
 const CONFRONTO = "XBTEUR";
 
 const soloCopertura = process.argv.includes("--solo-copertura");
+const verificaP = process.argv.includes("--verifica-p");
 
 function leggiCandele(nomeFile) {
   const percorso = dentro("dati", "archivio", nomeFile);
@@ -115,24 +116,92 @@ function analizza(candele) {
   };
 }
 
-function giudica(analisi, variante) {
+/** Il giudizio di una variante. Per il test pre-registrato, seme e permutazioni sono quelli della pre-registrazione. */
+function giudica(analisi, variante, { seme = SEME, permutazioni = PERMUTAZIONI } = {}) {
   const { d, S0, S1, risultati } = analisi;
   const r = risultati[variante];
   const prezzi = d.close.slice(S0, S1 + 1);
   return giudicaPermutazione({
     gruppi: [{ prezzi, W: prezzi.length, operazioni: r.perm.map((p) => ({ inizio: p.entrata - S0, fine: p.uscita - S0 })) }],
     costoAndataRitorno: COSTO,
-    permutazioni: PERMUTAZIONI,
-    rng: generatore(SEME),
+    permutazioni,
+    rng: generatore(seme),
     N,
     alfa: ALFA,
     minimoOperazioni: 1
   });
 }
 
+// la verifica informativa del p: seme e permutazioni fissati e scritti nel report prima di eseguire
+const SEME_VERIFICA = 20261020;
+const PERMUTAZIONI_VERIFICA = 100000;
+const RIGA_PIANO = "Stato: in attesa di esecuzione.";
+
+/** Rifà il giudizio con 100.000 permutazioni e un altro seme, solo per vedere quanto è stabile il p. Il verdetto non cambia. */
+function verificaInformativa(usd) {
+  const percorsoReport = dentro("report", "liu-replica.md");
+  const report = fs.readFileSync(percorsoReport, "utf8");
+  if (!report.includes(RIGA_PIANO) || !report.includes(`seme ${SEME_VERIFICA}`)) {
+    throw new Error(`la verifica non è pianificata nel report con il seme ${SEME_VERIFICA}: va scritta prima di eseguire`);
+  }
+  const registro = fs.readFileSync(dentro("registro", "esperimenti.md"), "utf8");
+  if (Object.keys(VARIANTI).some((v) => registro.includes(`| liu-${v}-verifica |`))) {
+    throw new Error("la verifica informativa è già stata eseguita");
+  }
+
+  const giudizi = {};
+  for (const v of Object.keys(VARIANTI)) {
+    giudizi[v] = giudica(usd, v, { seme: SEME_VERIFICA, permutazioni: PERMUTAZIONI_VERIFICA });
+  }
+  const errore = (p) => Math.sqrt((p * (1 - p)) / PERMUTAZIONI_VERIFICA);
+  const data = new Date().toISOString().slice(0, 16).replace("T", " ");
+
+  const tabella = [
+    "| variante | p (100.000 perm.) | errore standard Monte Carlo | soglia | esito informativo | verdetto pre-registrato |",
+    "|---|---:|---:|---:|---|---|"
+  ];
+  for (const v of Object.keys(VARIANTI)) {
+    const g = giudizi[v];
+    const verdettoPre = v === "B" ? "passa (invariato)" : "non passa (invariato)";
+    tabella.push(
+      `| ${v} | ${g.p.toExponential(2)} | ${errore(g.p).toExponential(2)} | ${(ALFA / N).toFixed(4)} | ` +
+      `${g.passa ? "passa" : "non passa"} | ${verdettoPre} |`
+    );
+  }
+  const testo = [
+    `Eseguita il ${data}, con seme ${SEME_VERIFICA} e ${PERMUTAZIONI_VERIFICA} permutazioni, come pianificato.`,
+    "",
+    ...tabella,
+    "",
+    "Il verdetto pre-registrato non cambia, qualunque sia il risultato: B passa con p 0,0160 su 10.000 permutazioni e seme 20261019, come scritto nei risultati sopra. Questa sezione misura solo quanto il p dipende dal caso."
+  ].join("\n");
+
+  fs.writeFileSync(percorsoReport, report.replace(RIGA_PIANO, testo), "utf8");
+
+  const impronta = crypto
+    .createHash("sha256")
+    .update(JSON.stringify({ SEME_VERIFICA, PERMUTAZIONI_VERIFICA, COSTO, N, ALFA }))
+    .digest("hex")
+    .slice(0, 10);
+  const righeRegistro = Object.keys(VARIANTI).map((v) => {
+    const g = giudizi[v];
+    return `| ${data} | liu-${v}-verifica | ${COPPIA} | ${impronta} | 4 gen 2021 → 28 giu 2026 | — | — | ` +
+      `p ${g.p.toExponential(2)} (errore ${errore(g.p).toExponential(2)}) | — | verifica informativa, seme ${SEME_VERIFICA}; ` +
+      `verdetto pre-registrato invariato: ${v === "B" ? "B passa" : `${v} non passa`} |`;
+  });
+  fs.appendFileSync(dentro("registro", "esperimenti.md"), righeRegistro.join("\n") + "\n", "utf8");
+  console.log(`Verifica informativa scritta nel report e nel registro. Verdetto pre-registrato invariato.`);
+}
+
 function main() {
   const usd = analizza(leggiCandele("XBTUSD_1440.csv"));
   const buchi = domenicheMancanti(usd.d, usd);
+
+  if (verificaP) {
+    if (buchi.length > 0) throw new Error(`domeniche senza prezzo nel periodo (${buchi.join(", ")})`);
+    verificaInformativa(usd);
+    return;
+  }
 
   if (soloCopertura) {
     console.log(`domeniche nella finestra: ${usd.S1 - usd.S0 + 1}, senza prezzo: ${buchi.length}${buchi.length ? ` (${buchi.join(", ")})` : ""}`);

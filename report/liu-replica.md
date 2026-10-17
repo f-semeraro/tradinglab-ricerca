@@ -39,3 +39,9 @@ Costi: 30,0 punti base per operazione, andata e ritorno.
 ---
 
 Simulazione su carta. Nessuna operazione reale, nessuna chiave, nessuna consulenza.
+
+## Verifica informativa del p
+
+Pianificata prima dell'esecuzione: seme 20261020, 100.000 permutazioni per A, B e C. Solo informativa: il verdetto pre-registrato non cambia, qualunque sia il risultato.
+
+Stato: in attesa di esecuzione.
