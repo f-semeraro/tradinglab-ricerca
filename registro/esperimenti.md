@@ -39,6 +39,46 @@ Scritta il 17 ottobre 2026, prima di qualsiasi esecuzione sui dati. I file dell'
 
 **Report.** Per ogni variante e versione: numero di operazioni, rendimento medio per operazione in punti base, lordo e netto; costo di pareggio, cioè il rendimento medio lordo; p; esito; anno per anno, solo informativo; confronto con la tabella 8 sul campione completo. Una riga per variante nel registro.
 
+## Pre-registrazione: replica fuori campione di Liu e Tsyvinski, «Risks and Returns of Cryptocurrency»
+
+Scritta il 18 ottobre 2026, prima di qualsiasi esecuzione sui dati di questo test. Il test è singolo, come quello su Shen et al.
+
+**Fonte.** Liu, Y. e Tsyvinski, A., «Risks and Returns of Cryptocurrency», NBER working paper w24877. Il testo è stato verificato sul PDF del NBER, letto in locale: paragrafi 2 e 4.1, tabelle 14–17. Dal testo: coefficiente settimanale di 0,19 a una settimana, 0,22 a due, 0,21 a tre e 0,09 a quattro (tabella 14); quinto più alto 11,22% e più basso 2,60% a una settimana, differenza 8,62 (tabella 15); differenza 4,35 dal 2013 (tabella 16); senza anticipazioni, con soglie sui primi due anni, l'effetto resta (tabella 17). Il committente cita la pubblicazione su *Review of Financial Studies* (2021): non l'ho verificata.
+
+**Correzione alla richiesta.** Il committente scriveva che il coefficiente è più debole a due e tre settimane. Il testo dice il contrario: 0,22 e 0,21, più alti dello 0,19 a una settimana. La previsione tiene conto del testo.
+
+**Coppia e periodo.** Coppia principale XBTUSD su Kraken. XBTEUR è solo un confronto, fuori dal giudizio. Periodo giudicato: da lunedì 4 gennaio 2021 a domenica 28 giugno 2026, cioè le settimane complete. I dati da luglio 2026 restano da parte. Lo studio usa dati CoinDesk dal 1 gennaio 2011 al 31 maggio 2018, quindi il periodo giudicato è fuori dal suo campione.
+
+**Dati.** Candele giornaliere (1440 minuti) dall'archivio Kraken, in locale in `dati/archivio/`, non nel repository. Il prezzo di domenica è la chiusura della candela giornaliera di domenica.
+
+**Settimana.** Da lunedì 00:00 a domenica 24:00 UTC. Rendimento settimanale: chiusura di domenica / chiusura della domenica precedente − 1.
+
+**Varianti** (tre, tutte solo lunghe, altrimenti fuori):
+1. *A, segno:* si tiene XBTUSD la settimana successiva se la settimana appena chiusa ha rendimento positivo.
+2. *B, quinto più alto, 1 settimana:* si tiene la settimana successiva se la settimana appena chiusa supera l'80° percentile dei rendimenti settimanali precedenti. Il percentile è calcolato solo sul passato, su tutte le settimane dal primo dato Kraken (ottobre 2013), con interpolazione lineare (metodo R7). Non include mai la settimana appena chiusa né dati futuri.
+3. *C, quinto più alto, 3 settimane:* stesso segnale di B, ma si resta dentro per 3 settimane. Un nuovo segnale mentre si è dentro fa ripartire il conteggio.
+
+**Operazioni.** Una permanenza è un periodo continuo di settimane con la posizione aperta, e conta come un'operazione. Si entra alla chiusura di domenica prima della prima settimana, si esce alla chiusura di domenica dell'ultima. Restare dentro più settimane non costa.
+
+**Costi.** 0,30% per operazione: 0,10% per lato più 0,05% di slippage per lato, pagati all'ingresso e all'uscita. Lo stesso modello di `strategie/rsi-base.json`.
+
+**Giudice.** Giudice a permutazione generale del laboratorio, con N = 3 e alfa 0,05. Le operazioni vere, con la loro durata in settimane, si ricollocano a caso tra le settimane del periodo, senza sovrapposizioni. La statistica è la somma dei rendimenti netti per operazione. Permutazioni: 10.000, con seme fisso 20261019. Passa solo con p ≤ alfa/N = 0,0167 e somma dei rendimenti netti positiva.
+
+**Confronto.** Buy and hold di XBTUSD nello stesso periodo, con lo stesso costo di andata e ritorno (0,30%). Per ogni variante, rendimento totale e drawdown massimo sulla curva settimanale.
+
+**Scostamenti dal metodo dichiarati.**
+(a) Per B e C il percentile usa tutti i dati Kraken dal 2013, non il campione CoinDesk dello studio dal 2011.
+(b) Il periodo giudicato non si sovrappone al campione dello studio (2011–2018).
+(c) Le soglie della tabella 15 usano l'intero campione; qui usano solo il passato, come nell'approccio della tabella 17.
+(d) Una permanenza iniziata prima del periodo viene tagliata: entra alla prima domenica del periodo, pagando il costo di ingresso.
+(e) Le settimane con dati mancanti si saltano e si contano.
+
+**Previsione.** Nessuna previsione netta. Ci aspettiamo un effetto più debole che nello studio: nello studio la differenza si dimezza già dal 2013, e il campione include anni di salita fortissima, in cui anche dopo le settimane peggiori il rendimento era positivo. Se qualcosa passa, è più probabile che riduca i crolli che batta il buy and hold.
+
+**Criterio di successo.** Una variante passa solo con p ≤ 0,0167 e somma dei rendimenti netti positiva.
+
+**Report.** Per ogni variante: numero di operazioni, percentuale di settimane dentro, rendimento medio per operazione lordo e netto in punti base, rendimento totale e drawdown massimo, buy and hold nello stesso periodo, p ed esito, e anno per anno. Una riga per variante nel registro.
+
 | data (UTC) | strategia | coppia | impronta | periodo | operazioni | capitale | vs comprato e basta | drawdown | nota |
 |---|---|---|---|---|---:|---:|---:|---:|---|
 | 2026-10-17 15:11 | rsi-base | XXBTZEUR | 1863e747c0 | 27 ott 2024, 02:00 → 16 ott 2025, 02:00 | 0 | 100,00 € (0,00%) | -8,30 punti | 0,00% | passo 1: pipeline su 20 coppie, solo finestra di ricerca |
