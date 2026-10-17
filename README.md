@@ -43,6 +43,8 @@ Il codice nuovo di questo repository segue la stessa regola: `simulazione.js` è
 
 **Quando cambi uno dei file copiati nel progetto principale, ricopialo qui e fai girare i test in entrambi i posti.** Non c'è un controllo automatico che lo faccia per te.
 
+**Costi.** Le operazioni simulate usano i costi di Bybit (0,10% per lato più 0,05% di slippage), mentre i prezzi e i volumi negli storici dei CSV sono ancora quelli di Kraken.
+
 ## Il generatore di strategie
 
 Il comando `npm run ricerca` genera strategie a caso dallo spazio di ricerca (`lib/ricerca.js`), le prova sulle candele giornaliere di venti coppie, e verifica le migliori sull'ultimo anno.

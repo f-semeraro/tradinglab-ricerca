@@ -32,7 +32,7 @@
   },
 
   "costi": {
-    "commissionePercentoPerLato": 0.4,
+    "commissionePercentoPerLato": 0.1,
     "slippagePercento": 0.05
   }
 }
