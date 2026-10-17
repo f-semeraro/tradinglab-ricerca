@@ -61,3 +61,6 @@ Scritta il 17 ottobre 2026, prima di qualsiasi esecuzione sui dati. I file dell'
 | 2026-10-17 15:12 | rsi-base | ALGOEUR | 1863e747c0 | 27 ott 2024, 02:00 → 16 ott 2025, 02:00 | 0 | 100,00 € (0,00%) | 9,47 punti | 0,00% | passo 1: pipeline su 20 coppie, solo finestra di ricerca |
 | 2026-10-17 15:12 | rsi-base | ATOMEUR | 1863e747c0 | 27 ott 2024, 02:00 → 16 ott 2025, 02:00 | 0 | 100,00 € (0,00%) | 48,48 punti | 0,00% | passo 1: pipeline su 20 coppie, solo finestra di ricerca |
 | 2026-10-17 15:12 | rsi-base | FILEUR | 1863e747c0 | 27 ott 2024, 02:00 → 16 ott 2025, 02:00 | 0 | 100,00 € (0,00%) | 69,09 punti | 0,00% | passo 1: pipeline su 20 coppie, solo finestra di ricerca |
+| 2026-10-17 23:04 | shen-inizio | XBTUSD | 1e0000e7bd | 1 gen 2021 → 30 giu 2026 | 1026 | — | pareggio -2,2 p.b. · p 7.85e-1 | — | Shen et al. 2022, inizio: eseguibile non passa; replica lorda -0,9 p.b., p 7.94e-1 |
+| 2026-10-17 23:04 | shen-penultima | XBTUSD | 1e0000e7bd | 1 gen 2021 → 30 giu 2026 | 957 | — | pareggio -0,7 p.b. · p 2.81e-1 | — | Shen et al. 2022, penultima: eseguibile non passa; replica lorda 0,7 p.b., p 2.76e-1 |
+| 2026-10-17 23:04 | shen-combinata | XBTUSD | 1e0000e7bd | 1 gen 2021 → 30 giu 2026 | 532 | — | pareggio -2,6 p.b. · p 7.68e-1 | — | Shen et al. 2022, combinata: eseguibile non passa; replica lorda -0,2 p.b., p 5.56e-1 |
