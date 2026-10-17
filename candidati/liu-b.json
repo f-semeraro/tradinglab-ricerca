@@ -1,22 +1,32 @@
 {
   "nome": "liu-b",
-  "fonte": "Liu e Tsyvinski (2021), NBER w24877. Replica pre-registrata in registro/esperimenti.md, risultati nel commit f68f365.",
-  "stato": "candidata: non in esecuzione. Il giro non legge questa cartella.",
-  "regola": {
-    "rendimento": "settimana da domenica a domenica, UTC: chiusura di domenica / chiusura della domenica precedente − 1",
-    "segnale": "la settimana appena chiusa supera l'80° percentile, metodo R7, dei rendimenti di tutte le settimane precedenti della stessa coppia",
-    "percentile": 0.8,
-    "metodoPercentile": "R7",
-    "storia": "tutte le settimane precedenti, dal primo dato Kraken disponibile",
-    "dentro": "una settimana",
-    "lato": "solo lungo, altrimenti fuori"
-  },
+  "tipo": "settimanale",
+  "variante": "B",
+  "settimaneDentro": 1,
+  "percentile": 0.8,
+  "metodoPercentile": "R7",
+  "lato": "lungo",
   "coppie": ["XBTUSD", "XBTEUR"],
-  "scostamenti": [
-    "XBTEUR è una coppia operativa dichiarata: nella replica era solo di confronto, fuori dal giudizio."
-  ],
   "costi": {
     "commissionePercentoPerLato": 0.1,
     "slippagePercento": 0.05
-  }
+  },
+  "rischio": {
+    "quotaCapitalePercento": 100,
+    "posizioniMassime": 1,
+    "perditaMassimaGiornalieraPercento": 6
+  },
+  "fonte": "Liu e Tsyvinski (2021), NBER w24877. Replica pre-registrata in registro/esperimenti.md; risultati nel commit f68f365; verifica informativa del p nel commit 918b440.",
+  "stato": "candidata: non in esecuzione. Il giro non la legge finché non viene spostata in strategie/ con un commit esplicito.",
+  "regola": {
+    "rendimento": "settimana da domenica a domenica, UTC: chiusura di domenica / chiusura della domenica precedente − 1",
+    "segnale": "la settimana appena chiusa supera l'80° percentile, metodo R7, dei rendimenti di tutte le settimane precedenti della stessa coppia",
+    "dentro": "una settimana",
+    "lato": "solo lungo, altrimenti fuori",
+    "esecuzione": "prezzo di chiusura della candela oraria del lunedì 00:00–01:00 UTC, eseguita dopo le 01:00"
+  },
+  "scostamenti": [
+    "XBTEUR è una coppia operativa dichiarata: nella replica era solo di confronto, fuori dal giudizio.",
+    "L'esecuzione avviene il lunedì dopo le 01:00, non alla chiusura di domenica come nel backtest."
+  ]
 }

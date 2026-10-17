@@ -31,7 +31,8 @@ import { leggiStrategia, candeleNecessarie } from "../lib/configurazione.js";
 import { nuovoStato, avanza, pianoDelGiro, ultimaCandelaElaborata, esecuzioneDi } from "../lib/simulazione.js";
 import { calcolaMetriche } from "../lib/metriche.js";
 import { formattaMomento } from "../lib/tempo.js";
-import { leggiJson, scriviJson, scriviAtomico } from "../lib/persistenza.js";
+import { leggiJson, scriviJson, scriviAtomico, leggiStoriaSettimanale, scriviStoriaSettimanale } from "../lib/persistenza.js";
+import { aggiornaStoria, passoPerCoppia, nuovoStatoProva, problemiSettimanale, righeSintesiSettimanale } from "../lib/prova.js";
 
 const RADICE = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dentro = (...parti) => path.join(RADICE, ...parti);
@@ -52,17 +53,32 @@ function caricaStrategie(lab) {
   if (file.length === 0) throw new Error("nessuna strategia in strategie/");
   // una strategia che non passa la validazione ferma il giro: meglio fermo che con valori inventati
   return file.map((f) => {
-    const strategia = leggiStrategia(path.join(cartella, f));
-    return { nome: path.basename(f, ".json"), strategia, ...esecuzioneDi(strategia, lab) };
+    const percorso = path.join(cartella, f);
+    const nome = path.basename(f, ".json");
+    // le strategie settimanali (la prova di Liu e Tsyvinski) hanno una regola diversa: si validano a parte
+    const grezza = leggiJson(percorso);
+    if (grezza?.tipo === "settimanale") {
+      const problemi = problemiSettimanale(grezza);
+      if (problemi.length > 0) throw new Error(`strategia settimanale ${nome} non valida: ${problemi.join("; ")}`);
+      return { nome, strategia: grezza, settimanale: true, intervallo: 1440, coppie: grezza.coppie, legacy: false };
+    }
+    const strategia = leggiStrategia(percorso);
+    return { nome, strategia, ...esecuzioneDi(strategia, lab) };
   });
 }
 
 /** Le chiavi (coppia, intervallo) che servono davvero adesso: una candela nuova è chiusa da almeno un intervallo. */
 function chiaviDaScaricare(strategie, adessoSecondi) {
   const chiavi = new Map();
-  for (const { nome, intervallo, coppie, legacy } of strategie) {
+  for (const { nome, intervallo, coppie, legacy, settimanale } of strategie) {
     const durata = intervallo * 60;
     for (const coppia of coppie) {
+      if (settimanale) {
+        // la prova ha bisogno sempre delle giornaliere (il segnale) e delle orarie (il prezzo di esecuzione)
+        chiavi.set(`${coppia}|1440`, true);
+        chiavi.set(`${coppia}|60`, true);
+        continue;
+      }
       const cursore = leggiJson(dentro("risultati", ...(legacy ? [nome] : [nome, coppia]), "cursore.json"));
       // la candela dopo l'ultima elaborata si chiude a ultima + 2 intervalli: prima non c'è niente da fare
       const serve = !cursore || adessoSecondi >= cursore.ultimaCandelaElaborata + 2 * durata;
@@ -96,7 +112,7 @@ function sintesi(elementi, lab) {
   ];
 
   const note = [];
-  for (const { nome, coppia, intervallo, stato } of elementi) {
+  for (const { nome, coppia, intervallo, stato } of elementi.filter((e) => !e.settimanale)) {
     const etichetta = intervallo === 1440 ? "giornaliere" : `${intervallo} min`;
     const ultimo = stato.istantanee.at(-1);
     if (!ultimo) {
@@ -121,6 +137,20 @@ function sintesi(elementi, lab) {
       const buchi = stato.lacune.length === 1 ? "buco" : "buchi";
       note.push(`- ${nome} · ${coppia}: ${candeleMancanti} candele mancanti nei dati (${stato.lacune.length} ${buchi}), dichiarate e non inventate.`);
     }
+  }
+
+  const settimanali = elementi.filter((e) => e.settimanale);
+  if (settimanali.length > 0) {
+    righe.push(
+      "",
+      "## Strategie settimanali (prova in avanti)",
+      "",
+      "Esecuzione al prezzo di chiusura della candela oraria del lunedì 00:00–01:00 UTC. Il confronto è con il buy and hold della stessa coppia dalla prima settimana della prova.",
+      "",
+      "| strategia | coppia | operazioni chiuse | settimane dentro | rendimento contro buy and hold | drawdown massimo | campione |",
+      "|---|---|---:|---:|---|---:|---|",
+      ...righeSintesiSettimanale(settimanali)
+    );
   }
 
   righe.push("");
@@ -160,8 +190,24 @@ async function main() {
   }
 
   const elementi = [];
-  for (const { nome, strategia, intervallo, coppie, legacy } of strategie) {
+  for (const { nome, strategia, intervallo, coppie, legacy, settimanale } of strategie) {
     for (const coppia of coppie) {
+      if (settimanale) {
+        // prima lo storico delle domeniche, poi lo stato: un'interruzione tra i due non conta due volte
+        const storiaPath = dentro("dati", "settimanali", `${coppia}.csv`);
+        const precedente = leggiStoriaSettimanale(storiaPath);
+        const storia = aggiornaStoria(precedente, candele.get(`${coppia}|1440`) ?? []);
+        if (storia.length !== precedente.length) scriviStoriaSettimanale(storiaPath, storia);
+
+        const statoPath = dentro("risultati", nome, coppia, "stato.json");
+        const stato = leggiJson(statoPath) ?? nuovoStatoProva({ lab, coppia });
+        const eseguiti = passoPerCoppia({ stato, strategia, storia, orarie: candele.get(`${coppia}|60`) ?? [], coppia, lab });
+        scriviJson(statoPath, stato);
+        console.log(`${nome} · ${coppia}: ${eseguiti.length} eventi eseguiti`);
+        elementi.push({ nome, coppia, stato, storia, settimanale: true });
+        continue;
+      }
+
       const cartella = dentro("risultati", ...(legacy ? [nome] : [nome, coppia]));
       const statoPath = path.join(cartella, "stato.json");
       const cursorePath = path.join(cartella, "cursore.json");
