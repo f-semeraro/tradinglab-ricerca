@@ -1,13 +1,11 @@
 # Sintesi del laboratorio
 
-Mercato **SOLEUR**, candele da 60 minuti, capitale di partenza 100,00 €.
-Ultima candela elaborata: quella che apre alle 17 ott 2026, 15:00 (ora di Europe/Rome).
+Ogni riga è un portafoglio di carta indipendente, partito con 100,00 €. Il confronto è con il «comprato e basta» sulla stessa coppia, dallo stesso punto di partenza.
+Ultima candela elaborata: quella che apre alle 17 ott 2026, 18:00 (ora di Europe/Rome).
 
-Il benchmark è il «comprato e basta» sullo stesso mercato, dallo stesso punto di partenza.
-
-| strategia | capitale | vs comprato e basta | operazioni chiuse | drawdown massimo | posizione aperta |
-|---|---:|---:|---:|---:|---|
-| rsi-base | 100,00 € (0,00%) | 0,11 punti | 0 | 0,00% | no |
+| strategia | coppia | candele | capitale | vs comprato e basta | operazioni chiuse | drawdown massimo | posizione aperta |
+|---|---|---|---:|---:|---:|---:|---|
+| rsi-base | SOLEUR | 60 min | 100,00 € (0,00%) | 0,91 punti | 0 | 0,00% | no |
 
 ---
 
