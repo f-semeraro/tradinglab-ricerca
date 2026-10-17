@@ -29,11 +29,11 @@ jobs:
       - name: Genera, valuta e verifica le strategie
         run: node scripts/ricerca.js
 
-      - name: Salva registro, report e strategie promosse, solo se sono cambiati
+      - name: Salva registro, report e candidati, solo se sono cambiati
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add registro report strategie
+          git add registro report candidati
           if git diff --cached --quiet; then
             echo "Nessuna novità: niente commit."
           else

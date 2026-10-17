@@ -51,8 +51,9 @@ Il comando `npm run ricerca` genera strategie a caso dallo spazio di ricerca (`l
 
 - **Ricerca:** tutto tranne l'ultimo anno. Le strategie si confrontano con il «comprato e basta» su ogni coppia.
 - **Verifica:** l'ultimo anno, una sola volta per candidato. Il registro impedisce di riverificare lo stesso candidato.
-- **Soglia:** un candidato passa solo se batte il «comprato e basta» sulla maggioranza delle coppie, con un t sopra la soglia che cresce con il numero di strategie mai provate (N). Più prove fai, più il risultato deve essere netto.
-- **Promozione:** i candidati che passano finiscono in `strategie/` e il giro li esegue da solo, sulle loro coppie e sul loro intervallo.
+- **Giudizio a permutazione** (`lib/giudice.js`): le operazioni della strategia restano fisse per numero, durata e costi, e vengono ricollocate a caso, senza sovrapposizioni, tra i momenti in cui la strategia poteva decidere. Un candidato passa solo se il suo p, cioè la frazione di ricollocazioni che fanno almeno altrettanto bene, è ≤ alfa/N, dove N è il numero di ipotesi provate in tutto. Serve anche un risultato netto positivo dopo i costi. Il report mostra netto, lordo e buy and hold.
+- **Promozione:** i candidati che passano finiscono in `candidati/`. Il giro non li legge: per usarne uno serve un commit che lo sposti in `strategie/`.
+- **Registro:** `registro/candidati.csv` per le corse con questo giudizio. `registro/ricerca.csv` è la prima corsa, con il giudizio t, ed è chiusa.
 
 Un seme si usa una volta sola: per una nuova corsa cambia `seme` in `ricerca.json`. Rilanciare lo stesso seme si ferma con un messaggio, così l'ultimo anno non si brucia per sbaglio. La corsa vera la lancia il workflow `ricerca`, a mano.
 

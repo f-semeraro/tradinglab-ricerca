@@ -9,6 +9,11 @@ node_modules/
 *.tmp
 *.log
 
+# archivio Kraken scaricato a mano (ZIP e CSV grezzi) e candele a 30 minuti ricavate da esso:
+# pesanti, restano in locale. I report e il registro dei backtest a 30 minuti sì, vanno nel repository.
+dati/archivio/
+dati/storico/*-30.csv
+
 # sistema operativo e editor
 .DS_Store
 Thumbs.db

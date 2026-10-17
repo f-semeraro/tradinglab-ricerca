@@ -8,12 +8,15 @@
  *      per lo stesso seme);
  *   2. le valuta sulla finestra di RICERCA (tutto tranne l'ultimo anno);
  *   3. sceglie le migliori `candidatiVerifica`, che non sono mai state verificate;
- *   4. le verifica sull'ULTIMO ANNO, una sola volta per candidato;
- *   5. promuove nel giro (strategie/) solo quelle che passano il giudizio, con
- *      una soglia che tiene conto di tutte le strategie mai provate.
+ *   4. le verifica sull'ULTIMO ANNO, una sola volta per candidato, con il giudizio
+ *      a permutazione (lib/giudice.js);
+ *   5. mette in candidati/ chi passa. Il giro non legge quella cartella: promuovere
+ *      una strategia in strategie/ richiede un commit esplicito.
  *
- * Tutto va in registro/ricerca.csv, che è sola aggiunta: ogni prova resta
- * scritta, anche le perdenti. È questo che rende onesto il conto di N.
+ * Il registro di questa versione è registro/candidati.csv, sola aggiunta. Il
+ * registro/ricerca.csv della prima corsa resta com'è, con il giudizio t: serve
+ * solo a sapere quali candidati sono già stati verificati e quante ipotesi sono
+ * state provate in tutto (N).
  */
 
 import fs from "node:fs";
@@ -25,22 +28,20 @@ import {
   campionaStrategia,
   impronta,
   valutaSuCoppie,
-  statistiche,
-  giudica,
-  sogliaT,
-  correlazioneMedia,
-  coppieEffettive
+  statistiche
 } from "../lib/ricerca.js";
+import { giudicaPermutazione } from "../lib/giudice.js";
 import { problemiStrategia } from "../lib/configurazione.js";
-import { giornoUTCInSecondi, formattaMomento } from "../lib/tempo.js";
+import { formattaMomento } from "../lib/tempo.js";
 import { leggiJson, scriviAtomico, scriviJson } from "../lib/persistenza.js";
 
 const RADICE = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dentro = (...parti) => path.join(RADICE, ...parti);
-const REGISTRO = dentro("registro", "ricerca.csv");
+const REGISTRO_PRIMA_CORSA = dentro("registro", "ricerca.csv");
+const REGISTRO = dentro("registro", "candidati.csv");
 const INTESTAZIONE =
-  "data_utc,seme,id,fase,N,operazioni,media_eccesso,quota_coppie_vincenti,correlazione,coppie_effettive,t,soglia,esito,motivi\n";
-const COLONNA_ESITO = 12;
+  "data_utc,seme,id,fase,N,operazioni,media_eccesso,statistica_netta,statistica_lorda,p,soglia_p,esito,motivi\n";
+const COLONNA_ESITO = 11;
 const DURATA = 86400; // le candele di ricerca sono giornaliere
 const INTERVALLO = 1440;
 
@@ -59,13 +60,23 @@ function leggiCsv(percorso) {
     .sort((a, b) => a.momento - b.momento);
 }
 
-/** Le righe già scritte nel registro: quali strategie sono state provate e quali verificate. */
-function leggiRegistro() {
-  if (!fs.existsSync(REGISTRO)) return [];
-  return fs.readFileSync(REGISTRO, "utf8").trim().split("\n").slice(1).map((riga) => {
-    const c = riga.split(",");
-    return { seme: c[1], id: c[2], fase: c[3], esito: c[COLONNA_ESITO] };
-  });
+/** Le righe dei due registri: colonne seme, id, fase; l'esito solo per questo registro. */
+function leggiRegistri() {
+  const righe = [];
+  // la prima corsa ha il vecchio formato: seme e id sono nelle stesse colonne
+  if (fs.existsSync(REGISTRO_PRIMA_CORSA)) {
+    for (const r of fs.readFileSync(REGISTRO_PRIMA_CORSA, "utf8").trim().split("\n").slice(1)) {
+      const c = r.split(",");
+      righe.push({ seme: c[1], id: c[2], fase: c[3] });
+    }
+  }
+  if (fs.existsSync(REGISTRO)) {
+    for (const r of fs.readFileSync(REGISTRO, "utf8").trim().split("\n").slice(1)) {
+      const c = r.split(",");
+      righe.push({ seme: c[1], id: c[2], fase: c[3], esito: c[COLONNA_ESITO] });
+    }
+  }
+  return righe;
 }
 
 function aggiungiRegistro(righe) {
@@ -101,16 +112,16 @@ function main() {
   const configurazioneBase = { capitaleIniziale: lab.capitaleIniziale, fusoOrario: fuso };
   const data = new Date().toISOString().slice(0, 16).replace("T", " ");
 
-  const registro = leggiRegistro();
+  const registri = leggiRegistri();
 
   /* un seme è una lotteria da giocare una volta: rilanciarlo per sbaglio cercherebbe
      altri candidati e brucerebbe l'ultimo anno. Per una nuova ricerca, un nuovo seme. */
-  if (registro.some((r) => r.seme === String(cfg.seme) && r.fase === "ricerca")) {
+  if (registri.some((r) => r.seme === String(cfg.seme) && r.fase === "ricerca")) {
     throw new Error(`il seme ${cfg.seme} è già stato usato: per una nuova ricerca cambia "seme" in ricerca.json`);
   }
 
-  const giaProvate = new Set(registro.filter((r) => r.fase === "ricerca").map((r) => r.id));
-  const giaVerificate = new Set(registro.filter((r) => r.fase === "verifica").map((r) => r.id));
+  const giaProvate = new Set(registri.filter((r) => r.fase === "ricerca").map((r) => r.id));
+  const giaVerificate = new Set(registri.filter((r) => r.fase === "verifica").map((r) => r.id));
 
   /* 1. generare i candidati, scartando quelli non validi e i duplicati */
   const candidati = [];
@@ -136,7 +147,7 @@ function main() {
     const operazioni = risultati.reduce((somma, r) => somma + r.operazioni, 0);
     const quota = risultati.length ? risultati.filter((r) => r.eccesso > 0).length / risultati.length : 0;
     valutati.push({ s, media: stat.media, quota, operazioni });
-    righeRegistro.push(riga([data, cfg.seme, s.id, "ricerca", N, operazioni, stat.media?.toFixed(4), quota.toFixed(4), "", "", "", "", "", ""]));
+    righeRegistro.push(riga([data, cfg.seme, s.id, "ricerca", N, operazioni, stat.media?.toFixed(4), "", "", "", "", "", ""]));
   }
 
   /* 3. scegliere le migliori fra quelle che hanno negoziato e non sono ancora state verificate */
@@ -146,45 +157,51 @@ function main() {
     .sort((a, b) => b.media - a.media);
   const daVerificare = negoziate.slice(0, cfg.candidatiVerifica);
 
-  /* 4. verificare sull'ultimo anno, una sola volta per candidato */
-  // quante coppie contano davvero sull'ultimo anno: le criptovalute si muovono insieme
-  const rho = correlazioneMedia(serie, finestraVerifica.da, finestraVerifica.a);
+  /* 4. verificare sull'ultimo anno, una sola volta per candidato, con il giudizio a permutazione.
+     Le ricollocazioni usano un seme derivato dal seme di ricerca: stessa corsa, stesso risultato. */
+  // il numero di ricollocazioni deve permettere di misurare la soglia: almeno 2·N/alfa
+  const permutazioni = Math.max(cfg.permutazioni, Math.ceil((2 * N) / cfg.alfa));
+  const rngGiudizio = generatore(cfg.seme + 1);
 
   const verifiche = [];
   for (const v of daVerificare) {
     const risultati = valutaSuCoppie(v.s, serie, finestraVerifica, configurazioneBase);
-    const g = giudica(risultati, {
+    const costoAndataRitorno = 2 * (v.s.costi.commissionePercentoPerLato + v.s.costi.slippagePercento);
+    const comprato = statistiche(risultati.map((r) => r.comprato)).media;
+    const g = giudicaPermutazione({
+      gruppi: risultati.map((r) => r.gruppo),
+      costoAndataRitorno,
+      permutazioni,
+      rng: rngGiudizio,
       N,
       alfa: cfg.alfa,
-      quotaMinima: cfg.quotaMinima,
-      minimoOperazioni: cfg.minimoOperazioni,
-      correlazione: rho
+      minimoOperazioni: cfg.minimoOperazioni
     });
-    verifiche.push({ ...v, giudizio: g });
+    verifiche.push({ ...v, giudizio: g, comprato });
     righeRegistro.push(riga([
-      data, cfg.seme, v.s.id, "verifica", N, g.operazioni, g.media?.toFixed(4), g.quota.toFixed(4),
-      rho === null ? "" : rho.toFixed(4), g.Meff.toFixed(3),
-      g.t === null ? "" : g.t.toFixed(3), g.soglia.toFixed(3), g.passa ? "promossa" : "scartata", g.motivi.join("; ")
+      data, cfg.seme, v.s.id, "verifica", N, g.operazioni, "",
+      g.statisticaNetta.toFixed(4), g.statisticaLorda.toFixed(4), g.p.toExponential(3), g.soglia.toExponential(3),
+      g.passa ? "promossa" : "scartata", g.motivi.join("; ")
     ]));
   }
 
-  /* 5. promuovere nel giro solo chi passa, e scrivere il registro */
+  /* 5. scrivere il registro, e mettere in candidati/ chi passa */
   aggiungiRegistro(righeRegistro);
 
   const promosse = verifiche.filter((v) => v.giudizio.passa);
   for (const v of promosse) {
-    // le strategie cercate girano sulle candele giornaliere, su tutte le coppie che hanno validato
-    const strategia = {
+    // in candidati/: il giro non la legge. Diventa strategia solo con un commit esplicito
+    const candidato = {
       nome: v.s.nome,
-      origine: { seme: cfg.seme, verificataIl: data },
+      origine: { seme: cfg.seme, verificataIl: data, giudice: "permutazione" },
       intervallo: INTERVALLO,
-      coppie: coppie,
+      coppie,
       ingresso: v.s.ingresso,
       uscita: v.s.uscita,
       rischio: v.s.rischio,
       costi: v.s.costi
     };
-    scriviJson(dentro("strategie", `${v.s.nome}.json`), strategia);
+    scriviJson(dentro("candidati", `${v.s.nome}.json`), candidato);
   }
 
   /* il report della corsa: sovrascritto, perché è lo specchio dell'ultima corsa */
@@ -195,9 +212,7 @@ function main() {
     `Strategie generate: ${candidati.length}. Provate in tutto (N, per la soglia): ${N}.`,
     `Finestra di ricerca: candele dal ${giorno(serie[coppie[0]][0].momento)} fino a quella che apre il ${giorno(finestraRicerca.a - DURATA)} (inclusa).`,
     `Finestra di verifica (l'ultimo anno, una sola volta per candidato): dalla candela che apre il ${giorno(finestraVerifica.da)}.`,
-    `Soglia del t con ${N} prove e alfa ${cfg.alfa}: ${numero(sogliaT(N, cfg.alfa))}.`,
-    `Correlazione media fra le ${coppie.length} coppie nell'ultimo anno: ${rho === null ? "non misurabile" : numero(rho)}. ` +
-    `Contano come ${numero(coppieEffettive(coppie.length, rho), 1)} prove indipendenti, non ${coppie.length}.`,
+    `Giudizio: permutazione del tempismo, ${permutazioni} ricollocazioni. Soglia p = alfa ${cfg.alfa} diviso ${N} ipotesi.`,
     "",
     `Scartate perché non hanno mai negoziato (meno di ${cfg.minimoOperazioniRicerca} operazioni): ${valutati.filter((v) => v.operazioni < cfg.minimoOperazioniRicerca).length}.`,
     "",
@@ -207,23 +222,31 @@ function main() {
   if (verifiche.length === 0) {
     righeReport.push("Nessun candidato da verificare: tutte le strategie generate sono state già verificate o non hanno negoziato.", "");
   } else {
-    righeReport.push("| strategia | operazioni | media eccesso (punti) | coppie che battono | t | esito |", "|---|---:|---:|---:|---:|---|");
+    righeReport.push(
+      "Il risultato netto è dopo i costi; il lordo è senza costi. Il buy and hold è la media delle coppie, sullo stesso periodo.",
+      "",
+      "| strategia | operazioni | netto (punti) | lordo (punti) | p | soglia p | buy and hold (media) | esito |",
+      "|---|---:|---:|---:|---:|---:|---:|---|"
+    );
     for (const v of verifiche) {
       const g = v.giudizio;
-      righeReport.push(`| ${v.s.nome} | ${g.operazioni} | ${numero(g.media)} | ${Math.round(g.quota * 100)}% | ${numero(g.t)} | ${g.passa ? "**promossa**" : "scartata"} |`);
+      righeReport.push(
+        `| ${v.s.nome} | ${g.operazioni} | ${numero(g.statisticaNetta)} | ${numero(g.statisticaLorda)} | ` +
+        `${g.p.toExponential(2)} | ${g.soglia.toExponential(2)} | ${numero(v.comprato)}% | ${g.passa ? "**promossa**" : "scartata"} |`
+      );
     }
     righeReport.push("");
-    const motivi = verifiche.filter((v) => !v.giudizio.passa);
-    if (motivi.length > 0) {
+    const scartate = verifiche.filter((v) => !v.giudizio.passa);
+    if (scartate.length > 0) {
       righeReport.push("Perché le scartate non passano:", "");
-      for (const v of motivi) righeReport.push(`- ${v.s.nome}: ${v.giudizio.motivi.join("; ")}`);
+      for (const v of scartate) righeReport.push(`- ${v.s.nome}: ${v.giudizio.motivi.join("; ")}`);
       righeReport.push("");
     }
   }
   righeReport.push(
     promosse.length > 0
-      ? `Promosse nel giro: ${promosse.map((v) => v.s.nome).join(", ")}. Dal prossimo giro orario sono in strategie/.`
-      : "**Nessuna strategia è passata la verifica.** È un risultato valido: significa che in questi dati non c'è niente che batta il «comprato e basta» in modo non casuale.",
+      ? `Messe in candidati/: ${promosse.map((v) => v.s.nome).join(", ")}. Il giro non le esegue: per usarle serve un commit che le sposti in strategie/.`
+      : "**Nessuna strategia è passata la verifica.** È un risultato valido: in questi dati non c'è niente che batta il caso in modo significativo, al netto dei costi.",
     "",
     "---",
     "",
@@ -231,7 +254,7 @@ function main() {
   );
   scriviAtomico(dentro("report", `ricerca-${cfg.seme}.md`), righeReport.join("\n") + "\n");
 
-  console.log(`ricerca seme ${cfg.seme}: ${candidati.length} strategie generate, ${negoziate.length} hanno negoziato, ${verifiche.length} verificate, ${promosse.length} promosse. N = ${N}.`);
+  console.log(`ricerca seme ${cfg.seme}: ${candidati.length} strategie generate, ${negoziate.length} hanno negoziato, ${verifiche.length} verificate, ${promosse.length} in candidati/. N = ${N}.`);
 }
 
 try {
