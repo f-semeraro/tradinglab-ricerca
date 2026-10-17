@@ -1,0 +1,7 @@
+{
+  "mercato": "SOLEUR",
+  "intervalloMinuti": 60,
+  "capitaleIniziale": 100,
+  "fusoOrario": "Europe/Rome",
+  "escludiUltimiGiorni": 365
+}

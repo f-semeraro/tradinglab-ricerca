@@ -1,0 +1,38 @@
+{
+  "nome": "RSI basso + incrocio medie + volume",
+  "descrizione": "Punto di partenza, non un consiglio: questi numeri sono da mettere alla prova, non da credere. Cambiali tu, sapendo che a ogni modifica il conto delle operazioni riparte da zero.",
+
+  "ingresso": {
+    "rsi": {
+      "periodi": 14,
+      "sotto": 32
+    },
+    "incrocioMedie": {
+      "veloce": 9,
+      "lenta": 21,
+      "direzione": "alto",
+      "entroCandele": 1
+    },
+    "volume": {
+      "periodi": 6,
+      "almeno": 1.25
+    }
+  },
+
+  "uscita": {
+    "presaDiProfittoPercento": 8,
+    "stopDiPerditaPercento": 4,
+    "tempoMassimoCandele": 48
+  },
+
+  "rischio": {
+    "quotaCapitalePercento": 100,
+    "posizioniMassime": 1,
+    "perditaMassimaGiornalieraPercento": 6
+  },
+
+  "costi": {
+    "commissionePercentoPerLato": 0.4,
+    "slippagePercento": 0.05
+  }
+}

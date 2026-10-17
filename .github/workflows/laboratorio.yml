@@ -1,0 +1,45 @@
+name: laboratorio
+
+# Un giro all'ora: scarica le candele chiuse, fa avanzare le strategie, salva i risultati.
+# Nessuna chiave: gli endpoint di Kraken usati sono pubblici.
+
+on:
+  schedule:
+    - cron: "7 * * * *"
+  workflow_dispatch:
+
+# Due giri non si sovrappongono mai: se uno è in corso, il successivo aspetta.
+# Non si annulla mai un giro a metà, perché lascerebbe lo stato a metà.
+concurrency:
+  group: laboratorio
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  giro:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Un giro del laboratorio
+        run: node scripts/giro.js
+
+      - name: Salva i risultati, solo se sono cambiati
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add risultati
+          if git diff --cached --quiet; then
+            echo "Nessuna novità: niente commit."
+          else
+            git commit -m "risultati: giro del $(date -u +%Y-%m-%dT%H:%MZ)"
+            git pull --rebase --quiet
+            git push
+          fi

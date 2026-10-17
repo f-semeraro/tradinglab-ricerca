@@ -1,0 +1,17 @@
+# dipendenze: il laboratorio non ne ha, ma se mai ne aggiungerai non vanno pubblicate
+node_modules/
+
+# variabili d'ambiente e segreti: nel laboratorio non ce ne devono essere, e questo serve a impedirlo
+.env
+.env.*
+
+# file temporanei di scrittura atomica e log
+*.tmp
+*.log
+
+# sistema operativo e editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
