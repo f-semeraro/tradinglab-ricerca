@@ -1,0 +1,43 @@
+name: ricerca
+
+# Il generatore di strategie. Si lancia a mano: ogni corsa verifica candidati
+# sull'ultimo anno, che si può usare una volta sola per candidato, e può
+# promuovere strategie nel giro. Per una nuova corsa cambia "seme" in ricerca.json.
+
+on:
+  workflow_dispatch:
+
+# Condivide il gruppo con il giro: non scrivono mai nello stesso momento.
+concurrency:
+  group: laboratorio
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  ricerca:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Genera, valuta e verifica le strategie
+        run: node scripts/ricerca.js
+
+      - name: Salva registro, report e strategie promosse, solo se sono cambiati
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add registro report strategie
+          if git diff --cached --quiet; then
+            echo "Nessuna novità: niente commit."
+          else
+            git commit -m "ricerca: corsa del $(date -u +%Y-%m-%dT%H:%MZ)"
+            git pull --rebase --quiet
+            git push
+          fi

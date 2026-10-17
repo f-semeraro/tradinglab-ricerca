@@ -1,0 +1,9 @@
+{
+  "candidati": 500,
+  "seme": 20261017,
+  "candidatiVerifica": 10,
+  "minimoOperazioniRicerca": 5,
+  "minimoOperazioni": 10,
+  "alfa": 0.05,
+  "quotaMinima": 0.66
+}

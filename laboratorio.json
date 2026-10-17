@@ -3,5 +3,27 @@
   "intervalloMinuti": 60,
   "capitaleIniziale": 100,
   "fusoOrario": "Europe/Rome",
-  "escludiUltimiGiorni": 365
+  "escludiUltimiGiorni": 365,
+  "coppieGiornaliere": [
+    "XXBTZEUR",
+    "XETHZEUR",
+    "XXRPZEUR",
+    "SOLEUR",
+    "LINKEUR",
+    "XZECZEUR",
+    "XDGEUR",
+    "ADAEUR",
+    "SUIEUR",
+    "XLTCZEUR",
+    "TRXEUR",
+    "NEAREUR",
+    "UNIEUR",
+    "BCHEUR",
+    "AAVEEUR",
+    "XXLMZEUR",
+    "AVAXEUR",
+    "ALGOEUR",
+    "ATOMEUR",
+    "FILEUR"
+  ]
 }

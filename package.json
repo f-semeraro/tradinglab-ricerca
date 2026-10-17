@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "giro": "node scripts/giro.js",
+    "dati": "node scripts/dati.js",
     "backtest": "node scripts/backtest.js",
     "test": "node --test"
   },

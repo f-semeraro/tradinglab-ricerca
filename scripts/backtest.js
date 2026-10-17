@@ -1,8 +1,12 @@
 /**
  * scripts/backtest.js — la strategia sul passato, dal CSV in dati/storico/.
  *
- *     npm run backtest -- --strategia rsi-base --da 2026-03-04 --a 2026-05-31
+ *     npm run backtest -- --strategia rsi-base --coppia XXBTZEUR --intervallo 1440
+ *     npm run backtest -- --strategia rsi-base --da 2025-01-01 --a 2025-06-30
  *     npm run backtest -- --nota "primo confronto"
+ *
+ * Coppia e intervallo predefiniti sono quelli di laboratorio.json. Il file letto
+ * è dati/storico/<COPPIA>-<intervallo>.csv.
  *
  * Usa le stesse funzioni del giro (lib/simulazione.js → lib/strategia.js →
  * valuta()) su un CSV di candele chiuse.
@@ -12,8 +16,9 @@
  * apposta nel comando: l'ultimo anno è quello che si guarda per primo, e quello
  * su cui è più facile sbagliare.
  *
- * Non tocca risultati/: quello è lo stato dal vivo. Scrive report/<strategia>.md
- * (sovrascritto) e aggiunge una riga a registro/esperimenti.md (mai riscritto).
+ * Non tocca risultati/: quello è lo stato dal vivo. Scrive
+ * report/<strategia>-<coppia>-<intervallo>.md (sovrascritto) e aggiunge una riga a
+ * registro/esperimenti.md (mai riscritto).
  */
 
 import fs from "node:fs";
@@ -37,13 +42,15 @@ const INTESTAZIONE_REGISTRO = [
   "Sola aggiunta: ogni backtest aggiunge una riga e non riscrive mai quelle precedenti.",
   "Il risultato è sempre confrontato col «comprato e basta» sullo stesso periodo.",
   "",
-  "| data (UTC) | strategia | impronta | periodo | operazioni | capitale | vs comprato e basta | drawdown | nota |",
-  "|---|---|---|---|---:|---:|---:|---:|---|",
+  "| data (UTC) | strategia | coppia | impronta | periodo | operazioni | capitale | vs comprato e basta | drawdown | nota |",
+  "|---|---|---|---|---|---:|---:|---:|---:|---|",
   ""
 ].join("\n");
 
 function parseArgomenti(argv) {
-  const opzioni = { strategie: [], da: null, a: null, usaUltimoAnno: false, nota: "" };
+  const opzioni = {
+    strategie: [], coppia: null, intervallo: null, da: null, a: null, usaUltimoAnno: false, nota: ""
+  };
   const valore = (i, nome) => {
     if (argv[i + 1] === undefined) throw new Error(`${nome} vuole un valore`);
     return argv[i + 1];
@@ -51,6 +58,8 @@ function parseArgomenti(argv) {
   for (let i = 0; i < argv.length; i++) {
     switch (argv[i]) {
       case "--strategia": opzioni.strategie.push(valore(i, "--strategia")); i++; break;
+      case "--coppia": opzioni.coppia = valore(i, "--coppia"); i++; break;
+      case "--intervallo": opzioni.intervallo = Number(valore(i, "--intervallo")); i++; break;
       case "--da": opzioni.da = valore(i, "--da"); i++; break;
       case "--a": opzioni.a = valore(i, "--a"); i++; break;
       case "--nota": opzioni.nota = valore(i, "--nota"); i++; break;
@@ -93,13 +102,14 @@ function appendiRegistro(riga) {
   fs.appendFileSync(REGISTRO, riga + "\n", "utf8");
 }
 
-function reportStrategia({ nome, impronta, lab, csvRel, candele, periodo, esclusi, stato, m }) {
+function reportStrategia({ nome, impronta, lab, coppia, intervallo, csvRel, candele, periodo, esclusi, stato, m }) {
   const operazioni = stato.operazioni;
+  const etichetta = intervallo === 1440 ? "giornaliere" : `da ${intervallo} minuti`;
   const righe = [
-    `# Backtest — ${nome}`,
+    `# Backtest — ${nome} su ${coppia}`,
     "",
-    `Dati: \`${csvRel}\`, candele da ${lab.intervalloMinuti} minuti.`,
-    `Periodo: ${periodo} (${numero(candele.length * lab.intervalloMinuti / 1440, 1)} giorni di candele).`,
+    `Dati: \`${csvRel}\`, candele ${etichetta}.`,
+    `Periodo: ${periodo} (${numero(candele.length * intervallo / 1440, 1)} giorni di candele).`,
     esclusi > 0
       ? `Escluse ${esclusi} candele dell'ultimo anno (configurazione: ${lab.escludiUltimiGiorni} giorni). Per includerle: \`--usa-ultimo-anno\`.`
       : "Ultimo anno incluso per scelta esplicita (`--usa-ultimo-anno`).",
@@ -138,12 +148,18 @@ function main() {
   if (!lab) throw new Error("manca laboratorio.json");
   const opzioni = parseArgomenti(process.argv.slice(2));
 
+  const coppia = opzioni.coppia ?? lab.mercato;
+  const intervallo = opzioni.intervallo ?? lab.intervalloMinuti;
+  if (!Number.isFinite(intervallo) || intervallo <= 0) {
+    throw new Error(`--intervallo vuole un numero di minuti positivo, non ${opzioni.intervallo}`);
+  }
+
   const nomi = opzioni.strategie.length > 0
     ? opzioni.strategie
     : fs.readdirSync(dentro("strategie")).filter((f) => f.endsWith(".json")).map((f) => path.basename(f, ".json")).sort();
 
-  const csvRel = `dati/storico/${lab.mercato}-${lab.intervalloMinuti}.csv`;
-  const durata = lab.intervalloMinuti * 60;
+  const csvRel = `dati/storico/${coppia}-${intervallo}.csv`;
+  const durata = intervallo * 60;
   let candele = leggiCsv(dentro(csvRel));
 
   if (opzioni.da) {
@@ -182,8 +198,8 @@ function main() {
 
     const stato = nuovoStato({
       capitaleIniziale: lab.capitaleIniziale,
-      mercato: lab.mercato,
-      intervalloMinuti: lab.intervalloMinuti,
+      mercato: coppia,
+      intervalloMinuti: intervallo,
       fusoOrario: lab.fusoOrario
     });
     avanza(stato, candele, primaValutabile, candele.length, strategia);
@@ -198,14 +214,15 @@ function main() {
     // l'impronta: stessa configurazione, stessa impronta. Serve a riconoscere un esperimento ripetuto
     const impronta = crypto.createHash("sha256").update(JSON.stringify(strategia)).digest("hex").slice(0, 10);
 
-    scriviAtomico(dentro("report", `${nome}.md`), reportStrategia({
-      nome, impronta, lab, csvRel, candele, periodo, esclusi, stato, m
+    scriviAtomico(dentro("report", `${nome}-${coppia}-${intervallo}.md`), reportStrategia({
+      nome, impronta, lab, coppia, intervallo, csvRel, candele, periodo, esclusi, stato, m
     }));
 
     const data = new Date().toISOString().slice(0, 16).replace("T", " ");
     appendiRegistro([
       `| ${data}`,
       nome,
+      coppia,
       impronta,
       periodo,
       m.operazioni.chiuse,
@@ -216,7 +233,7 @@ function main() {
     ].join(" | "));
 
     console.log(
-      `${nome}: ${m.operazioni.chiuse} operazioni · capitale ${numero(m.capitaleAttuale)} € ` +
+      `${nome} · ${coppia}: ${m.operazioni.chiuse} operazioni · capitale ${numero(m.capitaleAttuale)} € ` +
       `(${numero(m.variazionePercento)}%) · vs comprato e basta ${numero(m.benchmark.differenzaDalMercato)} punti`
     );
   }
