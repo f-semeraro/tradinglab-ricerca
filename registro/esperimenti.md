@@ -29,7 +29,7 @@ Scritta il 17 ottobre 2026, prima di qualsiasi esecuzione sui dati. I file dell'
 - *Replica:* lungo e corto, al lordo, come nello studio. Serve a vedere se l'effetto esiste ancora. Non viene giudicata.
 - *Eseguibile:* solo il lato lungo, altrimenti fuori. Costi come `strategie/rsi-base.json`: 0,10% per lato più 0,05% di slippage, quindi 0,30% andata e ritorno. Questa versione passa o non passa.
 
-**Giudice.** Permutazione con N = 3 e alfa 0,05. I momenti decisionali sono le 16:30 di ogni giorno. Si rimescolano i giorni in cui si opera, tenendo uguale il numero di operazioni; nella replica si conservano anche i segni (lungo o corto). La statistica è la somma dei rendimenti netti per operazione. Le permutazioni sono 10.000, con seme fisso. Passa solo con p ≤ alfa/N = 0,0167 e risultato netto positivo.
+**Giudice.** Permutazione con N = 3 e alfa 0,05. I momenti decisionali sono le 16:30 di ogni giorno in cui la variante ha tutti i prezzi che le servono: sono i giorni eleggibili, e quelli senza prezzi si saltano e si contano. Si rimescolano i giorni in cui si opera, tra quelli eleggibili, tenendo uguale il numero di operazioni; nella replica si conservano anche i segni (lungo o corto). La statistica è la somma dei rendimenti netti per operazione. Le permutazioni sono 10.000, con seme fisso 20261018. Passa solo con p ≤ alfa/N = 0,0167 e risultato netto positivo.
 
 **Scostamenti dal metodo dichiarati.** (a) Fuso con ora legale, al posto di «EST». (b) I giorni con candele mancanti si saltano e si contano. (c) Il periodo 2021–2026 non si sovrappone al campione dello studio (2013–2020): il confronto con la tabella 8 è sul campione completo, e l'anno per anno è solo informativo.
 
