@@ -178,6 +178,52 @@ Scritta il 18 ottobre 2026, prima di qualsiasi calcolo su questo periodo. Test s
 
 **Report.** `report/detzel-140-indietro.md`: universo, con incluse ed escluse e il motivo; statistica, p ed esito; rendimento netto totale e annuo del portafoglio e del buy and hold; drawdown massimo; cambi di posizione all'anno; giorni dentro per moneta; anno per anno (solo informativo). Curve in `report/dati/detzel-140-indietro.json`. Una riga nel registro.
 
+## Pre-registrazione: regola B su un universo senza senno di poi (monete scelte con dati fino al 31 dicembre 2020)
+
+Scritta il 18 ottobre 2026, prima di qualsiasi calcolo sui rendimenti di questo test. Test nuovo e singolo. La regola B (Liu e Tsyvinski, quinto più alto, una settimana) non cambia in nessun punto.
+
+**Perché.** Il test di conferma su altre crypto (commit 767e881) usava monete scelte nel 2026, quindi con il senno di poi. Qui l'universo è fissato con i dati fino al 31 dicembre 2020, cioè prima del periodo di test.
+
+**Dati.** Archivio Kraken OHLCVT completo, in locale, non nel repository: 1758 file giornalieri (1440 minuti), di cui 649 coppie in EUR e 760 in USD. Tra queste, 192 coppie EUR/USD finiscono prima del 1 giugno 2026: l'elenco con la data dell'ultima candela è nel report. Colonne: data, apertura, massimo, minimo, chiusura, volume (in moneta base), numero di scambi.
+
+**Universo.** Partenza: tutte le coppie spot dell'archivio quotate in EUR o in USD. Per ogni moneta, una sola coppia: EUR se esiste, altrimenti USD. Esclusi, con il motivo nel report:
+1. Bitcoin (XBT/BTC), già testato a parte.
+2. Stablecoin e token ancorati a una valuta: USDT, USDC, DAI, EURT, EURC, TUSD, PYUSD, USD1, USDG, GUSD, UST, USTC, USDE, USDS, FDUSD, BUSD, USDD, USDQ, USDR, EUROP, EURQ, EURR.
+3. Coppie tra valute tradizionali (EURUSD, GBPUSD, AUDUSD, USDJPY e simili): non sono monete. Valute tradizionali: EUR, USD, GBP, CAD, AUD, CHF, JPY, AED.
+4. Doppioni dello stesso asset: un simbolo con prefisso X o Z (uso storico di Kraken) è un doppione se esiste anche il simbolo senza prefisso; si tiene quello senza prefisso.
+
+**Storia.** Almeno 104 settimane complete prima di lunedì 4 gennaio 2021: candele giornaliere presenti senza buchi per ogni giorno dal 7 gennaio 2019 al 3 gennaio 2021 (728 giorni). Chi non le ha è escluso.
+
+**Liquidità.** Tra le monete rimaste, le 20 con il controvalore mediano giornaliero più alto nel 2020. Controvalore del giorno = volume × chiusura, in euro. Le coppie in USD si convertono con la chiusura di EURUSD dello stesso giorno (se manca, quella del giorno precedente). Si calcola la mediana sui giorni del 2020 con candela. Se le monete rimaste sono meno di 20, si tengono tutte.
+
+**Periodo.** Dal lunedì 4 gennaio 2021 alla domenica 28 giugno 2026: 286 settimane, come nel test di conferma.
+
+**Regola.** Identica a liu-b, per ogni moneta: rendimento della settimana domenica-domenica (UTC) sulle chiusure giornaliere. Segnale se il rendimento supera l'80° percentile R7 di tutte le settimane precedenti della stessa moneta, dal primo dato disponibile. Posizione dentro la settimana successiva, solo lunga. Entrata alla chiusura di domenica prima della settimana; uscita alla chiusura di domenica dell'ultima settimana tenuta.
+
+**Settimana senza scambi.** Settimana senza candela della moneta alla domenica di chiusura: nessun nuovo ingresso in quella settimana, e nessun rendimento per una posizione già aperta. Una posizione aperta resta aperta fino al segnale di uscita.
+
+**Moneta tolta dal listino.** Se l'ultima candela della moneta cade prima del 28 giugno 2026, la posizione si chiude alla chiusura di quella candela, con i costi di uscita, e la quota resta in liquidità fino alla fine. Il rendimento dell'ultima settimana parziale è contato fino a quella chiusura. Il buy and hold fa lo stesso.
+
+**Costi.** `strategie/rsi-base.json`: 0,10% per lato più 0,05% di slippage, cioè 0,30% per operazione.
+
+**Portafoglio.** Pesi uguali e indipendenti: ogni moneta ha una quota 1/N, senza ribilanciamento. Confronto: buy and hold a pesi uguali, con le stesse uscite per le monete tolte.
+
+**Giudice.** N = 1, alfa 0,05. Statistica: somma dei rendimenti netti per operazione su tutte le monete. Nulla: rotazione circolare comune, con lo stesso spostamento s per tutte le monete, senza seme. Una posizione che cade su settimane senza candela della moneta non genera operazioni. Si escludono gli spostamenti entro 4 settimane dallo zero in entrambe le direzioni: s = 1…4 e s = 282…285. Restano s = 5…281: 277 spostamenti; p = (k+1)/278. Decisione presa adesso, prima dei dati: spostare all'indietro farebbe guardare alla regola il futuro; in avanti la regola seguirebbe ancora la stessa tendenza. Passa con p ≤ 0,05 se k ≤ 12, e con somma netta positiva.
+
+**Previsione.** Un risultato più debole del test di conferma (+242% contro +144% del buy and hold, p 0,0105), perché quell'universo era scelto nel 2026. Se il vantaggio dipendeva dalla selezione, qui si riduce molto o sparisce; se regge, è la prova più solida che abbiamo.
+
+**Criterio di successo.** Passa solo con p ≤ 0,05 e somma netta positiva. Ogni altro esito non passa.
+
+**Scostamenti dal metodo dichiarati.**
+(a) Test nuovo sull'universo 2020, non replica di Liu e Tsyvinski.
+(b) Giudice: rotazione circolare comune con esclusione entro 4 settimane dallo zero, scelta di questo test.
+(c) Percentile sul primo dato disponibile di ciascuna moneta, non sul campione dello studio.
+(d) Liquidità in euro con EURUSD giornaliero dell'archivio.
+(e) Regole per settimana senza scambi, moneta tolta dal listino e nulla con posizioni su settimane senza prezzo: definite sopra.
+(f) Prezzi Kraken: l'archivio arriva al 30 settembre 2026, il test legge fino al 28 giugno 2026.
+
+**Report.** `report/b-universo-2020.md`: universo con incluse, escluse e motivo, e le monete tolte dal listino con la data; portafoglio contro buy and hold a pesi uguali, con rendimento totale e annuo, drawdown massimo, p ed esito; per moneta, solo come informazione, operazioni, rendimento netto e buy and hold; anno per anno; confronto con il test di conferma. Curve in `report/dati/b-universo-2020.json`. Una riga nel registro.
+
 | data (UTC) | strategia | coppia | impronta | periodo | operazioni | capitale | vs comprato e basta | drawdown | nota |
 |---|---|---|---|---|---:|---:|---:|---:|---|
 | 2026-10-17 15:11 | rsi-base | XXBTZEUR | 1863e747c0 | 27 ott 2024, 02:00 → 16 ott 2025, 02:00 | 0 | 100,00 € (0,00%) | -8,30 punti | 0,00% | passo 1: pipeline su 20 coppie, solo finestra di ricerca |
