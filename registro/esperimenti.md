@@ -79,6 +79,28 @@ Scritta il 18 ottobre 2026, prima di qualsiasi esecuzione sui dati di questo tes
 
 **Report.** Per ogni variante: numero di operazioni, percentuale di settimane dentro, rendimento medio per operazione lordo e netto in punti base, rendimento totale e drawdown massimo, buy and hold nello stesso periodo, p ed esito, e anno per anno. Una riga per variante nel registro.
 
+## Pre-registrazione: test di conferma della regola B su altre crypto
+
+Scritta il 18 ottobre 2026, prima di qualsiasi calcolo sui dati di questo test. La regola è quella di B nella replica di Liu e Tsyvinski (quinto più alto, una settimana), senza modifiche.
+
+**Universo.** Le coppie in EUR di `laboratorio.json`, tolto il Bitcoin (XXBTZEUR): 19 coppie. Nei file dell'archivio Kraken si chiamano ETHEUR, XRPEUR, SOLEUR, LINKEUR, ZECEUR, XDGEUR, ADAEUR, SUIEUR, LTCEUR, TRXEUR, NEAREUR, UNIEUR, BCHEUR, AAVEEUR, XLMEUR, AVAXEUR, ALGOEUR, ATOMEUR, FILEUR. I dati sono le candele giornaliere (1440) dell'archivio Kraken completo, già in locale, non nel repository.
+
+**Regola di inclusione.** Una moneta entra se ha almeno 104 domeniche con prezzo, dalla prima candela giornaliera disponibile fino a domenica 3 gennaio 2021 compresa, perché il percentile ne ha bisogno. Entra anche se nel periodo ha al massimo il 2% di domeniche senza prezzo (cioè non più di 5 su 287). Le monete escluse sono elencate nel report con il motivo.
+
+**Periodo.** Come nella replica: da lunedì 4 gennaio 2021 a domenica 28 giugno 2026, cioè 286 settimane.
+
+**Regola.** Identica a B: rendimento da domenica a domenica (UTC); segnale se la settimana appena chiusa supera l'80° percentile, metodo R7, di tutte le settimane precedenti della stessa moneta, dal primo dato disponibile; dentro una settimana; solo lunga, altrimenti fuori; costi 0,10% per lato più 0,05% di slippage, cioè 0,30% per operazione. Ogni moneta ha un proprio portafoglio indipendente.
+
+**Portafoglio.** Pesi uguali e nessun ribilanciamento: ogni moneta parte con 1/N del capitale, e il portafoglio è la somma delle quote. Il confronto è con il buy and hold a pesi uguali delle stesse monete: 1/N in ciascuna, senza ribilanciamento, con lo stesso costo di entrata e uscita di 0,30%.
+
+**Giudice.** Un'unica ipotesi, N = 1, alfa 0,05: «la regola B batte il caso sulle altre crypto». La statistica è la somma dei rendimenti netti per operazione su tutte le monete. La distribuzione nulla è una rotazione circolare comune: la serie delle settimane dentro di ogni moneta si sposta di s settimane, con ritorno all'inizio, e lo stesso s vale per tutte le monete. Una permanenza che attraversa la fine del periodo è una sola operazione, con rendimento composto dalle settimane reali che copre. Si provano tutti gli spostamenti s = 1, …, 285 (cioè tutti tranne lo zero), senza seme. p = (numero di spostamenti con statistica ≥ quella osservata, più 1) / (numero di spostamenti, più 1). Passa solo con p ≤ 0,05 e somma netta positiva.
+
+**Previsione.** Probabilmente non passa. Lo studio trova un momentum meno significativo su Ethereum che su Bitcoin, e su Bitcoin B è passata esattamente sul confine: p 0,0166 con 100.000 permutazioni. Se passa, è la prima prova indipendente a favore della regola.
+
+**Scostamenti dal metodo.** (a) L'universo è di altre crypto: è un test di conferma, non una replica. (b) Il giudice è una rotazione circolare comune, al posto della permutazione del test su Bitcoin. (c) Il portafoglio è a pesi uguali, con monete indipendenti.
+
+**Report.** Il risultato complessivo con p ed esito; il portafoglio di B a pesi uguali contro il buy and hold a pesi uguali, con rendimento totale e drawdown massimo; per ogni moneta, solo come informazione, operazioni, rendimento netto e buy and hold. Una riga nel registro.
+
 | data (UTC) | strategia | coppia | impronta | periodo | operazioni | capitale | vs comprato e basta | drawdown | nota |
 |---|---|---|---|---|---:|---:|---:|---:|---|
 | 2026-10-17 15:11 | rsi-base | XXBTZEUR | 1863e747c0 | 27 ott 2024, 02:00 → 16 ott 2025, 02:00 | 0 | 100,00 € (0,00%) | -8,30 punti | 0,00% | passo 1: pipeline su 20 coppie, solo finestra di ricerca |
