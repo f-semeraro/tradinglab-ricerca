@@ -1,0 +1,39 @@
+{
+  "configurazione": {
+    "capitaleIniziale": 100,
+    "mercato": "XBTEUR",
+    "intervalloCandele": 1440,
+    "fusoOrario": "Europe/Rome"
+  },
+  "capitale": 100,
+  "posizione": null,
+  "operazioni": [],
+  "istantanee": [
+    {
+      "momento": 1791763200,
+      "candela": 1791676800,
+      "portafoglio": 100,
+      "mercato": 99.74907439525985,
+      "prezzo": 74700.1
+    }
+  ],
+  "benchmark": {
+    "mercato": {
+      "coppia": "XBTEUR",
+      "prezzoRiferimento": 74813.2,
+      "quantita": 0.001335327186914875,
+      "commissionePagata": 0.09990009990009992,
+      "momento": 1791766800
+    }
+  },
+  "blocchi": [],
+  "lacune": [],
+  "prova": {
+    "impronta": "a39a95c93e15",
+    "K0": 682,
+    "eseguite": [],
+    "ultimaK": 682,
+    "inSospeso": null,
+    "lacune": []
+  }
+}
