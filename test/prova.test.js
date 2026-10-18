@@ -17,7 +17,7 @@ const SETTIMANA = 7 * GIORNO;
 const LAB = { capitaleIniziale: 100, fusoOrario: "Europe/Rome" };
 const iso = (ms) => new Date(ms).toISOString().slice(0, 10);
 const domenica = (i) => iso(Date.parse("2020-01-05") + i * SETTIMANA);
-const STRATEGIA = JSON.parse(fs.readFileSync(new URL("../candidati/liu-b.json", import.meta.url), "utf8"));
+const STRATEGIA = JSON.parse(fs.readFileSync(new URL("../strategie/liu-b.json", import.meta.url), "utf8"));
 
 /** Una candela giornaliera di domenica a un dato prezzo. */
 const candelaDomenica = (i, prezzo) => ({ momento: (Date.parse(domenica(i)) / 1000), chiusura: prezzo });

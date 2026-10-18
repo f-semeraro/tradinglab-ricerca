@@ -5,6 +5,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { leggiStrategia } from "../lib/configurazione.js";
+import { problemiSettimanale } from "../lib/prova.js";
 
 const RADICE = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const CARTELLA = path.join(RADICE, "strategie");
@@ -17,8 +18,15 @@ test("c'è almeno una strategia da mettere alla prova", () => {
 
 for (const nome of file) {
   test(`${nome} passa la validazione della configurazione`, () => {
+    const percorso = path.join(CARTELLA, nome);
+    const grezza = JSON.parse(fs.readFileSync(percorso, "utf8"));
+    // le strategie settimanali (la prova di Liu e Tsyvinski) hanno il loro validatore
+    if (grezza.tipo === "settimanale") {
+      assert.deepEqual(problemiSettimanale(grezza), []);
+      return;
+    }
     // leggiStrategia lancia se qualcosa non torna: il test fallisce con il motivo esatto
-    const strategia = leggiStrategia(path.join(CARTELLA, nome));
+    const strategia = leggiStrategia(percorso);
     assert.ok(strategia.ingresso && strategia.uscita && strategia.rischio && strategia.costi);
   });
 }
