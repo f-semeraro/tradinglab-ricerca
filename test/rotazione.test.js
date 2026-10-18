@@ -67,3 +67,15 @@ test("giudicaRotazione: una somma netta negativa non passa mai", () => {
   assert.equal(g.passa, false);
   assert.ok(g.motivi.some((m) => /somma netta non positiva/.test(m)));
 });
+
+test("giudicaRotazione: senza escludi conta tutti gli spostamenti tranne lo zero; con escludi, quelli vicini allo zero non entrano", () => {
+  const W = 50;
+  const R = rendimenti(W);
+  const H = R.map((_, i) => (i % 7 === 0 ? 1 : 0));
+  const tutti = giudicaRotazione({ monete: [{ R, H }], costo: COSTO, alfa: 0.05 });
+  assert.equal(tutti.spostamenti, 49);
+  // s = 1…10 e s = 40…49 sono esclusi: restano 29 spostamenti
+  const esclusi = giudicaRotazione({ monete: [{ R, H }], costo: COSTO, alfa: 0.05, escludi: 10 });
+  assert.equal(esclusi.spostamenti, 29);
+  assert.ok(esclusi.p >= 1 / 30);
+});
