@@ -200,7 +200,7 @@ Scritta il 18 ottobre 2026, prima di qualsiasi calcolo sui rendimenti di questo 
 
 **Regola.** Identica a liu-b, per ogni moneta: rendimento della settimana domenica-domenica (UTC) sulle chiusure giornaliere. Segnale se il rendimento supera l'80° percentile R7 di tutte le settimane precedenti della stessa moneta, dal primo dato disponibile. Posizione dentro la settimana successiva, solo lunga. Entrata alla chiusura di domenica prima della settimana; uscita alla chiusura di domenica dell'ultima settimana tenuta.
 
-**Settimana senza scambi.** Settimana senza candela della moneta alla domenica di chiusura: nessun nuovo ingresso in quella settimana, e nessun rendimento per una posizione già aperta. Una posizione aperta resta aperta fino al segnale di uscita.
+**Settimana senza scambi.** Settimana senza candela della moneta alla domenica di chiusura: il segnale di quella domenica non apre nessuna posizione. Una posizione già aperta mantiene la sua settimana, e il suo rendimento si calcola fino alla prossima chiusura disponibile.
 
 **Moneta tolta dal listino.** Se l'ultima candela della moneta cade prima del 28 giugno 2026, la posizione si chiude alla chiusura di quella candela, con i costi di uscita, e la quota resta in liquidità fino alla fine. Il rendimento dell'ultima settimana parziale è contato fino a quella chiusura. Il buy and hold fa lo stesso.
 
@@ -208,7 +208,7 @@ Scritta il 18 ottobre 2026, prima di qualsiasi calcolo sui rendimenti di questo 
 
 **Portafoglio.** Pesi uguali e indipendenti: ogni moneta ha una quota 1/N, senza ribilanciamento. Confronto: buy and hold a pesi uguali, con le stesse uscite per le monete tolte.
 
-**Giudice.** N = 1, alfa 0,05. Statistica: somma dei rendimenti netti per operazione su tutte le monete. Nulla: rotazione circolare comune, con lo stesso spostamento s per tutte le monete, senza seme. Una posizione che cade su settimane senza candela della moneta non genera operazioni. Si escludono gli spostamenti entro 4 settimane dallo zero in entrambe le direzioni: s = 1…4 e s = 282…285. Restano s = 5…281: 277 spostamenti; p = (k+1)/278. Decisione presa adesso, prima dei dati: spostare all'indietro farebbe guardare alla regola il futuro; in avanti la regola seguirebbe ancora la stessa tendenza. Passa con p ≤ 0,05 se k ≤ 12, e con somma netta positiva.
+**Giudice.** N = 1, alfa 0,05. Statistica: somma dei rendimenti netti per operazione su tutte le monete. Nulla: rotazione circolare comune, con lo stesso spostamento s per tutte le monete, senza seme. Una posizione che cade su settimane in cui la moneta non è più quotata non genera operazioni. Si escludono gli spostamenti entro 4 settimane dallo zero in entrambe le direzioni: s = 1…4 e s = 282…285. Restano s = 5…281: 277 spostamenti; p = (k+1)/278. Decisione presa adesso, prima dei dati: spostare all'indietro farebbe guardare alla regola il futuro; in avanti la regola seguirebbe ancora la stessa tendenza. Passa con p ≤ 0,05 se k ≤ 12, e con somma netta positiva.
 
 **Previsione.** Un risultato più debole del test di conferma (+242% contro +144% del buy and hold, p 0,0105), perché quell'universo era scelto nel 2026. Se il vantaggio dipendeva dalla selezione, qui si riduce molto o sparisce; se regge, è la prova più solida che abbiamo.
 
@@ -219,7 +219,7 @@ Scritta il 18 ottobre 2026, prima di qualsiasi calcolo sui rendimenti di questo 
 (b) Giudice: rotazione circolare comune con esclusione entro 4 settimane dallo zero, scelta di questo test.
 (c) Percentile sul primo dato disponibile di ciascuna moneta, non sul campione dello studio.
 (d) Liquidità in euro con EURUSD giornaliero dell'archivio.
-(e) Regole per settimana senza scambi, moneta tolta dal listino e nulla con posizioni su settimane senza prezzo: definite sopra.
+(e) Regole per settimana senza scambi, moneta tolta dal listino e nulla con posizioni su settimane in cui la moneta non è quotata: definite sopra.
 (f) Prezzi Kraken: l'archivio arriva al 30 settembre 2026, il test legge fino al 28 giugno 2026.
 
 **Report.** `report/b-universo-2020.md`: universo con incluse, escluse e motivo, e le monete tolte dal listino con la data; portafoglio contro buy and hold a pesi uguali, con rendimento totale e annuo, drawdown massimo, p ed esito; per moneta, solo come informazione, operazioni, rendimento netto e buy and hold; anno per anno; confronto con il test di conferma. Curve in `report/dati/b-universo-2020.json`. Una riga nel registro.
