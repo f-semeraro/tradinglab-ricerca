@@ -145,6 +145,39 @@ Scritta il 18 ottobre 2026, prima di qualsiasi calcolo sui dati di questo test. 
 
 **Report.** Per ogni test: giudice, con spostamenti e soglia; cambi di posizione all'anno; percentuale di giorni dentro; rendimento totale e annuo netti (annuo con 365,25 giorni); drawdown massimo della curva giornaliera; buy and hold nello stesso periodo; costo di pareggio per lato; statistica M in punti base al giorno; p ed esito; anno per anno (solo informativo). Per la replica, confronto con 1,38%, 2,12%, 3,13%, 5,75%, 6,85% (EW: non riportato). Curve giornaliere in `report/dati/`. Una riga per esposizione nel registro.
 
+## Pre-registrazione: verifica all'indietro della media a 140 giorni (Detzel et al., L = 20 settimane), su dati mai usati dal laboratorio
+
+Scritta il 18 ottobre 2026, prima di qualsiasi calcolo su questo periodo. Test singolo. L'ipotesi nasce dai dati 2021–2026 della replica di Detzel et al. (2021): la variante a 20 settimane è la più forte della replica (p 0,03753, sopra la soglia di 0,00833, quindi non passa). Qui si mette alla prova solo su un periodo che quei dati non contengono. Nel registro non ci sono altri test su dati 2018–2020.
+
+**Periodo.** Dal 1 luglio 2018 al 31 dicembre 2020, giorni di calendario UTC: W = 915 giorni. Il periodo inizia dopo la fine dei dati di Detzel et al. (30 giugno 2018) e prima dei test del laboratorio (dal 1 gennaio 2021). La posizione del 30 giugno 2018 entra alla chiusura di quel giorno, come negli altri test: l'entrata iniziale paga il costo.
+
+**Regola.** Identica alla replica. Per ogni giorno t, b_t è il logaritmo naturale della chiusura giornaliera di t (UTC). S_t = 1 se b_t supera la media di b sulle ultime 140 chiusure, oggi compresa; altrimenti S_t = 0. L'esposizione del giorno t+1 è S_t. Solo lunga; fuori dal mercato c'è liquidità, a rendimento zero.
+
+**Universo.** XBTUSD più le coppie EUR di `laboratorio.json`, tranne XXBTZEUR (vedi scostamento (a)), con i nomi dell'archivio Kraken. Una coppia entra se ha almeno 140 chiusure giornaliere con data prima del 1 luglio 2018 e nessun giorno mancante dalla prima di quelle chiusure al 31 dicembre 2020. Le altre sono escluse, con il motivo, nel report. L'universo è fissato da questa regola prima del periodo: nessuna moneta entra o esce durante il test.
+
+**Dati.** Candele giornaliere (1440 minuti) dall'archivio Kraken, in locale in `dati/archivio/`, non nel repository.
+
+**Costi.** `strategie/rsi-base.json`: 0,10% per lato più 0,05% di slippage, cioè 0,15% per unità di variazione di esposizione, quindi 0,30% per operazione intera. La posizione è piatta prima e dopo il periodo: entrata iniziale e uscita finale pagano il costo.
+
+**Portafoglio.** Pesi uguali: ogni giorno ciascuna delle N monete incluse pesa 1/N. Il rendimento netto del giorno d è la media delle monete di e_d · r_d − c · |Δe_d|, con r_d = C_d / C_(d−1) − 1 e c = 0,15%; il costo di uscita finale è addebitato all'ultimo giorno. Confronto: buy and hold a pesi uguali, con gli stessi costi di entrata e uscita.
+
+**Giudice.** N = 1, alfa 0,05. Statistica: rendimento netto medio giornaliero del portafoglio. Nulla: rotazione circolare comune, cioè lo stesso spostamento s per tutte le monete, con ritorno all'inizio, lasciando i rendimenti; i costi della nulla sono quelli della serie circolare di ciascuna moneta. Si escludono gli spostamenti entro 30 giorni dallo zero in entrambe le direzioni: s = 31…884, cioè 854 spostamenti; p = (k+1)/855. Decisione presa adesso, prima dei dati: spostare all'indietro farebbe guardare alla regola il futuro; in avanti la regola seguirebbe ancora la stessa tendenza. Passa con p ≤ 0,05 se k ≤ 41, e con rendimento netto totale del portafoglio positivo.
+
+**Previsione.** Incerta, probabilmente negativa. Nel campione di Detzel la media a 20 settimane ha Sharpe 1,99 contro 1,82 del buy and hold, non significativo (dato del committente, non verificato da noi). Wei e colleghi non la trovano robusta: l'abstract che abbiamo letto parla solo del rapporto logaritmico di breve periodo. Il periodo contiene il calo della seconda metà del 2018 e il crollo di marzo 2020, dove una media lunga dovrebbe aiutare: se passa, è più probabile che passi per quello.
+
+**Criterio di successo.** Passa solo con p ≤ 0,05 e rendimento netto totale del portafoglio positivo. Ogni altro esito non passa.
+
+**Scostamenti dal metodo dichiarati.**
+(a) XBTEUR è escluso dall'universo, anche se è tra le coppie EUR di `laboratorio.json`: è lo stesso asset di XBTUSD e lo conterebbe due volte.
+(b) Condizione aggiuntiva: nessun giorno mancante nel periodo, per il confronto del portafoglio.
+(c) Liquidità a rendimento zero, come negli altri test.
+(d) Esposizione sul giorno successivo al segnale, come nella replica (equazione 16 dello studio).
+(e) Prezzi Kraken: il periodo è fuori dal campione di Detzel (CoinDesk, fino al 30 giugno 2018).
+(f) Esclusione entro 30 giorni dallo zero: scelta di questo test.
+(g) Il giudice è sul rendimento medio giornaliero del portafoglio, non sulla somma per operazione del test di conferma crypto.
+
+**Report.** `report/detzel-140-indietro.md`: universo, con incluse ed escluse e il motivo; statistica, p ed esito; rendimento netto totale e annuo del portafoglio e del buy and hold; drawdown massimo; cambi di posizione all'anno; giorni dentro per moneta; anno per anno (solo informativo). Curve in `report/dati/detzel-140-indietro.json`. Una riga nel registro.
+
 | data (UTC) | strategia | coppia | impronta | periodo | operazioni | capitale | vs comprato e basta | drawdown | nota |
 |---|---|---|---|---|---:|---:|---:|---:|---|
 | 2026-10-17 15:11 | rsi-base | XXBTZEUR | 1863e747c0 | 27 ott 2024, 02:00 → 16 ott 2025, 02:00 | 0 | 100,00 € (0,00%) | -8,30 punti | 0,00% | passo 1: pipeline su 20 coppie, solo finestra di ricerca |
