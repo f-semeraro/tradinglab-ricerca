@@ -101,6 +101,50 @@ Scritta il 18 ottobre 2026, prima di qualsiasi calcolo sui dati di questo test. 
 
 **Report.** Il risultato complessivo con p ed esito; il portafoglio di B a pesi uguali contro il buy and hold a pesi uguali, con rendimento totale e drawdown massimo; per ogni moneta, solo come informazione, operazioni, rendimento netto e buy and hold. Una riga nel registro.
 
+## Pre-registrazione: test di Detzel, Liu, Strauss, Zhou e Zhu (2021) su XBTUSD, con la media a 7 giorni come test principale
+
+Scritta il 18 ottobre 2026, prima di qualsiasi calcolo sui dati di questo test. Nulla è stato ancora letto né calcolato. Il test principale decide il verdetto; la replica delle sei esposizioni è secondaria.
+
+**Motivo del disegno.** Il disegno è cambiato prima dei dati, dopo la lettura integrale di due studi critici. Wei, Kyriakou, Sermpinis e Stasinakis (2024), *International Journal of Finance & Economics* 29(4), 4073–4104, doi:10.1002/ijfe.2863: su 12 criptovalute, dal 2015 a marzo 2022 secondo il committente, con correzione rigorosa per i test multipli su regole tecniche. L'abstract riporta 7.846 regole; il committente scrive 7.851, da verificare sul testo letto. Tra le regole tecniche solo il rapporto logaritmico tra prezzo e media mobile di breve periodo regge nel campione e fuori. L'indice di hashrate, fondamentale, regge anch'esso e non è nel test. Il test principale verifica quella regola su dati successivi a quelli dello studio.
+
+**Test principale.**
+- Regola: per ogni giorno t, b_t è il logaritmo naturale della chiusura di t (UTC). La media ma_t è la media di b sugli ultimi 7 giorni, oggi compreso. Il segnale è 1 se b_t > ma_t, altrimenti 0: il segno del rapporto logaritmico tra prezzo e media. Solo lunga.
+- Esposizione: l'esposizione del giorno d è il segnale del giorno d−1.
+- Dati: candele giornaliere (1440 minuti) di XBTUSD dall'archivio Kraken, in locale in `dati/archivio/`, non nel repository. Nessuna mancanza nel periodo, come verificato sul file.
+- Periodo giudicato: dal 1 aprile 2022 al 28 giugno 2026, W = 1550 giorni. Il periodo inizia dopo l'ultimo dato di Wei e colleghi. La posizione del 31 marzo 2022 entra alla chiusura di quel giorno. Le candele dal 29 giugno 2026 non vengono lette.
+- N = 1, alfa 0,05: soglia 0,05.
+
+**Test secondario: replica delle sei esposizioni.** Periodo dal 1 gennaio 2021 al 28 giugno 2026, W = 2005 giorni. Cinque medie logaritmiche su 7L giorni (L = 1, 2, 4, 10, 20 settimane, cioè 7, 14, 28, 70, 140 giorni) e la combinazione EW, media a pesi uguali delle cinque: valori 0; 0,2; 0,4; 0,6; 0,8; 1. N = 6, alfa 0,05: soglia 0,0083. La variante di 7 giorni compare in entrambi i test, e il periodo del test principale è contenuto in quello secondario: i due test non sono indipendenti. Il verdetto che conta è quello del test principale.
+
+**Costi.** 0,10% per lato più 0,05% di slippage per lato: 0,15% per unità di variazione di esposizione, quindi 0,30% per operazione intera. Per EW la variazione è in proporzione. La posizione è piatta prima del primo giorno del periodo e dopo il 28 giugno 2026: l'entrata iniziale e l'uscita finale pagano il costo, come nella replica di Liu e Tsyvinski, lettera (d).
+
+**Statistica.** Rendimento netto medio giornaliero: M = (1/W) · [Σ e_d · r_d − c · T], con r_d = C_d / C_(d−1) − 1, c = 0,15% per lato, e T la somma dei cambi di esposizione sul periodo, entrata iniziale e uscita finale comprese. Rendimento netto totale: composto giorno per giorno, Π(1 + e_d · r_d − c · |Δe_d|), con l'uscita finale come fattore (1 − c · e) alla chiusura dell'ultimo giorno.
+
+**Giudice (comune ai due test).** Rotazione circolare della serie delle esposizioni rispetto ai rendimenti, senza seme. Lo spostamento s sposta le esposizioni di s giorni in avanti, con ritorno all'inizio, e lascia i rendimenti. I costi della nulla sono quelli della serie circolare: una permanenza che attraversa la fine del periodo è una sola operazione. Si escludono gli spostamenti entro 30 giorni dallo zero in entrambe le direzioni. Decisione presa adesso, prima dei dati: spostare all'indietro farebbe guardare alla regola il futuro; in avanti la regola seguirebbe ancora la stessa tendenza. p = (numero di spostamenti con M_s ≥ M osservata, più 1) / (numero di spostamenti, più 1). Passa solo con p ≤ alfa/N e rendimento netto totale positivo.
+- Test principale: W = 1550, spostamenti s = 31…1519, cioè 1489; p = (k+1)/1490. Passa con p ≤ 0,05 se k ≤ 73.
+- Test secondario: W = 2005, spostamenti s = 31…1974, cioè 1944; p = (k+1)/1945. Passa con p ≤ 0,00833 se k ≤ 15.
+
+**Costo di pareggio.** Costo per lato c al quale il vantaggio sul buy and hold è zero. Il vantaggio è M(regola) − M(buy and hold), con il buy and hold a esposizione 1 per tutto il periodo. È lineare in c: c* = Σ(e_d − 1) · r_d / (T − 2). Non definito se T − 2 ≤ 0 o se c* ≤ 0. Riportato per entrambi i test.
+
+**XBTEUR.** Solo confronto, per entrambi i periodi: stessa regola, rendimento totale e buy and hold. Nessun p, nessun esito.
+
+**Previsione.**
+- Test principale: Wei e colleghi trovano predittività fuori campione, ma con significatività modesta (al 10%, secondo il committente). Nello studio di Detzel la media a 7 giorni cambia posizione circa 64 volte l'anno: a 0,15% per cambio, i costi pesano intorno ai 10 punti l'anno (64 × 0,15% ≈ 9,6%). L'esito è incerto. Se passa, ci aspettiamo più riduzione del drawdown che rendimento in più rispetto al buy and hold.
+- Medie mobili e momentum hanno rendimenti correlati oltre 0,80, secondo Marshall, Nguyen e Visaltanachoti, come citati da Hudson e Urquhart e riportati dal committente (non verificato). Quindi Shen, Urquhart e Wang (2022) e Liu e Tsyvinski (2021) sono quasi la stessa ipotesi di questo test. Sappiamo già che la regola B ha funzionato su XBTUSD nel periodo 2021–2026, che contiene questo: un esito positivo qui conferma lo stesso fenomeno, non lo prova di nuovo.
+
+**Criterio di successo.** Il test principale passa solo con p ≤ 0,05 e rendimento netto totale positivo. Il secondario passa solo con p ≤ 0,00833 e rendimento netto totale positivo, ma non decide il verdetto. Ogni altro esito non passa.
+
+**Scostamenti dal metodo dichiarati.**
+(a) Equazione 16 dello studio: S_t · r_t; qui S_t si applica a r_(t+1), l'unica versione eseguibile.
+(b) Liquidità a rendimento zero; lo studio usa il tasso privo di rischio.
+(c) Prezzi Kraken invece di CoinDesk. Il test principale è su 2022–2026, fuori dal campione dello studio (2010–2018) e da quello di Wei e colleghi.
+(d) Esclusione entro 30 giorni dallo zero: scelta di questo test.
+(e) Il vantaggio è misurato come differenza di rendimento netto medio giornaliero: la definizione dello studio potrebbe differire, quindi il confronto del costo di pareggio è indicativo.
+(f) La regola di Wei e colleghi è letta come segno del rapporto logaritmico con la media a 7 giorni. Se il loro testo la definisce diversamente, il test principale va rivisto prima del commit.
+(g) Nella nulla i costi sono quelli della serie circolare; nella serie osservata la posizione è piatta ai bordi.
+
+**Report.** Per ogni test: giudice, con spostamenti e soglia; cambi di posizione all'anno; percentuale di giorni dentro; rendimento totale e annuo netti (annuo con 365,25 giorni); drawdown massimo della curva giornaliera; buy and hold nello stesso periodo; costo di pareggio per lato; statistica M in punti base al giorno; p ed esito; anno per anno (solo informativo). Per la replica, confronto con 1,38%, 2,12%, 3,13%, 5,75%, 6,85% (EW: non riportato). Curve giornaliere in `report/dati/`. Una riga per esposizione nel registro.
+
 | data (UTC) | strategia | coppia | impronta | periodo | operazioni | capitale | vs comprato e basta | drawdown | nota |
 |---|---|---|---|---|---:|---:|---:|---:|---|
 | 2026-10-17 15:11 | rsi-base | XXBTZEUR | 1863e747c0 | 27 ott 2024, 02:00 → 16 ott 2025, 02:00 | 0 | 100,00 € (0,00%) | -8,30 punti | 0,00% | passo 1: pipeline su 20 coppie, solo finestra di ricerca |
