@@ -194,7 +194,7 @@ Scritta il 18 ottobre 2026, prima di qualsiasi calcolo sui rendimenti di questo 
 
 **Storia.** Almeno 104 settimane complete prima di lunedì 4 gennaio 2021: candele giornaliere presenti senza buchi per ogni giorno dal 7 gennaio 2019 al 3 gennaio 2021 (728 giorni). Chi non le ha è escluso.
 
-**Liquidità.** Tra le monete rimaste, le 20 con il controvalore mediano giornaliero più alto nel 2020. Controvalore del giorno = volume × chiusura, in euro. Le coppie in USD si convertono con la chiusura di EURUSD dello stesso giorno (se manca, quella del giorno precedente). Si calcola la mediana sui giorni del 2020 con candela. Se le monete rimaste sono meno di 20, si tengono tutte.
+**Liquidità.** Tra le monete rimaste, le 20 con il controvalore mediano giornaliero più alto nel 2020. Controvalore del giorno = volume × chiusura, in euro. Le coppie in USD si convertono con la chiusura di EURUSD dello stesso giorno (se manca, quella del giorno precedente). L'archivio contiene EURUSD solo dal 12 marzo 2020: la mediana si calcola sui giorni dal 12 marzo al 31 dicembre 2020 con candela, per tutte le monete, così la stessa finestra vale per le coppie in EUR e in USD. Se le monete rimaste sono meno di 20, si tengono tutte.
 
 **Periodo.** Dal lunedì 4 gennaio 2021 alla domenica 28 giugno 2026: 286 settimane, come nel test di conferma.
 
@@ -218,7 +218,7 @@ Scritta il 18 ottobre 2026, prima di qualsiasi calcolo sui rendimenti di questo 
 (a) Test nuovo sull'universo 2020, non replica di Liu e Tsyvinski.
 (b) Giudice: rotazione circolare comune con esclusione entro 4 settimane dallo zero, scelta di questo test.
 (c) Percentile sul primo dato disponibile di ciascuna moneta, non sul campione dello studio.
-(d) Liquidità in euro con EURUSD giornaliero dell'archivio.
+(d) Liquidità in euro con EURUSD giornaliero dell'archivio, disponibile dal 12 marzo 2020; la mediana usa la finestra dal 12 marzo al 31 dicembre 2020.
 (e) Regole per settimana senza scambi, moneta tolta dal listino e nulla con posizioni su settimane in cui la moneta non è quotata: definite sopra.
 (f) Prezzi Kraken: l'archivio arriva al 30 settembre 2026, il test legge fino al 28 giugno 2026.
 
