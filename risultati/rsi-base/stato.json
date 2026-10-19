@@ -5125,6 +5125,27 @@
       "portafoglio": 100,
       "mercato": 98.42409105443734,
       "prezzo": 91.11
+    },
+    {
+      "momento": 1792364400,
+      "candela": 1792360800,
+      "portafoglio": 100,
+      "mercato": 100.01209910898704,
+      "prezzo": 92.58
+    },
+    {
+      "momento": 1792368000,
+      "candela": 1792364400,
+      "portafoglio": 100,
+      "mercato": 100.10932409191867,
+      "prezzo": 92.67
+    },
+    {
+      "momento": 1792371600,
+      "candela": 1792368000,
+      "portafoglio": 100,
+      "mercato": 100.22815462661285,
+      "prezzo": 92.78
     }
   ],
   "benchmark": {
