@@ -224,6 +224,46 @@ Scritta il 18 ottobre 2026, prima di qualsiasi calcolo sui rendimenti di questo 
 
 **Report.** `report/b-universo-2020.md`: universo con incluse, escluse e motivo, e le monete tolte dal listino con la data; portafoglio contro buy and hold a pesi uguali, con rendimento totale e annuo, drawdown massimo, p ed esito; per moneta, solo come informazione, operazioni, rendimento netto e buy and hold; anno per anno; confronto con il test di conferma. Curve in `report/dati/b-universo-2020.json`. Una riga nel registro.
 
+## Pre-registrazione: verifica all'indietro della regola B su un secondo ciclo di mercato (luglio 2018 – dicembre 2020)
+
+Scritta il 24 ottobre 2026, prima di qualsiasi calcolo sui rendimenti di questo test. Test nuovo e singolo. La regola B (Liu e Tsyvinski, quinto più alto, una settimana) non cambia in nessun punto.
+
+**Periodo dello studio.** Versione pubblicata: Liu e Tsyvinski, *Review of Financial Studies* 34(6), 2021, doi:10.1093/rfs/hhaa113. La pagina dell'editore è disponibile, ma la sezione sui dati non è leggibile da qui: il periodo della versione pubblicata non è verificato. Versione di lavoro del 2018 (PDF su red-files-public.s3.amazonaws.com, letto in locale): Bitcoin dal 1 gennaio 2011 al 31 maggio 2018 (CoinDesk), Ripple dal 4 agosto 2013 e Ethereum dal 7 agosto 2015 (CoinMarketCap), tutti fino al 31 maggio 2018. Il periodo di questo test inizia il 2 luglio 2018, dopo la fine della versione di lavoro. Se la versione pubblicata arriva oltre il 31 maggio 2018, il periodo si sovrappone: il test resta valido per il laboratorio, ma non è fuori campione rispetto allo studio.
+
+**Universo.** Partenza: tutte le coppie spot dell'archivio quotate in EUR. Non si usano le coppie in USD: l'archivio non ha il cambio EUR/USD prima di marzo 2020, e la liquidità va misurata in euro. Bitcoin incluso (XBTEUR), perché per questo periodo è nuovo anche per il laboratorio. Esclusi, con il motivo nel report: stablecoin e token ancorati a una valuta (stessa lista del test 2020), valute tradizionali (stessa lista), doppioni dello stesso asset (un simbolo con prefisso X o Z è un doppione se esiste il simbolo senza prefisso; si tiene quello senza prefisso).
+
+**Storia.** Candela in ogni giorno delle 104 settimane prima di lunedì 2 luglio 2018: dal 4 luglio 2016 al 1 luglio 2018 compresi (728 giorni), senza buchi. Stessa regola del test 2020.
+
+**Liquidità.** Tra le monete rimaste, le 20 con il controvalore mediano giornaliero più alto dal 1 gennaio al 30 giugno 2018. Controvalore del giorno = volume × chiusura, in euro. Nessuna conversione. Se le monete rimaste sono meno di 20, si tengono tutte.
+
+**Monete tolte dal listino.** Restano nell'universo. Se l'ultima candela cade prima della fine del periodo, la posizione si chiude alla chiusura di quella candela, con i costi di uscita, e la quota resta in liquidità fino al 27 dicembre 2020. Il buy and hold fa lo stesso.
+
+**Periodo.** Dal lunedì 2 luglio 2018 alla domenica 27 dicembre 2020: 130 settimane. Il test legge le candele fino al 27 dicembre 2020 compreso. Il segnale della domenica 1 luglio 2018 decide la prima settimana.
+
+**Regola.** Identica a liu-b, per ogni moneta: rendimento della settimana domenica-domenica (UTC) sulle chiusure giornaliere. Segnale se il rendimento supera l'80° percentile R7 di tutte le settimane precedenti della stessa moneta, dal primo dato disponibile. Posizione dentro la settimana successiva, solo lunga. Entrata alla chiusura di domenica prima della settimana; uscita alla chiusura di domenica dell'ultima settimana tenuta.
+
+**Settimana senza scambi.** Settimana senza candela della moneta alla domenica di chiusura: il segnale di quella domenica non apre nessuna posizione. Una posizione già aperta mantiene la sua settimana, e il suo rendimento si calcola fino alla prossima chiusura disponibile.
+
+**Costi.** `strategie/rsi-base.json`: 0,10% per lato più 0,05% di slippage, cioè 0,30% per operazione.
+
+**Portafoglio.** Pesi uguali e indipendenti: ogni moneta ha una quota 1/N, senza ribilanciamento. Confronto: buy and hold a pesi uguali, con le stesse uscite per le monete tolte.
+
+**Giudice.** N = 1, alfa 0,05. Statistica: somma dei rendimenti netti per operazione su tutte le monete. Nulla: rotazione circolare comune, con lo stesso spostamento s per tutte le monete, senza seme. Una posizione che cade su settimane in cui la moneta non è più quotata non genera operazioni. Una permanenza che attraversa la fine del periodo è una sola operazione. Si escludono gli spostamenti entro 4 settimane dallo zero in entrambe le direzioni: s = 1…4 e s = 126…129. Restano s = 5…125: 121 spostamenti; p = (k+1)/122. Il p minimo raggiungibile è 1/122 ≈ 0,0082. Decisione presa adesso, prima dei dati: spostare all'indietro farebbe guardare alla regola il futuro; in avanti la regola seguirebbe ancora la stessa tendenza. Passa con p ≤ 0,05 se k ≤ 5, e con somma netta positiva.
+
+**Previsione.** Incerta. Il periodo è più corto (130 settimane) e con meno monete, quindi il test ha meno potere. Contiene il crollo del 2018, dove la regola dovrebbe aiutare, e la salita del 2020, dove dovrebbe restare indietro. Nello stesso periodo la media a 140 giorni ha fatto +79% contro +23% del buy and hold, con p 0,12.
+
+**Criterio di successo.** Passa solo con p ≤ 0,05 e somma netta positiva. Ogni altro esito non passa.
+
+**Scostamenti dal metodo dichiarati.**
+(a) Test nuovo su un secondo ciclo di mercato, non replica di Liu e Tsyvinski.
+(b) Universo solo in EUR, Bitcoin incluso: scelta del test, dettata dall'archivio (nessun EUR/USD prima di marzo 2020).
+(c) Giudice: rotazione circolare comune con esclusione entro 4 settimane dallo zero, come nel test 2020.
+(d) Percentile sul primo dato disponibile di ciascuna moneta.
+(e) Settimana senza scambi, moneta tolta dal listino e nulla: definite sopra.
+(f) Periodo dello studio: la versione di lavoro finisce il 31 maggio 2018, prima del periodo di test; per la versione pubblicata il periodo non è verificato.
+
+**Report.** `report/b-indietro-2018.md`: universo con incluse, escluse e motivo; portafoglio contro buy and hold, con rendimento totale e annuo, drawdown massimo, p ed esito; per moneta, solo come informazione, operazioni, rendimento netto e buy and hold; anno per anno; confronto con il test sull'universo 2020. Curve in `report/dati/b-indietro-2018.json`. Una riga nel registro.
+
 | data (UTC) | strategia | coppia | impronta | periodo | operazioni | capitale | vs comprato e basta | drawdown | nota |
 |---|---|---|---|---|---:|---:|---:|---:|---|
 | 2026-10-17 15:11 | rsi-base | XXBTZEUR | 1863e747c0 | 27 ott 2024, 02:00 → 16 ott 2025, 02:00 | 0 | 100,00 € (0,00%) | -8,30 punti | 0,00% | passo 1: pipeline su 20 coppie, solo finestra di ricerca |
