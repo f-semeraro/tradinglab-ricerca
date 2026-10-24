@@ -288,6 +288,42 @@ Scritta il 24 ottobre 2026, prima di qualsiasi calcolo su questo universo. Test 
 
 **Report.** `report/b-indietro-2018-estensione.md`: stessa struttura del primo tentativo, con un confronto con il risultato su ETH e con il test sull'universo 2020. Curve in `report/dati/b-indietro-2018-estensione.json`. Una riga nel registro.
 
+## Pre-registrazione: prova in avanti su carta della regola B su un portafoglio di monete
+
+Scritta il 24 ottobre 2026, prima di attivare la strategia. Test pre-registrato: universo, regola, durata e giudizio sono fissati adesso, prima del primo giro. La strategia sarà attivata spostando il file da `candidati/` a `strategie/` con un commit separato, solo dopo il push di questa pre-registrazione.
+
+**Perché.** I backtest e le verifiche all'indietro danno risultati discordanti (vedi sezioni precedenti). La prova in avanti misura la regola su dati che nessun test ha usato.
+
+**Universo.** Fissato una volta per tutte alla partenza, con i dati fino al giorno prima. Data di partenza: il primo lunedì dopo l'attivazione. Coppie spot in EUR di Kraken, Bitcoin compreso (XBTEUR); esclusi stablecoin, valute tradizionali e doppioni, con le stesse regole dei test precedenti. Storia: al massimo 30 giorni senza candela nelle 104 settimane prima della partenza. Liquidità: tra le monete rimaste, le 20 con il controvalore mediano giornaliero più alto nei 365 giorni prima della partenza; se sono meno di 20, si tengono tutte. Nessuna moneta entra dopo la partenza. Moneta tolta dal listino: si chiude all'ultima chiusura, con i costi di uscita, e la quota resta in liquidità fino alla fine; il buy and hold fa lo stesso. L'universo, con il controvalore di ogni moneta, è salvato in `candidati/b-portafoglio-universo.json` prima dell'attivazione.
+
+**Regola.** Identica a liu-b, per ogni moneta: rendimento della settimana domenica-domenica (UTC) sulle chiusure giornaliere; segnale se il rendimento supera l'80° percentile R7 di tutte le settimane precedenti della stessa moneta, dal primo dato disponibile; posizione dentro la settimana successiva; solo lunga. Settimana senza candela alla domenica di chiusura: il segnale di quella domenica non apre posizioni; una posizione già aperta mantiene la sua settimana.
+
+**Portafoglio.** Pesi uguali e indipendenti: quota 1/N per moneta, senza ribilanciamento. Benchmark: buy and hold a pesi uguali delle stesse monete dalla partenza, con le stesse uscite.
+
+**Esecuzione.** Valutazione una volta a settimana, dopo la chiusura della domenica, con controllo di idempotenza: una settimana già elaborata non si rielabora. Esecuzione alla chiusura della candela oraria del lunedì dalle 00:00 alle 01:00 UTC, come per liu-b, a qualunque ora parta il giro. Costi: `strategie/rsi-base.json`, 0,10% per lato più 0,05% di slippage, cioè 0,30% per operazione. Nel report, una riga solo informativa con lo slippage moltiplicato per cinque (0,25% per lato), per le monete poco liquide.
+
+**Dati.** Storia settimanale in `dati/settimanali/<COPPIA>.csv`, costruita dall'archivio e aggiornata dal giro con l'API. Al massimo una richiesta per coppia a settimana, e non più di una al secondo.
+
+**Giudizio.** Il verdetto si dà una volta sola: dopo 52 settimane o 100 operazioni chiuse, quale arriva più tardi. Prima non si conclude nulla. Giudice: rotazione circolare comune a tutte le monete, con esclusione degli spostamenti entro 4 settimane dallo zero, senza seme; N = 1, alfa 0,05. Statistica: somma dei rendimenti netti per operazione. Passa con p ≤ 0,05 e somma netta positiva. Il p minimo raggiungibile dipende dalla durata: con 52 settimane, 43 spostamenti e minimo 1/44. Indicatore secondario, riportato ma non decisivo: drawdown massimo contro quello del buy and hold.
+
+**Regola congelata.** Qualunque modifica a universo, regola, costi, giudice o durata azzera la prova e va registrata come strategia nuova.
+
+**Previsione.**
+- Sui backtest 2021–2026 la regola indica un vantaggio forte su due universi (p 0,0105 sull'universo scelto nel 2026, con il senno di poi; p 0,0036 sull'universo del 2020). Sull'universo del 2020 il sorpasso sul buy and hold avviene nel 2022, anno di crollo (+13,75% contro −70,13%); nel 2021 e negli anni 2023–2024 la regola resta indietro.
+- Nel ciclo 2018–2020 il vantaggio non si conferma: forte su ETH da sola (p 0,00820), ma assente su XBT, LTC ed ETC (p 0,29508). Si conferma solo la riduzione del drawdown.
+- L'esito è incerto, e il vantaggio, se c'è, sembra dipendere dal tipo di mercato.
+- Se i prossimi 12 mesi saranno di salita, è probabile che il portafoglio resti molto indietro rispetto al buy and hold, come nel 2019 (+11,46% contro +52,79%) e nel 2020 (+29,78% contro +177,62%) sulle tre monete. Per questo il giudizio è la rotazione e non il confronto con il buy and hold.
+
+**Scostamenti dal metodo dichiarati.**
+(a) La prova è su carta: nessun ordine reale.
+(b) Universo fissato alla partenza, con dati dell'archivio e dell'API fino al giorno prima.
+(c) Percentile sul primo dato disponibile di ciascuna moneta.
+(d) Liquidità in euro, coppie in EUR.
+(e) Durata del verdetto (52 settimane o 100 operazioni) fissata adesso.
+(f) Slippage moltiplicato per cinque: solo informativo.
+
+**Monitoraggio.** In testa a `SINTESI.md` l'ora dell'ultimo giro. Se il giro non gira da più di 24 ore, o se una domenica non è elaborata entro il lunedì sera, la segnalazione va in evidenza. Il dettaglio per moneta va in `report/b-portafoglio-monete.md`; `SINTESI.md` ha una riga per il portafoglio, con settimane trascorse, operazioni chiuse, rendimento contro il buy and hold, drawdown e l'etichetta «prova in avanti: tendenza, non indipendente da liu-b e detzel-140».
+
 | data (UTC) | strategia | coppia | impronta | periodo | operazioni | capitale | vs comprato e basta | drawdown | nota |
 |---|---|---|---|---|---:|---:|---:|---:|---|
 | 2026-10-17 15:11 | rsi-base | XXBTZEUR | 1863e747c0 | 27 ott 2024, 02:00 → 16 ott 2025, 02:00 | 0 | 100,00 € (0,00%) | -8,30 punti | 0,00% | passo 1: pipeline su 20 coppie, solo finestra di ricerca |
