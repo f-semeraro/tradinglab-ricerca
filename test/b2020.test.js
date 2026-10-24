@@ -59,6 +59,18 @@ test("costruisciUniverso: EUR prima di USD, esclusioni con motivo, e le prime N 
   assert.equal(universo.filter((r) => r.incluso).length, 1);
 });
 
+test("costruisciUniverso con soloEur e ammettiBitcoin: solo coppie in EUR, Bitcoin ammesso, USD escluse con motivo", () => {
+  const coppie = [coppia("XBTEUR", 500), coppia("XBTUSD", 900), coppia("AEUR", 10), coppia("AUSD", 800), coppia("BUSD", 700)];
+  const universo = costruisciUniverso(coppie, { top: 5, soloEur: true, ammettiBitcoin: true });
+  const per = (base) => universo.find((r) => r.base === base);
+  assert.equal(per("XBT").incluso, true);
+  assert.equal(per("XBT").coppia, "XBTEUR");
+  assert.equal(per("A").coppia, "AEUR");
+  assert.equal(per("A").incluso, true);
+  assert.equal(per("B").incluso, false);
+  assert.match(per("B").motivo, /solo coppia in USD/);
+});
+
 test("serieSettimanale: la moneta tolta dal listino si chiude alla sua ultima candela, poi è inattiva", () => {
   const date = giorniDa("2019-01-06", "2024-01-15");
   const close = date.map((_, i) => 100 + i);
