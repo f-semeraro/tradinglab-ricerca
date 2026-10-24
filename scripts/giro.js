@@ -27,8 +27,17 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { candeleChiuse } from "../lib/kraken.js";
-import { domenicaChiusa, richiesteDaFare } from "../lib/politicaRichieste.js";
-import { avvisi, sezionePortafoglio, paginaMonete } from "../lib/portafoglioSintesi.js";
+import { domenicaChiusa, richiesteDaFare, richiestaGiornalieraDaFare } from "../lib/politicaRichieste.js";
+import { avvisi, sezionePortafoglio, paginaMonete, curvaMedia, metriche as metricheCurva } from "../lib/portafoglioSintesi.js";
+import { verdettoDovuto } from "../lib/verdettoPortafoglio.js";
+import {
+  aggiornaStoriaGiornaliera,
+  problemiGiornaliera,
+  datiPortafoglio,
+  verdetto as verdettoGiornaliera,
+  avvisiGiornaliera,
+  sezioneGiornaliera
+} from "../lib/giornalieraProva.js";
 import { leggiStrategia, candeleNecessarie } from "../lib/configurazione.js";
 import { nuovoStato, avanza, pianoDelGiro, ultimaCandelaElaborata, esecuzioneDi } from "../lib/simulazione.js";
 import { calcolaMetriche } from "../lib/metriche.js";
@@ -39,6 +48,8 @@ import { aggiornaStoria, passoPerCoppia, nuovoStatoProva, problemiSettimanale, r
 const RADICE = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dentro = (...parti) => path.join(RADICE, ...parti);
 const PAUSA_TRA_RICHIESTE_MS = 1000; // Kraken è pubblico e gratuito: si chiede con calma
+const GIORNO_MS = 86400000;
+const giornoIso = (ms) => new Date(ms).toISOString().slice(0, 10);
 
 function caricaLaboratorio() {
   const lab = leggiJson(dentro("laboratorio.json"));
@@ -64,6 +75,12 @@ function caricaStrategie(lab) {
       if (problemi.length > 0) throw new Error(`strategia settimanale ${nome} non valida: ${problemi.join("; ")}`);
       return { nome, strategia: grezza, settimanale: true, intervallo: 1440, coppie: grezza.coppie, legacy: false, portafoglio: grezza.portafoglio === true };
     }
+    // la variante «B giornaliera»: una regola sua, con storia e richieste proprie, vedi lib/giornalieraProva.js
+    if (grezza?.tipo === "giornaliera") {
+      const problemi = problemiGiornaliera(grezza);
+      if (problemi.length > 0) throw new Error(`strategia giornaliera ${nome} non valida: ${problemi.join("; ")}`);
+      return { nome, strategia: grezza, giornaliera: true, intervallo: 1440, coppie: grezza.coppie, legacy: false, portafoglio: false };
+    }
     const strategia = leggiStrategia(percorso);
     return { nome, strategia, ...esecuzioneDi(strategia, lab) };
   });
@@ -75,12 +92,23 @@ function statoRichieste(coppia) {
   return { ultimaGiornaliera: stato.ultimaGiornaliera ?? null, ultimaOraria: stato.ultimaOraria ?? null };
 }
 
+/** L'ultimo giorno in cui la richiesta giornaliera della variante è stata tentata: vedi lib/politicaRichieste.js. */
+function statoRichiesteGiornaliere(coppia) {
+  return leggiJson(dentro("dati", "giornaliere", `${coppia}.richieste.json`)) ?? { ultimoTentativo: null };
+}
+
 /** Le chiavi (coppia, intervallo) che servono davvero adesso: una candela nuova è chiusa da almeno un intervallo. */
 function chiaviDaScaricare(strategie, adessoSecondi, adessoMs) {
   const chiavi = new Map();
-  for (const { nome, intervallo, coppie, legacy, settimanale } of strategie) {
+  for (const { nome, intervallo, coppie, legacy, settimanale, giornaliera } of strategie) {
     const durata = intervallo * 60;
     for (const coppia of coppie) {
+      if (giornaliera) {
+        // una richiesta giornaliera per coppia al giorno, anche se fallisce: vedi lib/politicaRichieste.js
+        const richiesta = richiestaGiornalieraDaFare({ adessoMs, ultimoTentativo: statoRichiesteGiornaliere(coppia).ultimoTentativo });
+        if (richiesta.fare) chiavi.set(`${coppia}|1440`, true);
+        continue;
+      }
       if (settimanale) {
         // al più una richiesta giornaliera e una oraria per coppia a settimana: vedi lib/politicaRichieste.js
         const richieste = richiesteDaFare({ adessoMs, ...statoRichieste(coppia) });
@@ -98,6 +126,18 @@ function chiaviDaScaricare(strategie, adessoSecondi, adessoMs) {
   return [...chiavi].filter(([, serve]) => serve).map(([chiave]) => chiave);
 }
 
+/** Registra il tentativo della richiesta giornaliera, riuscito o no: una al giorno per coppia, vedi lib/politicaRichieste.js. */
+function registraTentativiGiornalieri(strategie, adessoMs) {
+  for (const { coppie, giornaliera } of strategie) {
+    if (!giornaliera) continue;
+    for (const coppia of coppie) {
+      if (richiestaGiornalieraDaFare({ adessoMs, ultimoTentativo: statoRichiesteGiornaliere(coppia).ultimoTentativo }).fare) {
+        scriviJson(dentro("dati", "giornaliere", `${coppia}.richieste.json`), { ultimoTentativo: giornoIso(adessoMs) });
+      }
+    }
+  }
+}
+
 const numero = (valore, decimali = 2) =>
   Number.isFinite(valore) ? valore.toFixed(decimali).replace(".", ",") : "—";
 
@@ -107,9 +147,15 @@ function sintesi(elementi, lab, opzioni = {}) {
   const ultime = elementi.map((e) => ultimaCandelaElaborata(e.stato)).filter((m) => m !== null);
   const ultima = ultime.length > 0 ? Math.max(...ultime) : null;
 
+  // gli avvisi in testa: giro fermo, domeniche in ritardo, giornate in ritardo
+  const avvisiRighe = [
+    ...avvisi({ elementi, adessoMs: opzioni.adessoMs, ultimoGiroPrecedente: opzioni.ultimoGiroPrecedente }),
+    ...(opzioni.giornaliera?.avvisi ?? [])
+  ];
   const righe = [
     "# Sintesi del laboratorio",
     "",
+    ...(avvisiRighe.length > 0 ? [...avvisiRighe, ""] : []),
     `Ogni riga è un portafoglio di carta indipendente, partito con ${numero(lab.capitaleIniziale)} €. ` +
     "Il confronto è con il «comprato e basta» sulla stessa coppia, dallo stesso punto di partenza.",
     ultima === null
@@ -167,6 +213,13 @@ function sintesi(elementi, lab, opzioni = {}) {
     righe.push("", ...sezionePortafoglio({ elementi: portafoglio, capitale: lab.capitaleIniziale, nome: portafoglio[0].nome }));
   }
 
+  const giornaliera = opzioni.giornaliera;
+  if (giornaliera) {
+    righe.push("", ...(giornaliera.dati
+      ? sezioneGiornaliera({ nome: giornaliera.nome, dati: giornaliera.dati, capitale: giornaliera.capitale, verdetto: giornaliera.verdetto, liuB: giornaliera.liuB })
+      : ["## Variante «B giornaliera» (prova in avanti)", "", `In attesa della partenza di lunedì ${giornaliera.partenza}.`, ""]));
+  }
+
   righe.push("");
   if (note.length > 0) righe.push("## Buchi nei dati", "", ...note, "");
   righe.push(
@@ -198,6 +251,8 @@ async function main() {
     else if (risposta.candele.length === 0) errori.push(`${coppia} (${intervallo} min): nessuna candela chiusa`);
     else candele.set(chiave, risposta.candele);
   }
+  // il tentativo giornaliero si registra anche se il download è fallito: al più uno al giorno
+  registraTentativiGiornalieri(strategie, adessoMs);
   if (errori.length > 0) {
     console.error(`mercato non raggiungibile: ${errori.join("; ")}. Riprovo al prossimo giro.`);
     process.exitCode = 1;
@@ -205,8 +260,21 @@ async function main() {
   }
 
   const elementi = [];
-  for (const { nome, strategia, intervallo, coppie, legacy, settimanale, portafoglio } of strategie) {
+  const storieGiornaliere = new Map();
+  for (const { nome, strategia, intervallo, coppie, legacy, settimanale, portafoglio, giornaliera } of strategie) {
     for (const coppia of coppie) {
+      if (giornaliera) {
+        // lo storico giornaliero cresce con le candele del giro; le decisioni si ricalcolano dalla storia, a ogni giro
+        const storiaPath = dentro("dati", "giornaliere", `${coppia}.csv`);
+        if (!fs.existsSync(storiaPath)) {
+          throw new Error(`storia giornaliera di ${coppia} mancante: va costruita con scripts/b-giornaliera-universo.js`);
+        }
+        const nuove = candele.get(`${coppia}|1440`);
+        const storia = aggiornaStoriaGiornaliera(leggiStoriaSettimanale(storiaPath), nuove ?? []);
+        if (nuove) scriviStoriaSettimanale(storiaPath, storia);
+        storieGiornaliere.set(coppia, storia);
+        continue;
+      }
       if (settimanale) {
         // prima lo storico delle domeniche, poi lo stato: un'interruzione tra i due non conta due volte
         const storiaPath = dentro("dati", "settimanali", `${coppia}.csv`);
@@ -267,8 +335,38 @@ async function main() {
     }
   }
 
+  // la variante giornaliera: la sezione in SINTESI, e il verdetto una sola volta, quando quello di liu-b è dovuto
+  const giornaliere = strategie.filter((s) => s.giornaliera);
+  if (giornaliere.length > 1) throw new Error("una sola variante giornaliera alla volta");
+  let giornaliera = null;
+  if (giornaliere.length === 1) {
+    const { nome, strategia } = giornaliere[0];
+    const storie = Object.fromEntries(storieGiornaliere);
+    const fine = giornoIso(adessoMs - GIORNO_MS); // l'ultima candela chiusa è quella di ieri
+    const verdettoPath = dentro("risultati", nome, "verdetto.json");
+    let verdettoEmesso = leggiJson(verdettoPath);
+    const liuB = elementi.filter((e) => e.portafoglio);
+    const curvaLiuB = curvaMedia(liuB, lab.capitaleIniziale, "portafoglio");
+    const operazioniLiuB = liuB.reduce((somma, e) => somma + (e.stato.operazioni?.length ?? 0), 0);
+    if (!verdettoEmesso && curvaLiuB.length > 0 && verdettoDovuto({ settimaneTrascorse: curvaLiuB.length, operazioniChiuse: operazioniLiuB }).dovuto) {
+      // la domenica in cui il verdetto di liu-b è diventato dovuto: l'ultima della sua curva
+      const domenica = giornoIso(Math.max(...curvaLiuB.map((c) => c.momento)) * 1000 - GIORNO_MS);
+      verdettoEmesso = { ...verdettoGiornaliera({ storie, partenza: strategia.partenza, domenica }), emesso: giornoIso(adessoMs) };
+      scriviJson(verdettoPath, verdettoEmesso);
+    }
+    giornaliera = {
+      nome,
+      partenza: strategia.partenza,
+      capitale: lab.capitaleIniziale,
+      dati: fine >= strategia.partenza ? datiPortafoglio({ storie, partenza: strategia.partenza, fine }) : null,
+      verdetto: verdettoEmesso,
+      liuB: liuB.length > 0 ? metricheCurva(curvaLiuB) : null,
+      avvisi: avvisiGiornaliera({ storie, adessoMs, fine })
+    };
+  }
+
   scriviJson(dentro("risultati", "ultimo-giro.json"), { ultimoGiroMs: adessoMs });
-  scriviAtomico(dentro("risultati", "SINTESI.md"), sintesi(elementi, lab, { adessoMs, ultimoGiroPrecedente }));
+  scriviAtomico(dentro("risultati", "SINTESI.md"), sintesi(elementi, lab, { adessoMs, ultimoGiroPrecedente, giornaliera }));
   const portafoglio = elementi.filter((e) => e.portafoglio);
   if (portafoglio.length > 0) {
     scriviAtomico(dentro("report", "b-portafoglio-monete.md"), paginaMonete(portafoglio, lab.capitaleIniziale));

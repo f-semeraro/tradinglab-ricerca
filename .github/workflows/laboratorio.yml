@@ -38,6 +38,8 @@ jobs:
           git add risultati dati/settimanali
           # la pagina per moneta del portafoglio esiste solo dopo l'attivazione: senza il file, git add fallirebbe
           if [ -f report/b-portafoglio-monete.md ]; then git add report/b-portafoglio-monete.md; fi
+          # la storia giornaliera della variante esiste solo dopo la sua costruzione alla partenza: vale la stessa regola
+          if [ -d dati/giornaliere ]; then git add dati/giornaliere; fi
           if git diff --cached --quiet; then
             echo "Nessuna novità: niente commit."
           else
