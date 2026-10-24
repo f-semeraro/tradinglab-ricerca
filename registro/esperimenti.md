@@ -264,6 +264,30 @@ Scritta il 24 ottobre 2026, prima di qualsiasi calcolo sui rendimenti di questo 
 
 **Report.** `report/b-indietro-2018.md`: universo con incluse, escluse e motivo; portafoglio contro buy and hold, con rendimento totale e annuo, drawdown massimo, p ed esito; per moneta, solo come informazione, operazioni, rendimento netto e buy and hold; anno per anno; confronto con il test sull'universo 2020. Curve in `report/dati/b-indietro-2018.json`. Una riga nel registro.
 
+## Pre-registrazione: estensione della verifica all'indietro della regola B, 2018–2020 (secondo tentativo sulla stessa domanda)
+
+Scritta il 24 ottobre 2026, prima di qualsiasi calcolo su questo universo. Test nuovo e singolo. È il secondo tentativo sulla stessa domanda: il primo (pre-registrazione de4ed73, risultato 9c7c17a) aveva un universo ridotto a una sola moneta, ETH, per un errore di disegno. La regola sulla storia escludeva ogni moneta con anche un solo giorno senza candela, e il blocco di Kraken del 12 gennaio 2018 ha escluso XBTEUR e LTCEUR per quel solo giorno. Il risultato del primo tentativo resta quello registrato: questo test non lo sostituisce.
+
+**Periodo dello studio.** Come nel primo tentativo: la versione di lavoro del 2018 (Liu e Tsyvinski) usa dati fino al 31 maggio 2018; la versione pubblicata (*Review of Financial Studies* 34(6), 2021, doi:10.1093/rfs/hhaa113) non è verificata, perché la sezione sui dati non è leggibile dalla pagina dell'editore.
+
+**Universo.** Stessi filtri di tipo e di liquidità del primo tentativo: solo coppie spot in EUR, Bitcoin incluso (XBTEUR); esclusi stablecoin, valute tradizionali e doppioni (un simbolo con prefisso X o Z è un doppione se esiste il simbolo senza prefisso; si tiene quello senza prefisso). Storia: la regola ammette al massimo 30 giorni senza candela sui 728 compresi dal 4 luglio 2016 al 1 luglio 2018. Liquidità: tra le monete rimaste, le 20 con il controvalore mediano giornaliero più alto dal 1 gennaio al 30 giugno 2018; se sono meno di 20, si tengono tutte. ETH è esclusa per decisione del test (vedi scostamenti). Le monete che risultano sono quelle che la regola seleziona, non una lista data in anticipo.
+
+**Tutto il resto è identico al primo tentativo.** Periodo: dal lunedì 2 luglio 2018 alla domenica 27 dicembre 2020, 130 settimane; il test legge le candele fino al 27 dicembre 2020 compreso. Regola: identica a liu-b, per ogni moneta, con il segnale della domenica che decide la settimana successiva. Costi: `strategie/rsi-base.json`, 0,10% per lato più 0,05% di slippage, cioè 0,30% per operazione. Monete tolte dal listino: restano nell'universo, si chiudono all'ultima candela con i costi di uscita, e la quota resta in liquidità fino alla fine. Settimane senza scambi: il segnale di una domenica senza candela non apre posizioni; una posizione già aperta mantiene la sua settimana. Portafoglio: pesi uguali e indipendenti, senza ribilanciamento, con buy and hold a pesi uguali per confronto. Giudice: N = 1, alfa 0,05; statistica: somma dei rendimenti netti per operazione su tutte le monete; nulla: rotazione circolare comune, senza seme, con esclusione degli spostamenti entro 4 settimane dallo zero in entrambe le direzioni (s = 1…4 e s = 126…129); una permanenza che attraversa la fine del periodo è una sola operazione. Restano s = 5…125: 121 spostamenti; p = (k+1)/122. Il p minimo raggiungibile è 1/122 ≈ 0,0082. Passa con p ≤ 0,05 se k ≤ 5, e con somma netta positiva. Decisione presa adesso, prima dei dati: spostare all'indietro farebbe guardare alla regola il futuro; in avanti la regola seguirebbe ancora la stessa tendenza.
+
+**Previsione.** Incerta. Tre monete per 130 settimane danno poco potere: se passa, è una conferma su un secondo ciclo ma con un campione piccolo; se non passa, non smentisce i test precedenti.
+
+**Criterio di successo.** Passa solo con p ≤ 0,05 e somma netta positiva. Ogni altro esito non passa.
+
+**Scostamenti dal metodo dichiarati.**
+(a) Secondo tentativo sulla stessa domanda: non indipendente dal primo, il cui risultato è noto.
+(b) ETH esclusa per decisione del test, presa dopo aver visto il suo risultato su questo periodo: è una scelta successiva al risultato, dichiarata come tale. Senza questa esclusione l'universo sarebbe quello della regola, ETH compresa.
+(c) La soglia di 30 giorni senza candela è stata scelta guardando i conteggi del primo tentativo; sotto 30 giorni entrano XBTEUR, LTCEUR ed ETCEUR, e nessuna altra moneta con storia più corta.
+(d) Universo solo in EUR, Bitcoin incluso: scelta del test, dettata dall'archivio.
+(e) Giudice: rotazione circolare comune con esclusione entro 4 settimane dallo zero, come nel primo tentativo.
+(f) Periodo dello studio: la versione di lavoro finisce il 31 maggio 2018, prima del periodo di test; per la versione pubblicata il periodo non è verificato.
+
+**Report.** `report/b-indietro-2018-estensione.md`: stessa struttura del primo tentativo, con un confronto con il risultato su ETH e con il test sull'universo 2020. Curve in `report/dati/b-indietro-2018-estensione.json`. Una riga nel registro.
+
 | data (UTC) | strategia | coppia | impronta | periodo | operazioni | capitale | vs comprato e basta | drawdown | nota |
 |---|---|---|---|---|---:|---:|---:|---:|---|
 | 2026-10-17 15:11 | rsi-base | XXBTZEUR | 1863e747c0 | 27 ott 2024, 02:00 → 16 ott 2025, 02:00 | 0 | 100,00 € (0,00%) | -8,30 punti | 0,00% | passo 1: pipeline su 20 coppie, solo finestra di ricerca |
