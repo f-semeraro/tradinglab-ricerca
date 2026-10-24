@@ -27,6 +27,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { candeleChiuse } from "../lib/kraken.js";
+import { domenicaChiusa, richiesteDaFare } from "../lib/politicaRichieste.js";
 import { leggiStrategia, candeleNecessarie } from "../lib/configurazione.js";
 import { nuovoStato, avanza, pianoDelGiro, ultimaCandelaElaborata, esecuzioneDi } from "../lib/simulazione.js";
 import { calcolaMetriche } from "../lib/metriche.js";
@@ -67,16 +68,23 @@ function caricaStrategie(lab) {
   });
 }
 
+/** Lo stato delle richieste di una coppia settimanale: l'ultima domenica per cui ciascuna è andata a buon fine. */
+function statoRichieste(coppia) {
+  const stato = leggiJson(dentro("dati", "settimanali", `${coppia}.richieste.json`)) ?? {};
+  return { ultimaGiornaliera: stato.ultimaGiornaliera ?? null, ultimaOraria: stato.ultimaOraria ?? null };
+}
+
 /** Le chiavi (coppia, intervallo) che servono davvero adesso: una candela nuova è chiusa da almeno un intervallo. */
-function chiaviDaScaricare(strategie, adessoSecondi) {
+function chiaviDaScaricare(strategie, adessoSecondi, adessoMs) {
   const chiavi = new Map();
   for (const { nome, intervallo, coppie, legacy, settimanale } of strategie) {
     const durata = intervallo * 60;
     for (const coppia of coppie) {
       if (settimanale) {
-        // la prova ha bisogno sempre delle giornaliere (il segnale) e delle orarie (il prezzo di esecuzione)
-        chiavi.set(`${coppia}|1440`, true);
-        chiavi.set(`${coppia}|60`, true);
+        // al più una richiesta giornaliera e una oraria per coppia a settimana: vedi lib/politicaRichieste.js
+        const richieste = richiesteDaFare({ adessoMs, ...statoRichieste(coppia) });
+        if (richieste.giornaliera) chiavi.set(`${coppia}|1440`, true);
+        if (richieste.oraria) chiavi.set(`${coppia}|60`, true);
         continue;
       }
       const cursore = leggiJson(dentro("risultati", ...(legacy ? [nome] : [nome, coppia]), "cursore.json"));
@@ -170,7 +178,7 @@ async function main() {
 
   // l'orologio si legge qui, nella parte che parla con il mondo: il resto riceve i numeri
   const adessoMs = Date.now();
-  const daScaricare = chiaviDaScaricare(strategie, Math.floor(adessoMs / 1000));
+  const daScaricare = chiaviDaScaricare(strategie, Math.floor(adessoMs / 1000), adessoMs);
 
   /* tutti i download prima di scrivere: se uno fallisce, non si scrive niente */
   const candele = new Map();
@@ -198,6 +206,14 @@ async function main() {
         const precedente = leggiStoriaSettimanale(storiaPath);
         const storia = aggiornaStoria(precedente, candele.get(`${coppia}|1440`) ?? []);
         if (storia.length !== precedente.length) scriviStoriaSettimanale(storiaPath, storia);
+        // una richiesta conta come fatta solo se ha portato la candela che serve: altrimenti si ripete al giro successivo
+        const domenica = domenicaChiusa(adessoMs);
+        const lunedi = Date.parse(domenica) / 1000 + 86400;
+        const fatte = statoRichieste(coppia);
+        const ultimaRiga = storia.at(-1);
+        if (ultimaRiga?.data === domenica && ultimaRiga.chiusura !== null) fatte.ultimaGiornaliera = domenica;
+        if ((candele.get(`${coppia}|60`) ?? []).some((c) => c.momento === lunedi)) fatte.ultimaOraria = domenica;
+        scriviJson(dentro("dati", "settimanali", `${coppia}.richieste.json`), fatte);
 
         const statoPath = dentro("risultati", nome, coppia, "stato.json");
         const stato = leggiJson(statoPath) ?? nuovoStatoProva({ lab, coppia });
