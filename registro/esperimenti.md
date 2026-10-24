@@ -324,6 +324,47 @@ Scritta il 24 ottobre 2026, prima di attivare la strategia. Test pre-registrato:
 
 **Monitoraggio.** In testa a `SINTESI.md` l'ora dell'ultimo giro. Se il giro non gira da più di 24 ore, o se una domenica non è elaborata entro le 23:59 di lunedì, ora di Roma, la segnalazione va in evidenza. Il dettaglio per moneta va in `report/b-portafoglio-monete.md`; `SINTESI.md` ha una riga per il portafoglio, con settimane trascorse, operazioni chiuse, rendimento contro il buy and hold, drawdown e l'etichetta «prova in avanti: tendenza, non indipendente da liu-b e detzel-140».
 
+## Pre-registrazione: variante «B giornaliera» della regola B, con controllo giornaliero dell'ingresso
+
+Scritta il 25 ottobre 2026, prima di qualsiasi calcolo sui rendimenti di questo test. Ipotesi nuova e pre-registrata. Non tocca liu-b né la prova in avanti del portafoglio. L'idea nasce dopo aver visto i risultati di liu-b su questi periodi: il test A non è quindi indipendente da quei risultati.
+
+**Regola.** Per ogni moneta, ogni giorno, dopo la chiusura giornaliera UTC, se la moneta non è in posizione:
+- si calcola il rendimento degli ultimi 7 giorni: chiusura di oggi su chiusura di 7 giorni prima, meno 1;
+- il segnale è vero se questo rendimento supera l'80° percentile, metodo R7, di tutti i rendimenti a 7 giorni dei giorni precedenti della stessa moneta, calcolati dal primo dato disponibile; oggi è escluso, quindi il percentile usa solo il passato;
+- con il segnale si entra alla chiusura di oggi e si resta dentro per 7 giorni. Nessuna uscita anticipata;
+- alla chiusura del settimo giorno si esce, a meno che il segnale sia vero anche quel giorno: in quel caso si resta dentro altri 7 giorni, senza costi aggiuntivi. Lo stesso controllo si ripete ogni settimo giorno, finché il segnale è vero;
+- solo lunga. Costi di rsi-base: 0,10% per lato più 0,05% di slippage, cioè 0,30% per operazione, pagati solo all'ingresso e all'uscita. Un'operazione è una permanenza continua, estensioni comprese.
+
+**Giorni senza candela.** Un giorno senza candela non ha segnale e non apre posizioni. Una posizione aperta mantiene il conto dei giorni; se il settimo giorno manca, l'uscita avviene alla prima candela disponibile dopo. Il rendimento dei giorni mancanti si calcola alla prima chiusura disponibile.
+
+**Monete tolte dal listino.** Come nei test di liu-b: si chiudono all'ultima candela, con i costi di uscita, e la quota resta in liquidità fino alla fine. Il buy and hold fa lo stesso.
+
+**Portafoglio.** Pesi uguali e indipendenti: quota 1/N per moneta, senza ribilanciamento. La posizione è piatta prima e dopo il periodo, come negli altri test. Confronti: buy and hold a pesi uguali delle stesse monete, con le stesse uscite; liu-b sulle stesse monete, con la regola settimanale già pre-registrata.
+
+**Test.**
+- Test A: universo 2020, le 15 monete di report/b-universo-2020.md (ADA, BCH, DASH, EOS, ETC, ETH, GNO, LTC, QTUM, REP, XLM, XMR, XRP, XTZ, ZEC), dal 4 gennaio 2021 al 28 giugno 2026. Periodo di 2002 giorni.
+- Test B: ciclo 2018–2020, dal 2 luglio 2018 al 27 dicembre 2020, su XBT, LTC, ETC ed ETH. Il risultato di liu-b su queste monete è già noto. Periodo di 910 giorni.
+
+**Giudice.** Un'unica ipotesi con due test: N = 2, alfa 0,05, soglia 0,025 per ciascun test. Statistica: somma dei rendimenti netti per operazione su tutte le monete. Nulla: rotazione circolare comune a tutte le monete, spostamenti in giorni, senza seme, con esclusione degli spostamenti entro 28 giorni dallo zero in entrambe le direzioni. Una permanenza che attraversa la fine del periodo è una sola operazione. Decisione presa adesso, prima dei dati: spostare all'indietro farebbe guardare alla regola il futuro; in avanti la regola seguirebbe ancora la stessa tendenza.
+- Test A: restano 1945 spostamenti; p = (k+1)/1946. Il p minimo è 1/1946, circa 0,00051. Passa con p ≤ 0,025 se k ≤ 47.
+- Test B: restano 853 spostamenti; p = (k+1)/854. Il p minimo è 1/854, circa 0,00117. Passa con p ≤ 0,025 se k ≤ 20.
+
+**Previsione.**
+- Test A: risultato simile a liu-b. Le finestre di detenzione si sovrappongono in gran parte con quelle di liu-b, perché la variante entra di giorno e liu-b entra il lunedì dopo il segnale domenicale; la sovrapposizione esatta dipende dal giorno di ingresso.
+- Test B: dice se entrare prima aiuta dove liu-b non ha retto. Sul ciclo 2018–2020 il vantaggio di liu-b su XBT, LTC ed ETC non si è confermato (p 0,29508).
+
+**Criterio di successo.** La variante passa solo se passano entrambi i test, ciascuno con p ≤ 0,025 e somma netta positiva. Ogni altro esito non passa.
+
+**Scostamenti dal metodo dichiarati.**
+(a) Il test A non è indipendente: l'idea nasce dai risultati di liu-b sullo stesso universo e periodo.
+(b) Il test B include ETH, esclusa nell'estensione 2018–2020 perché già nota: qui è inclusa per confrontare la variante con liu-b su quattro monete. Il risultato di liu-b su ETH è già noto dal primo tentativo.
+(c) Soglia di 28 giorni per l'esclusione dallo zero: scelta di questo test, analoga alle 4 settimane di liu-b.
+(d) Nella nulla, la rotazione sposta le esposizioni giornaliere: le operazioni hanno durata variabile.
+(e) Liu-b sulle stesse monete è calcolato con lo stesso motore settimanale dei test precedenti.
+(f) Giorni senza candela e monete tolte dal listino: regole definite sopra.
+
+**Report.** `report/b-giornaliera.md`: per ciascun test, portafoglio contro buy and hold e contro liu-b sulle stesse monete (rendimento totale e annuo, drawdown massimo, operazioni all'anno, p ed esito); per moneta e anno per anno solo come informazione. Curve in `report/dati/b-giornaliera.json`. Una riga nel registro.
+
 | data (UTC) | strategia | coppia | impronta | periodo | operazioni | capitale | vs comprato e basta | drawdown | nota |
 |---|---|---|---|---|---:|---:|---:|---:|---|
 | 2026-10-17 15:11 | rsi-base | XXBTZEUR | 1863e747c0 | 27 ott 2024, 02:00 → 16 ott 2025, 02:00 | 0 | 100,00 € (0,00%) | -8,30 punti | 0,00% | passo 1: pipeline su 20 coppie, solo finestra di ricerca |
