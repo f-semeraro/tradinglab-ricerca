@@ -71,6 +71,23 @@ test("costruisciUniverso con soloEur e ammettiBitcoin: solo coppie in EUR, Bitco
   assert.match(per("B").motivo, /solo coppia in USD/);
 });
 
+test("costruisciUniverso con maxGiorniMancanti ed escludiBasi: tolleranza sui giorni mancanti e esclusione dichiarata", () => {
+  const coppie = [
+    coppia("LEUR", 40, ["2016-08-01", "2016-08-02"]),
+    coppia("EEUR", 50),
+    coppia("XEUR", 30, Array(40).fill("2017-01-01"))
+  ];
+  const tollerante = costruisciUniverso(coppie, { top: 5, maxGiorniMancanti: 30, escludiBasi: ["E"] });
+  const per = (base) => tollerante.find((r) => r.base === base);
+  assert.equal(per("L").incluso, true);
+  assert.equal(per("E").incluso, false);
+  assert.match(per("E").motivo, /decisione del test/);
+  assert.equal(per("X").incluso, false);
+  assert.match(per("X").motivo, /storia insufficiente/);
+  const rigoroso = costruisciUniverso(coppie, { top: 5 });
+  assert.equal(rigoroso.find((r) => r.base === "L").incluso, false);
+});
+
 test("serieSettimanale: la moneta tolta dal listino si chiude alla sua ultima candela, poi è inattiva", () => {
   const date = giorniDa("2019-01-06", "2024-01-15");
   const close = date.map((_, i) => 100 + i);
