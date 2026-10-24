@@ -365,6 +365,49 @@ Scritta il 25 ottobre 2026, prima di qualsiasi calcolo sui rendimenti di questo 
 
 **Report.** `report/b-giornaliera.md`: per ciascun test, portafoglio contro buy and hold e contro liu-b sulle stesse monete (rendimento totale e annuo, drawdown massimo, operazioni all'anno, p ed esito); per moneta e anno per anno solo come informazione. Curve in `report/dati/b-giornaliera.json`. Una riga nel registro.
 
+## Pre-registrazione: prova in avanti della variante «B giornaliera» su un portafoglio di monete
+
+Scritta il 25 ottobre 2026, prima di attivare la strategia e prima di qualsiasi calcolo sui dati della prova. La variante non ha passato il test retrospettivo: sul ciclo 2018–2020 il portafoglio ha p 0,030 (0,03044), contro una soglia di 0,025. Va in prova per decisione del laboratorio, come ipotesi: non come strategia che ha già passato un test.
+
+**Perché.** Il test retrospettivo non ha confermato la variante. La prova in avanti misura la stessa regola su dati che nessun test ha usato.
+
+**Relazione con liu-b.** Universo, partenza e periodo sono quelli di liu-b. Le due prove non sono indipendenti: seguono la stessa tendenza, e vanno lette insieme.
+
+**Universo.** Lo stesso di liu-b: le monete di `candidati/b-portafoglio-universo.json`, prodotto da `scripts/b-portafoglio-universo.js` con data 2026-10-26, con dati fino a domenica 25 compresa. Nessuna selezione separata: `scripts/b-giornaliera-universo.js` legge quell'elenco e, se il file non c'è, si ferma e lo dice. Nessuna moneta entra dopo la partenza.
+
+**Storia giornaliera.** Costruita una tantum il giorno dell'attivazione: archivio Kraken fino al 30 settembre 2026, poi l'API per le candele successive. È la storia del test, estesa con le candele nuove. Il percentile usa tutti i rendimenti a 7 giorni precedenti della stessa moneta, dal primo dato disponibile: mai solo le ultime 720 giornate che restituisce l'API. Per questa costruzione una richiesta API per coppia, dichiarata in `report/b-giornaliera-storia.md`, con per ogni moneta il primo dato, i giorni mancanti e le richieste fatte.
+
+**Regola.** Identica a quella testata in `report/b-giornaliera.md`, senza modifiche. Per ogni moneta, ogni giorno, sulla chiusura giornaliera UTC: rendimento degli ultimi 7 giorni; segnale se supera l'80° percentile R7 dei rendimenti a 7 giorni precedenti, solo sul passato; con il segnale si entra alla chiusura del giorno; si resta 7 giorni; al settimo giorno si esce, a meno che il segnale ci sia anche allora: in quel caso si resta altri 7 giorni, senza costi. Solo lunga. Pesi uguali e senza ribilanciamento. Prima decisione: la candela giornaliera di domenica 25 ottobre 2026, chiusa alle 00:00 UTC di lunedì 26. Nessuna posizione ereditata: si entra solo con segnali dal 25 ottobre in poi.
+
+**Costi.** Come rsi-base: 0,10% di commissione per lato più 0,05% di slippage, cioè 0,15% per lato e 0,30% per operazione, pagati solo all'ingresso e all'uscita. Un'operazione è una permanenza continua, estensioni comprese.
+
+**Esecuzione.** Ogni decisione si esegue al prezzo di chiusura della candela giornaliera del suo giorno, cioè alle 00:00 UTC del giorno dopo, e non alla candela oraria come per liu-b. Il giro ricalcola le decisioni dalla storia a ogni giro: una decisione dipende solo dalle candele fino al suo giorno, e rifarla non cambia nulla. Se il giro salta dei giorni, le candele mancanti arrivano insieme al giro successivo, e ogni decisione resta al prezzo di chiusura del suo giorno.
+
+**Dati e richieste.** Una richiesta giornaliera per coppia al giorno, alla prima esecuzione del giro dopo le 01:00 UTC. Il tentativo si registra anche se fallisce, e quel giorno non si ripete. La candela mancante arriva con la richiesta del giorno dopo, che restituisce le ultime 720 candele. Non più di una richiesta al secondo. La richiesta può coincidere con quella di liu-b della stessa coppia e dello stesso giorno: una sola chiamata serve entrambe. Le regole di richiesta di liu-b e rsi-base restano identiche a 9c9c076.
+
+**Monete tolte dal listino.** Se per 7 giorni consecutivi Kraken non dà candele nuove per una moneta, la si considera tolta: la posizione si chiude all'ultima chiusura, con i costi di uscita, e la quota resta in liquidità fino alla fine. Il buy and hold fa lo stesso. Prima di quella soglia, un giorno senza candela non decide nulla e la decisione slitta al giorno con candela, come nel test.
+
+**Attivazione.** La strategia è in `candidati/b-giornaliera.json`. Si attiva spostandola in `strategie/` con un commit separato, a mano, dopo il push di questa pre-registrazione. Diversamente da liu-b, la partenza non slitta: se l'attivazione arriva più tardi, le giornate già chiuse si recuperano ai loro prezzi di chiusura.
+
+**Giudizio.** Il verdetto si dà una volta sola, nel momento in cui il verdetto del portafoglio liu-b diventa dovuto: 52 settimane e 100 operazioni chiuse di liu-b, quale arriva più tardi. Finestra: dal lunedì 26 ottobre 2026 alla domenica D compresa, dove D è la domenica in cui il verdetto di liu-b diventa dovuto. Giudice: rotazione circolare comune a tutte le monete, spostamenti in giorni, con esclusione degli spostamenti entro 28 giorni dallo zero in entrambe le direzioni, senza seme. N = 1, alfa 0,05. Statistica: somma dei rendimenti netti per operazione su tutte le monete. Passa con p ≤ 0,05 e somma netta positiva. Il p minimo dipende dalla durata: con 364 giorni, 307 spostamenti e minimo 1/308, circa 0,00325. Il rendimento annuo diviso il drawdown, il rendimento e il drawdown contro liu-b e contro il buy and hold, e le operazioni all'anno sono solo informativi.
+
+**Regola congelata.** Qualunque modifica a universo, regola, costi, giudice o durata azzera la prova e va registrata come strategia nuova.
+
+**Previsione.** Rendimento e drawdown più ampi di liu-b, con un rapporto tra rendimento e drawdown simile a quello di liu-b.
+
+**Scostamenti dal metodo dichiarati.**
+(a) La prova è su carta: nessun ordine reale.
+(b) Universo fissato alla partenza, come liu-b, con dati dell'archivio e dell'API.
+(c) Storia giornaliera costruita una tantum il giorno dell'attivazione, con una richiesta API per coppia, dichiarata nel report.
+(d) Percentile sul primo dato disponibile di ciascuna moneta.
+(e) Nessuna posizione ereditata alla partenza.
+(f) Esecuzione alla chiusura giornaliera, e non alla candela oraria di liu-b: è la differenza che la variante mette alla prova.
+(g) Nessuno slittamento della partenza: le giornate si recuperano ai prezzi del loro giorno.
+(h) Moneta tolta dopo 7 giorni consecutivi senza candele: soglia fissata adesso.
+(i) Verdetto legato alla durata di liu-b.
+
+**Monitoraggio.** In `risultati/SINTESI.md`, una sezione propria per la variante, con etichetta «prova in avanti: tendenza, non indipendente da liu-b», giorni trascorsi, operazioni chiuse, rendimento contro buy and hold, drawdown e verdetto. Un avviso se una giornata non è entrata nello storico entro 24 ore dalla sua chiusura, oltre a quello già previsto sul giro fermo. Il workflow committa `dati/giornaliere/`, se esiste.
+
 | data (UTC) | strategia | coppia | impronta | periodo | operazioni | capitale | vs comprato e basta | drawdown | nota |
 |---|---|---|---|---|---:|---:|---:|---:|---|
 | 2026-10-17 15:11 | rsi-base | XXBTZEUR | 1863e747c0 | 27 ott 2024, 02:00 → 16 ott 2025, 02:00 | 0 | 100,00 € (0,00%) | -8,30 punti | 0,00% | passo 1: pipeline su 20 coppie, solo finestra di ricerca |
