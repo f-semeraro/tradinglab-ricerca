@@ -302,7 +302,7 @@ Scritta il 24 ottobre 2026, prima di attivare la strategia. Test pre-registrato:
 
 **Esecuzione.** Valutazione una volta a settimana, dopo la chiusura della domenica, con controllo di idempotenza: una settimana già elaborata non si rielabora. Esecuzione alla chiusura della candela oraria del lunedì dalle 00:00 alle 01:00 UTC, come per liu-b, a qualunque ora parta il giro. Costi: `strategie/rsi-base.json`, 0,10% per lato più 0,05% di slippage, cioè 0,30% per operazione. Nel report, una riga solo informativa con lo slippage moltiplicato per cinque (0,25% per lato), per le monete poco liquide.
 
-**Dati.** Storia settimanale in `dati/settimanali/<COPPIA>.csv`, costruita dall'archivio e aggiornata dal giro con l'API. Al massimo una richiesta per coppia a settimana, e non più di una al secondo.
+**Dati.** Storia settimanale in `dati/settimanali/<COPPIA>.csv`, costruita dall'archivio e aggiornata dal giro con l'API. Kraken restituisce un solo intervallo per richiesta, quindi per ogni coppia e ogni settimana: al massimo una richiesta giornaliera (per il segnale, dopo la chiusura della domenica) e al massimo una richiesta oraria (per il prezzo di esecuzione del lunedì, dopo le 01:00 UTC). Se una richiesta fallisce, il giro la ripete al giro successivo. Non più di una richiesta al secondo. Lo storico iniziale e l'universo sono costruiti una tantum alla partenza, con richieste dichiarate nel report.
 
 **Giudizio.** Il verdetto si dà una volta sola: dopo 52 settimane o 100 operazioni chiuse, quale arriva più tardi. Prima non si conclude nulla. Giudice: rotazione circolare comune a tutte le monete, con esclusione degli spostamenti entro 4 settimane dallo zero, senza seme; N = 1, alfa 0,05. Statistica: somma dei rendimenti netti per operazione. Passa con p ≤ 0,05 e somma netta positiva. Il p minimo raggiungibile dipende dalla durata: con 52 settimane, 43 spostamenti e minimo 1/44. Indicatore secondario, riportato ma non decisivo: drawdown massimo contro quello del buy and hold.
 
@@ -322,7 +322,7 @@ Scritta il 24 ottobre 2026, prima di attivare la strategia. Test pre-registrato:
 (e) Durata del verdetto (52 settimane o 100 operazioni) fissata adesso.
 (f) Slippage moltiplicato per cinque: solo informativo.
 
-**Monitoraggio.** In testa a `SINTESI.md` l'ora dell'ultimo giro. Se il giro non gira da più di 24 ore, o se una domenica non è elaborata entro il lunedì sera, la segnalazione va in evidenza. Il dettaglio per moneta va in `report/b-portafoglio-monete.md`; `SINTESI.md` ha una riga per il portafoglio, con settimane trascorse, operazioni chiuse, rendimento contro il buy and hold, drawdown e l'etichetta «prova in avanti: tendenza, non indipendente da liu-b e detzel-140».
+**Monitoraggio.** In testa a `SINTESI.md` l'ora dell'ultimo giro. Se il giro non gira da più di 24 ore, o se una domenica non è elaborata entro le 23:59 di lunedì, ora di Roma, la segnalazione va in evidenza. Il dettaglio per moneta va in `report/b-portafoglio-monete.md`; `SINTESI.md` ha una riga per il portafoglio, con settimane trascorse, operazioni chiuse, rendimento contro il buy and hold, drawdown e l'etichetta «prova in avanti: tendenza, non indipendente da liu-b e detzel-140».
 
 | data (UTC) | strategia | coppia | impronta | periodo | operazioni | capitale | vs comprato e basta | drawdown | nota |
 |---|---|---|---|---|---:|---:|---:|---:|---|
