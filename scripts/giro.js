@@ -28,6 +28,7 @@ import { fileURLToPath } from "node:url";
 
 import { candeleChiuse } from "../lib/kraken.js";
 import { domenicaChiusa, richiesteDaFare } from "../lib/politicaRichieste.js";
+import { avvisi, sezionePortafoglio, paginaMonete } from "../lib/portafoglioSintesi.js";
 import { leggiStrategia, candeleNecessarie } from "../lib/configurazione.js";
 import { nuovoStato, avanza, pianoDelGiro, ultimaCandelaElaborata, esecuzioneDi } from "../lib/simulazione.js";
 import { calcolaMetriche } from "../lib/metriche.js";
@@ -61,7 +62,7 @@ function caricaStrategie(lab) {
     if (grezza?.tipo === "settimanale") {
       const problemi = problemiSettimanale(grezza);
       if (problemi.length > 0) throw new Error(`strategia settimanale ${nome} non valida: ${problemi.join("; ")}`);
-      return { nome, strategia: grezza, settimanale: true, intervallo: 1440, coppie: grezza.coppie, legacy: false };
+      return { nome, strategia: grezza, settimanale: true, intervallo: 1440, coppie: grezza.coppie, legacy: false, portafoglio: grezza.portafoglio === true };
     }
     const strategia = leggiStrategia(percorso);
     return { nome, strategia, ...esecuzioneDi(strategia, lab) };
@@ -101,7 +102,7 @@ const numero = (valore, decimali = 2) =>
   Number.isFinite(valore) ? valore.toFixed(decimali).replace(".", ",") : "—";
 
 /** La sintesi: deterministica, senza orologio di esecuzione, così cambia solo quando cambia lo stato. */
-function sintesi(elementi, lab) {
+function sintesi(elementi, lab, opzioni = {}) {
   const fuso = lab.fusoOrario;
   const ultime = elementi.map((e) => ultimaCandelaElaborata(e.stato)).filter((m) => m !== null);
   const ultima = ultime.length > 0 ? Math.max(...ultime) : null;
@@ -147,7 +148,7 @@ function sintesi(elementi, lab) {
     }
   }
 
-  const settimanali = elementi.filter((e) => e.settimanale);
+  const settimanali = elementi.filter((e) => e.settimanale && !e.portafoglio);
   if (settimanali.length > 0) {
     righe.push(
       "",
@@ -159,6 +160,11 @@ function sintesi(elementi, lab) {
       "|---|---|---:|---:|---|---:|---|",
       ...righeSintesiSettimanale(settimanali)
     );
+  }
+
+  const portafoglio = elementi.filter((e) => e.portafoglio);
+  if (portafoglio.length > 0) {
+    righe.push("", ...sezionePortafoglio({ elementi: portafoglio, capitale: lab.capitaleIniziale, nome: portafoglio[0].nome }));
   }
 
   righe.push("");
@@ -178,6 +184,7 @@ async function main() {
 
   // l'orologio si legge qui, nella parte che parla con il mondo: il resto riceve i numeri
   const adessoMs = Date.now();
+  const ultimoGiroPrecedente = leggiJson(dentro("risultati", "ultimo-giro.json"))?.ultimoGiroMs ?? null;
   const daScaricare = chiaviDaScaricare(strategie, Math.floor(adessoMs / 1000), adessoMs);
 
   /* tutti i download prima di scrivere: se uno fallisce, non si scrive niente */
@@ -198,7 +205,7 @@ async function main() {
   }
 
   const elementi = [];
-  for (const { nome, strategia, intervallo, coppie, legacy, settimanale } of strategie) {
+  for (const { nome, strategia, intervallo, coppie, legacy, settimanale, portafoglio } of strategie) {
     for (const coppia of coppie) {
       if (settimanale) {
         // prima lo storico delle domeniche, poi lo stato: un'interruzione tra i due non conta due volte
@@ -220,7 +227,7 @@ async function main() {
         const eseguiti = passoPerCoppia({ stato, strategia, storia, orarie: candele.get(`${coppia}|60`) ?? [], coppia, lab });
         scriviJson(statoPath, stato);
         console.log(`${nome} · ${coppia}: ${eseguiti.length} eventi eseguiti`);
-        elementi.push({ nome, coppia, stato, storia, settimanale: true });
+        elementi.push({ nome, coppia, stato, storia, settimanale: true, portafoglio: portafoglio === true });
         continue;
       }
 
@@ -260,7 +267,12 @@ async function main() {
     }
   }
 
-  scriviAtomico(dentro("risultati", "SINTESI.md"), sintesi(elementi, lab));
+  scriviJson(dentro("risultati", "ultimo-giro.json"), { ultimoGiroMs: adessoMs });
+  scriviAtomico(dentro("risultati", "SINTESI.md"), sintesi(elementi, lab, { adessoMs, ultimoGiroPrecedente }));
+  const portafoglio = elementi.filter((e) => e.portafoglio);
+  if (portafoglio.length > 0) {
+    scriviAtomico(dentro("report", "b-portafoglio-monete.md"), paginaMonete(portafoglio, lab.capitaleIniziale));
+  }
 }
 
 main().catch((errore) => {
