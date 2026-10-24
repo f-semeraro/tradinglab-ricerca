@@ -31,11 +31,13 @@ jobs:
       - name: Un giro del laboratorio
         run: node scripts/giro.js
 
-      - name: Salva i risultati e lo storico delle domeniche, solo se sono cambiati
+      - name: Salva i risultati, lo storico delle domeniche e la pagina per moneta, solo se sono cambiati
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add risultati dati/settimanali
+          # la pagina per moneta del portafoglio esiste solo dopo l'attivazione: senza il file, git add fallirebbe
+          if [ -f report/b-portafoglio-monete.md ]; then git add report/b-portafoglio-monete.md; fi
           if git diff --cached --quiet; then
             echo "Nessuna novità: niente commit."
           else
