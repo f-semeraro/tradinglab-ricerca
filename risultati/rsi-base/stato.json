@@ -6294,6 +6294,27 @@
       "portafoglio": 100,
       "mercato": 97.88395226037282,
       "prezzo": 90.61
+    },
+    {
+      "momento": 1792965600,
+      "candela": 1792962000,
+      "portafoglio": 100,
+      "mercato": 97.2357857074954,
+      "prezzo": 90.01
+    },
+    {
+      "momento": 1792969200,
+      "candela": 1792965600,
+      "portafoglio": 100,
+      "mercato": 97.88395226037282,
+      "prezzo": 90.61
+    },
+    {
+      "momento": 1792972800,
+      "candela": 1792969200,
+      "portafoglio": 100,
+      "mercato": 97.52746065629024,
+      "prezzo": 90.28
     }
   ],
   "benchmark": {
