@@ -6595,6 +6595,41 @@
       "portafoglio": 100,
       "mercato": 97.73271339803476,
       "prezzo": 90.47
+    },
+    {
+      "momento": 1793120400,
+      "candela": 1793116800,
+      "portafoglio": 100,
+      "mercato": 97.88395226037282,
+      "prezzo": 90.61
+    },
+    {
+      "momento": 1793124000,
+      "candela": 1793120400,
+      "portafoglio": 100,
+      "mercato": 97.71110784627218,
+      "prezzo": 90.45
+    },
+    {
+      "momento": 1793127600,
+      "candela": 1793124000,
+      "portafoglio": 100,
+      "mercato": 97.80833282920379,
+      "prezzo": 90.54
+    },
+    {
+      "momento": 1793131200,
+      "candela": 1793127600,
+      "portafoglio": 100,
+      "mercato": 98.00278279506702,
+      "prezzo": 90.72
+    },
+    {
+      "momento": 1793134800,
+      "candela": 1793131200,
+      "portafoglio": 100,
+      "mercato": 97.94876891566057,
+      "prezzo": 90.67
     }
   ],
   "benchmark": {
