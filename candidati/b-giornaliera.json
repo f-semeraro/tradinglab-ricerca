@@ -1,0 +1,37 @@
+{
+  "nome": "b-giornaliera",
+  "tipo": "giornaliera",
+  "variante": "B",
+  "partenza": "2026-11-02",
+  "percentile": 0.8,
+  "metodoPercentile": "R7",
+  "lato": "lungo",
+  "coppie": [
+    "AAVEEUR",
+    "ADAEUR",
+    "AVAXEUR",
+    "BCHEUR",
+    "DOTEUR",
+    "ETHEUR",
+    "LINKEUR",
+    "LTCEUR",
+    "NEAREUR",
+    "PAXGEUR",
+    "SOLEUR",
+    "SUIEUR",
+    "TAOEUR",
+    "TRXEUR",
+    "UNIEUR",
+    "XBTEUR",
+    "XDGEUR",
+    "XLMEUR",
+    "XRPEUR",
+    "ZECEUR"
+  ],
+  "costi": {
+    "commissionePercentoPerLato": 0.1,
+    "slippagePercento": 0.05
+  },
+  "fonte": "Liu e Tsyvinski (2021), NBER w24877; variante «B giornaliera» della regola B. Prova in avanti su carta pre-registrata in registro/esperimenti.md.",
+  "stato": "candidata: non in esecuzione. Il giro la legge solo dopo lo spostamento in strategie/, fatto a mano con un commit."
+}

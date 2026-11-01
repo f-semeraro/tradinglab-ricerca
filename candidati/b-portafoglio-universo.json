@@ -1,0 +1,4772 @@
+{
+  "partenza": "2026-11-02",
+  "regole": {
+    "coppie": "EUR di Kraken, Bitcoin compreso; stablecoin, valute tradizionali e doppioni esclusi",
+    "storia": "al massimo 30 giorni senza candela nei 728 giorni fino al 2026-10-31 compreso",
+    "liquidita": "le prime 20 per controvalore mediano giornaliero nei 365 giorni fino al 2026-10-31 compreso"
+  },
+  "incluse": [
+    {
+      "base": "AAVE",
+      "coppia": "AAVEEUR",
+      "controvalorioMediano": 233645.1949200468
+    },
+    {
+      "base": "ADA",
+      "coppia": "ADAEUR",
+      "controvalorioMediano": 1303584.8994222127
+    },
+    {
+      "base": "AVAX",
+      "coppia": "AVAXEUR",
+      "controvalorioMediano": 288710.1970895919
+    },
+    {
+      "base": "BCH",
+      "coppia": "BCHEUR",
+      "controvalorioMediano": 310852.93640555214
+    },
+    {
+      "base": "DOT",
+      "coppia": "DOTEUR",
+      "controvalorioMediano": 281563.09603168204
+    },
+    {
+      "base": "ETH",
+      "coppia": "ETHEUR",
+      "controvalorioMediano": 13859109.104606694
+    },
+    {
+      "base": "LINK",
+      "coppia": "LINKEUR",
+      "controvalorioMediano": 601862.2092211131
+    },
+    {
+      "base": "LTC",
+      "coppia": "LTCEUR",
+      "controvalorioMediano": 1273235.7170204709
+    },
+    {
+      "base": "NEAR",
+      "coppia": "NEAREUR",
+      "controvalorioMediano": 341701.1061841256
+    },
+    {
+      "base": "PAXG",
+      "coppia": "PAXGEUR",
+      "controvalorioMediano": 351834.6920142141
+    },
+    {
+      "base": "SOL",
+      "coppia": "SOLEUR",
+      "controvalorioMediano": 6871876.68817751
+    },
+    {
+      "base": "SUI",
+      "coppia": "SUIEUR",
+      "controvalorioMediano": 858091.6537995749
+    },
+    {
+      "base": "TAO",
+      "coppia": "TAOEUR",
+      "controvalorioMediano": 694754.201379784
+    },
+    {
+      "base": "TRX",
+      "coppia": "TRXEUR",
+      "controvalorioMediano": 657394.3679624179
+    },
+    {
+      "base": "UNI",
+      "coppia": "UNIEUR",
+      "controvalorioMediano": 266436.666901775
+    },
+    {
+      "base": "XBT",
+      "coppia": "XBTEUR",
+      "controvalorioMediano": 28558938.08441135
+    },
+    {
+      "base": "XDG",
+      "coppia": "XDGEUR",
+      "controvalorioMediano": 972238.5019939365
+    },
+    {
+      "base": "XLM",
+      "coppia": "XLMEUR",
+      "controvalorioMediano": 315254.140048089
+    },
+    {
+      "base": "XRP",
+      "coppia": "XRPEUR",
+      "controvalorioMediano": 5255593.464897938
+    },
+    {
+      "base": "ZEC",
+      "coppia": "ZECEUR",
+      "controvalorioMediano": 1766522.996010219
+    }
+  ],
+  "considerate": [
+    {
+      "base": "0G",
+      "coppia": "0GEUR",
+      "controvalorioMediano": 12779.65867395,
+      "incluso": false,
+      "motivo": "storia insufficiente: 323 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "1INCH",
+      "coppia": "1INCHEUR",
+      "controvalorioMediano": 5478.042757625496,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "2Z",
+      "coppia": "2ZEUR",
+      "controvalorioMediano": 10294.109884809599,
+      "incluso": false,
+      "motivo": "storia insufficiente: 333 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "A",
+      "coppia": "AEUR",
+      "controvalorioMediano": 1771.7893374,
+      "incluso": false,
+      "motivo": "storia insufficiente: 262 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "AAVE",
+      "coppia": "AAVEEUR",
+      "controvalorioMediano": 233645.1949200468,
+      "incluso": true,
+      "motivo": "inclusa"
+    },
+    {
+      "base": "AB",
+      "coppia": "ABEUR",
+      "controvalorioMediano": 14995.296411169362,
+      "incluso": false,
+      "motivo": "storia insufficiente: 278 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "ACA",
+      "coppia": "ACAEUR",
+      "controvalorioMediano": 606.1091901603927,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "ACH",
+      "coppia": "ACHEUR",
+      "controvalorioMediano": 2592.153427219144,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "ACT",
+      "coppia": "ACTEUR",
+      "controvalorioMediano": 378.11638180799997,
+      "incluso": false,
+      "motivo": "storia insufficiente: 85 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "ACU",
+      "coppia": "ACUEUR",
+      "controvalorioMediano": 13340.533220923999,
+      "incluso": false,
+      "motivo": "storia insufficiente: 443 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "ACX",
+      "coppia": "ACXEUR",
+      "controvalorioMediano": 62.68619541975,
+      "incluso": false,
+      "motivo": "storia insufficiente: 95 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "ADA",
+      "coppia": "ADAEUR",
+      "controvalorioMediano": 1303584.8994222127,
+      "incluso": true,
+      "motivo": "inclusa"
+    },
+    {
+      "base": "ADI",
+      "coppia": "ADIEUR",
+      "controvalorioMediano": 6340.232054643,
+      "incluso": false,
+      "motivo": "storia insufficiente: 401 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "ADX",
+      "coppia": "ADXEUR",
+      "controvalorioMediano": 67.2268073690379,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "AERO",
+      "coppia": "AEROEUR",
+      "controvalorioMediano": 14478.804746908001,
+      "incluso": false,
+      "motivo": "storia insufficiente: 122 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "AEVO",
+      "coppia": "AEVOEUR",
+      "controvalorioMediano": 3221.3214148855996,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "AGLD",
+      "coppia": "AGLDEUR",
+      "controvalorioMediano": 0,
+      "incluso": false,
+      "motivo": "storia insufficiente: 497 giorni senza candela, il primo il 2025-03-08"
+    },
+    {
+      "base": "AI",
+      "coppia": "AIEUR",
+      "controvalorioMediano": 17523.881873274,
+      "incluso": false,
+      "motivo": "storia insufficiente: 542 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "AI16Z",
+      "coppia": "AI16ZEUR",
+      "controvalorioMediano": 0,
+      "incluso": false,
+      "motivo": "storia insufficiente: 569 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "AI3",
+      "coppia": "AI3EUR",
+      "controvalorioMediano": 166.0869432879,
+      "incluso": false,
+      "motivo": "storia insufficiente: 297 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "AIOZ",
+      "coppia": "AIOZEUR",
+      "controvalorioMediano": 1735.4218377735,
+      "incluso": false,
+      "motivo": "storia insufficiente: 250 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "AIR",
+      "coppia": "AIREUR",
+      "controvalorioMediano": 336.98810543405705,
+      "incluso": false,
+      "motivo": "storia insufficiente: 306 giorni senza candela, il primo il 2025-12-07"
+    },
+    {
+      "base": "AIXBT",
+      "coppia": "AIXBTEUR",
+      "controvalorioMediano": 3849.0397292655002,
+      "incluso": false,
+      "motivo": "storia insufficiente: 110 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "AKT",
+      "coppia": "AKTEUR",
+      "controvalorioMediano": 44669.021063958025,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "ALCH",
+      "coppia": "ALCHEUR",
+      "controvalorioMediano": 426.60669256,
+      "incluso": false,
+      "motivo": "storia insufficiente: 166 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "ALCX",
+      "coppia": "ALCXEUR",
+      "controvalorioMediano": 198.389400372,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "ALGO",
+      "coppia": "ALGOEUR",
+      "controvalorioMediano": 155467.36184949375,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "ALICE",
+      "coppia": "ALICEEUR",
+      "controvalorioMediano": 592.466190543396,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "ALKIMI",
+      "coppia": "ALKIMIEUR",
+      "controvalorioMediano": 1208.432841885,
+      "incluso": false,
+      "motivo": "storia insufficiente: 289 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "ALMANAK",
+      "coppia": "ALMANAKEUR",
+      "controvalorioMediano": 2721.8760977299003,
+      "incluso": false,
+      "motivo": "storia insufficiente: 707 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "ALPHA",
+      "coppia": "ALPHAEUR",
+      "controvalorioMediano": 986.6627045385105,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "ALT",
+      "coppia": "ALTEUR",
+      "controvalorioMediano": 290.89780798695006,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "ALTHEA",
+      "coppia": "ALTHEAEUR",
+      "controvalorioMediano": 199.33291744900004,
+      "incluso": false,
+      "motivo": "storia insufficiente: 339 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "ANIME",
+      "coppia": "ANIMEEUR",
+      "controvalorioMediano": 73.946391561595,
+      "incluso": false,
+      "motivo": "storia insufficiente: 351 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "ANKR",
+      "coppia": "ANKREUR",
+      "controvalorioMediano": 2846.580737361751,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "ANLOG",
+      "coppia": "ANLOGEUR",
+      "controvalorioMediano": 83.70828908780001,
+      "incluso": false,
+      "motivo": "storia insufficiente: 437 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "ANON",
+      "coppia": "ANONEUR",
+      "controvalorioMediano": 536.6405509599999,
+      "incluso": false,
+      "motivo": "storia insufficiente: 121 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "ANT",
+      "coppia": "ANTEUR",
+      "controvalorioMediano": 0,
+      "incluso": false,
+      "motivo": "storia insufficiente: 728 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "APE",
+      "coppia": "APEEUR",
+      "controvalorioMediano": 18987.7437203513,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "APENFT",
+      "coppia": "APENFTEUR",
+      "controvalorioMediano": 104.7318684179465,
+      "incluso": false,
+      "motivo": "storia insufficiente: 137 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "API3",
+      "coppia": "API3EUR",
+      "controvalorioMediano": 1125.897115700412,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "APR",
+      "coppia": "APREUR",
+      "controvalorioMediano": 949.6494303239999,
+      "incluso": false,
+      "motivo": "storia insufficiente: 354 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "APT",
+      "coppia": "APTEUR",
+      "controvalorioMediano": 31865.293826842397,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "APU",
+      "coppia": "APUEUR",
+      "controvalorioMediano": 936.1934532604649,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "AR",
+      "coppia": "AREUR",
+      "controvalorioMediano": 4826.8287665,
+      "incluso": false,
+      "motivo": "storia insufficiente: 176 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "ARB",
+      "coppia": "ARBEUR",
+      "controvalorioMediano": 40228.84672484,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "ARC",
+      "coppia": "ARCEUR",
+      "controvalorioMediano": 3769.6477849035,
+      "incluso": false,
+      "motivo": "storia insufficiente: 165 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "ARKM",
+      "coppia": "ARKMEUR",
+      "controvalorioMediano": 14048.289390128,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "ARPA",
+      "coppia": "ARPAEUR",
+      "controvalorioMediano": 963.2846314162501,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "ART",
+      "coppia": "ARTEUR",
+      "controvalorioMediano": 5.585999999999999,
+      "incluso": false,
+      "motivo": "storia insufficiente: 679 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "ASRR",
+      "coppia": "ASRREUR",
+      "controvalorioMediano": 126.612026725,
+      "incluso": false,
+      "motivo": "storia insufficiente: 559 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "ASTER",
+      "coppia": "ASTEREUR",
+      "controvalorioMediano": 15784.009962115899,
+      "incluso": false,
+      "motivo": "storia insufficiente: 351 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "ASTR",
+      "coppia": "ASTREUR",
+      "controvalorioMediano": 2244.457790684386,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "ATH",
+      "coppia": "ATHEUR",
+      "controvalorioMediano": 7860.228231626002,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "ATLAS",
+      "coppia": "ATLASEUR",
+      "controvalorioMediano": 1297.0388987315393,
+      "incluso": false,
+      "motivo": "storia insufficiente: 304 giorni senza candela, il primo il 2026-01-01"
+    },
+    {
+      "base": "ATOM",
+      "coppia": "ATOMEUR",
+      "controvalorioMediano": 85858.88973685582,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "AUCTION",
+      "coppia": "AUCTIONEUR",
+      "controvalorioMediano": 535.872620715,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "AUDIO",
+      "coppia": "AUDIOEUR",
+      "controvalorioMediano": 585.008972060592,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "AURA",
+      "coppia": "AURAEUR",
+      "controvalorioMediano": 211.7524480705,
+      "incluso": false,
+      "motivo": "storia insufficiente: 628 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "AVA",
+      "coppia": "AVAEUR",
+      "controvalorioMediano": 16936.552501938502,
+      "incluso": false,
+      "motivo": "storia insufficiente: 558 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "AVAAI",
+      "coppia": "AVAAIEUR",
+      "controvalorioMediano": 524.23320435675,
+      "incluso": false,
+      "motivo": "storia insufficiente: 426 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "AVAX",
+      "coppia": "AVAXEUR",
+      "controvalorioMediano": 288710.1970895919,
+      "incluso": true,
+      "motivo": "inclusa"
+    },
+    {
+      "base": "AVNT",
+      "coppia": "AVNTEUR",
+      "controvalorioMediano": 8691.2085049556,
+      "incluso": false,
+      "motivo": "storia insufficiente: 310 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "AXS",
+      "coppia": "AXSEUR",
+      "controvalorioMediano": 10468.330526874,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "AZTEC",
+      "coppia": "AZTECEUR",
+      "controvalorioMediano": 2496.4212745264,
+      "incluso": false,
+      "motivo": "storia insufficiente: 466 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "B2",
+      "coppia": "B2EUR",
+      "controvalorioMediano": 5119.5823088960005,
+      "incluso": false,
+      "motivo": "storia insufficiente: 338 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "B3",
+      "coppia": "B3EUR",
+      "controvalorioMediano": 204.64914357048002,
+      "incluso": false,
+      "motivo": "storia insufficiente: 131 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "BABY",
+      "coppia": "BABYEUR",
+      "controvalorioMediano": 776.8950919026,
+      "incluso": false,
+      "motivo": "storia insufficiente: 165 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "BADGER",
+      "coppia": "BADGEREUR",
+      "controvalorioMediano": 160.524834749565,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "BAL",
+      "coppia": "BALEUR",
+      "controvalorioMediano": 114.8435069535,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "BANANAS31",
+      "coppia": "BANANAS31EUR",
+      "controvalorioMediano": 3874.1275662406197,
+      "incluso": false,
+      "motivo": "storia insufficiente: 178 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "BAND",
+      "coppia": "BANDEUR",
+      "controvalorioMediano": 1404.8125772465,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "BASED",
+      "coppia": "BASEDEUR",
+      "controvalorioMediano": 5763.2282311359995,
+      "incluso": false,
+      "motivo": "storia insufficiente: 512 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "BAT",
+      "coppia": "BATEUR",
+      "controvalorioMediano": 29885.140771438797,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "BCH",
+      "coppia": "BCHEUR",
+      "controvalorioMediano": 310852.93640555214,
+      "incluso": true,
+      "motivo": "inclusa"
+    },
+    {
+      "base": "BDXN",
+      "coppia": "BDXNEUR",
+      "controvalorioMediano": 321.89192739435,
+      "incluso": false,
+      "motivo": "storia insufficiente: 212 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "BEAM",
+      "coppia": "BEAMEUR",
+      "controvalorioMediano": 1833.92558743672,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "BERA",
+      "coppia": "BERAEUR",
+      "controvalorioMediano": 2473.11949341,
+      "incluso": false,
+      "motivo": "storia insufficiente: 95 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "BERT",
+      "coppia": "BERTEUR",
+      "controvalorioMediano": 2043.4811886684,
+      "incluso": false,
+      "motivo": "storia insufficiente: 327 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "BGB",
+      "coppia": "BGBEUR",
+      "controvalorioMediano": 180.79693824,
+      "incluso": false,
+      "motivo": "storia insufficiente: 453 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "BICO",
+      "coppia": "BICOEUR",
+      "controvalorioMediano": 554.365213571009,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "BIGTIME",
+      "coppia": "BIGTIMEEUR",
+      "controvalorioMediano": 442.07543417100004,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "BILL",
+      "coppia": "BILLEUR",
+      "controvalorioMediano": 61195.4067731492,
+      "incluso": false,
+      "motivo": "storia insufficiente: 547 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "BILLY",
+      "coppia": "BILLYEUR",
+      "controvalorioMediano": 186.25171806235997,
+      "incluso": false,
+      "motivo": "storia insufficiente: 340 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "BIO",
+      "coppia": "BIOEUR",
+      "controvalorioMediano": 6654.9804256187,
+      "incluso": false,
+      "motivo": "storia insufficiente: 93 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "BIT",
+      "coppia": "BITEUR",
+      "controvalorioMediano": 213.65089337858905,
+      "incluso": false,
+      "motivo": "storia insufficiente: 342 giorni senza candela, il primo il 2024-12-25"
+    },
+    {
+      "base": "BKS",
+      "coppia": "BKSEUR",
+      "controvalorioMediano": 571.861527897,
+      "incluso": false,
+      "motivo": "storia insufficiente: 367 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "BLEND",
+      "coppia": "BLENDEUR",
+      "controvalorioMediano": 2815.01542211,
+      "incluso": false,
+      "motivo": "storia insufficiente: 537 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "BLUAI",
+      "coppia": "BLUAIEUR",
+      "controvalorioMediano": 9649.964812802611,
+      "incluso": false,
+      "motivo": "storia insufficiente: 352 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "BLUE",
+      "coppia": "BLUEEUR",
+      "controvalorioMediano": 98.807347887975,
+      "incluso": false,
+      "motivo": "storia insufficiente: 382 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "BLUR",
+      "coppia": "BLUREUR",
+      "controvalorioMediano": 2603.154339826,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "BLZ",
+      "coppia": "BLZEUR",
+      "controvalorioMediano": 401.8926782712,
+      "incluso": false,
+      "motivo": "storia insufficiente: 307 giorni senza candela, il primo il 2025-07-08"
+    },
+    {
+      "base": "BMT",
+      "coppia": "BMTEUR",
+      "controvalorioMediano": 2569.762158184,
+      "incluso": false,
+      "motivo": "storia insufficiente: 128 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "BNB",
+      "coppia": "BNBEUR",
+      "controvalorioMediano": 230345.3164129,
+      "incluso": false,
+      "motivo": "storia insufficiente: 170 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "BNC",
+      "coppia": "BNCEUR",
+      "controvalorioMediano": 47.12355600144,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "BNT",
+      "coppia": "BNTEUR",
+      "controvalorioMediano": 915.6264944014486,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "BOB",
+      "coppia": "BOBEUR",
+      "controvalorioMediano": 10406.9276326613,
+      "incluso": false,
+      "motivo": "storia insufficiente: 382 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "BOBA",
+      "coppia": "BOBAEUR",
+      "controvalorioMediano": 241.06365598625044,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "BODEN",
+      "coppia": "BODENEUR",
+      "controvalorioMediano": 183.299609658,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "BOND",
+      "coppia": "BONDEUR",
+      "controvalorioMediano": 248.71343190146993,
+      "incluso": false,
+      "motivo": "storia insufficiente: 308 giorni senza candela, il primo il 2025-04-17"
+    },
+    {
+      "base": "BONK",
+      "coppia": "BONKEUR",
+      "controvalorioMediano": 21066.193099758173,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "BREV",
+      "coppia": "BREVEUR",
+      "controvalorioMediano": 3537.154381188,
+      "incluso": false,
+      "motivo": "storia insufficiente: 429 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "BRICK",
+      "coppia": "BRICKEUR",
+      "controvalorioMediano": 0,
+      "incluso": false,
+      "motivo": "storia insufficiente: 492 giorni senza candela, il primo il 2025-04-12"
+    },
+    {
+      "base": "BSX",
+      "coppia": "BSXEUR",
+      "controvalorioMediano": 995.661675050124,
+      "incluso": false,
+      "motivo": "storia insufficiente: 305 giorni senza candela, il primo il 2025-04-20"
+    },
+    {
+      "base": "BTR",
+      "coppia": "BTREUR",
+      "controvalorioMediano": 1676.3693259679999,
+      "incluso": false,
+      "motivo": "storia insufficiente: 297 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "BTT",
+      "coppia": "BTTEUR",
+      "controvalorioMediano": 443.43783371656855,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "C98",
+      "coppia": "C98EUR",
+      "controvalorioMediano": 196.55890472288002,
+      "incluso": false,
+      "motivo": "storia insufficiente: 324 giorni senza candela, il primo il 2024-11-04"
+    },
+    {
+      "base": "CAKE",
+      "coppia": "CAKEEUR",
+      "controvalorioMediano": 4230.80734047,
+      "incluso": false,
+      "motivo": "storia insufficiente: 180 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "CAMP",
+      "coppia": "CAMPEUR",
+      "controvalorioMediano": 805.9413861686351,
+      "incluso": false,
+      "motivo": "storia insufficiente: 297 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "CARV",
+      "coppia": "CARVEUR",
+      "controvalorioMediano": 1432.8876537916,
+      "incluso": false,
+      "motivo": "storia insufficiente: 278 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "CAT",
+      "coppia": "CATEUR",
+      "controvalorioMediano": 138.62162826691986,
+      "incluso": false,
+      "motivo": "storia insufficiente: 201 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "CC",
+      "coppia": "CCEUR",
+      "controvalorioMediano": 58992.49255261045,
+      "incluso": false,
+      "motivo": "storia insufficiente: 372 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "CCD",
+      "coppia": "CCDEUR",
+      "controvalorioMediano": 13757.81251324752,
+      "incluso": false,
+      "motivo": "storia insufficiente: 263 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "CELO",
+      "coppia": "CELOEUR",
+      "controvalorioMediano": 941.03922042,
+      "incluso": false,
+      "motivo": "storia insufficiente: 155 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "CELR",
+      "coppia": "CELREUR",
+      "controvalorioMediano": 607.3828992671126,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "CFG",
+      "coppia": "CFGEUR",
+      "controvalorioMediano": 9619.09614221898,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "CFX",
+      "coppia": "CFXEUR",
+      "controvalorioMediano": 747.67171871505,
+      "incluso": false,
+      "motivo": "storia insufficiente: 460 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "CHECK",
+      "coppia": "CHECKEUR",
+      "controvalorioMediano": 18699.28319662407,
+      "incluso": false,
+      "motivo": "storia insufficiente: 696 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "CHEEMS",
+      "coppia": "CHEEMSEUR",
+      "controvalorioMediano": 84.72751612846264,
+      "incluso": false,
+      "motivo": "storia insufficiente: 178 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "CHEX",
+      "coppia": "CHEXEUR",
+      "controvalorioMediano": 1291.0231203995,
+      "incluso": false,
+      "motivo": "storia insufficiente: 227 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "CHILLHOUSE",
+      "coppia": "CHILLHOUSEEUR",
+      "controvalorioMediano": 356.8829071398,
+      "incluso": false,
+      "motivo": "storia insufficiente: 255 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "CHIP",
+      "coppia": "CHIPEUR",
+      "controvalorioMediano": 3727.5365202239,
+      "incluso": false,
+      "motivo": "storia insufficiente: 535 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "CHR",
+      "coppia": "CHREUR",
+      "controvalorioMediano": 140.748534884554,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "CHZ",
+      "coppia": "CHZEUR",
+      "controvalorioMediano": 24792.998980088934,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "CLANKER",
+      "coppia": "CLANKEREUR",
+      "controvalorioMediano": 563.1647865,
+      "incluso": false,
+      "motivo": "storia insufficiente: 208 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "CLOUD",
+      "coppia": "CLOUDEUR",
+      "controvalorioMediano": 370.915383624,
+      "incluso": false,
+      "motivo": "storia insufficiente: 314 giorni senza candela, il primo il 2025-11-26"
+    },
+    {
+      "base": "CLV",
+      "coppia": "CLVEUR",
+      "controvalorioMediano": 829.8155824746642,
+      "incluso": false,
+      "motivo": "storia insufficiente: 442 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "COMP",
+      "coppia": "COMPEUR",
+      "controvalorioMediano": 18941.5773564729,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "COOKIE",
+      "coppia": "COOKIEEUR",
+      "controvalorioMediano": 131.42655426,
+      "incluso": false,
+      "motivo": "storia insufficiente: 186 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "COQ",
+      "coppia": "COQEUR",
+      "controvalorioMediano": 227.7315667045095,
+      "incluso": false,
+      "motivo": "storia insufficiente: 246 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "CORN",
+      "coppia": "CORNEUR",
+      "controvalorioMediano": 310.8613930526001,
+      "incluso": false,
+      "motivo": "storia insufficiente: 451 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "COTI",
+      "coppia": "COTIEUR",
+      "controvalorioMediano": 4889.216154902444,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "COW",
+      "coppia": "COWEUR",
+      "controvalorioMediano": 625.098448975,
+      "incluso": false,
+      "motivo": "storia insufficiente: 74 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "CPOOL",
+      "coppia": "CPOOLEUR",
+      "controvalorioMediano": 2878.4414301784004,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "CQT",
+      "coppia": "CQTEUR",
+      "controvalorioMediano": 262.48411589875883,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "CRO",
+      "coppia": "CROEUR",
+      "controvalorioMediano": 12936.252194424898,
+      "incluso": false,
+      "motivo": "storia insufficiente: 87 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "CRV",
+      "coppia": "CRVEUR",
+      "controvalorioMediano": 91324.22797460589,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "CSM",
+      "coppia": "CSMEUR",
+      "controvalorioMediano": 0,
+      "incluso": false,
+      "motivo": "storia insufficiente: 511 giorni senza candela, il primo il 2025-03-24"
+    },
+    {
+      "base": "CTC",
+      "coppia": "CTCEUR",
+      "controvalorioMediano": 212.43358258400002,
+      "incluso": false,
+      "motivo": "storia insufficiente: 316 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "CTSI",
+      "coppia": "CTSIEUR",
+      "controvalorioMediano": 1649.319412333563,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "CVC",
+      "coppia": "CVCEUR",
+      "controvalorioMediano": 856.8160359958699,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "CVX",
+      "coppia": "CVXEUR",
+      "controvalorioMediano": 3675.590033031,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "CXT",
+      "coppia": "CXTEUR",
+      "controvalorioMediano": 865.3665247836001,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "CYBER",
+      "coppia": "CYBEREUR",
+      "controvalorioMediano": 135.35210244,
+      "incluso": false,
+      "motivo": "storia insufficiente: 108 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "DAG",
+      "coppia": "DAGEUR",
+      "controvalorioMediano": 790.8535496224,
+      "incluso": false,
+      "motivo": "storia insufficiente: 373 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "DAI",
+      "coppia": "DAIEUR",
+      "controvalorioMediano": 5919.496374520697,
+      "incluso": false,
+      "motivo": "stablecoin o token ancorato a una valuta"
+    },
+    {
+      "base": "DASH",
+      "coppia": "DASHEUR",
+      "controvalorioMediano": 117047.79212520042,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "DBR",
+      "coppia": "DBREUR",
+      "controvalorioMediano": 1492.5351377207999,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "DEEP",
+      "coppia": "DEEPEUR",
+      "controvalorioMediano": 2921.3724797775,
+      "incluso": false,
+      "motivo": "storia insufficiente: 214 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "DEGEN",
+      "coppia": "DEGENEUR",
+      "controvalorioMediano": 427.77408599000006,
+      "incluso": false,
+      "motivo": "storia insufficiente: 199 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "DENT",
+      "coppia": "DENTEUR",
+      "controvalorioMediano": 1054.5712818065135,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "DMC",
+      "coppia": "DMCEUR",
+      "controvalorioMediano": 512.7743382976,
+      "incluso": false,
+      "motivo": "storia insufficiente: 233 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "DOG",
+      "coppia": "DOGEUR",
+      "controvalorioMediano": 5863.3016819608,
+      "incluso": false,
+      "motivo": "storia insufficiente: 236 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "DOGS",
+      "coppia": "DOGSEUR",
+      "controvalorioMediano": 3272.932857899805,
+      "incluso": false,
+      "motivo": "storia insufficiente: 102 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "DOLO",
+      "coppia": "DOLOEUR",
+      "controvalorioMediano": 72.986198144,
+      "incluso": false,
+      "motivo": "storia insufficiente: 174 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "DOT",
+      "coppia": "DOTEUR",
+      "controvalorioMediano": 281563.09603168204,
+      "incluso": true,
+      "motivo": "inclusa"
+    },
+    {
+      "base": "DRIFT",
+      "coppia": "DRIFTEUR",
+      "controvalorioMediano": 2473.141071453,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "DRV",
+      "coppia": "DRVEUR",
+      "controvalorioMediano": 3452.2523396614006,
+      "incluso": false,
+      "motivo": "storia insufficiente: 73 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "DUAL",
+      "coppia": "DUALEUR",
+      "controvalorioMediano": 502.697713054125,
+      "incluso": false,
+      "motivo": "storia insufficiente: 513 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "DUCK",
+      "coppia": "DUCKEUR",
+      "controvalorioMediano": 195.22865511499998,
+      "incluso": false,
+      "motivo": "storia insufficiente: 136 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "DYDX",
+      "coppia": "DYDXEUR",
+      "controvalorioMediano": 28268.091207758207,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "DYM",
+      "coppia": "DYMEUR",
+      "controvalorioMediano": 3222.448948704,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "EAT",
+      "coppia": "EATEUR",
+      "controvalorioMediano": 935.44580608905,
+      "incluso": false,
+      "motivo": "storia insufficiente: 360 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "EDGE",
+      "coppia": "EDGEEUR",
+      "controvalorioMediano": 466.16765762880004,
+      "incluso": false,
+      "motivo": "storia insufficiente: 150 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "EDGEX",
+      "coppia": "EDGEXEUR",
+      "controvalorioMediano": 6024.430919963101,
+      "incluso": false,
+      "motivo": "storia insufficiente: 549 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "EDU",
+      "coppia": "EDUEUR",
+      "controvalorioMediano": 526.4564033568,
+      "incluso": false,
+      "motivo": "storia insufficiente: 375 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "EGLD",
+      "coppia": "EGLDEUR",
+      "controvalorioMediano": 7914.4790645025005,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "EIGEN",
+      "coppia": "EIGENEUR",
+      "controvalorioMediano": 12545.878491341,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "ELIZAOS",
+      "coppia": "ELIZAOSEUR",
+      "controvalorioMediano": 1562.5912116716502,
+      "incluso": false,
+      "motivo": "storia insufficiente: 438 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "ELX",
+      "coppia": "ELXEUR",
+      "controvalorioMediano": 480.22203243145003,
+      "incluso": false,
+      "motivo": "storia insufficiente: 124 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "ENA",
+      "coppia": "ENAEUR",
+      "controvalorioMediano": 104983.541260689,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "ENJ",
+      "coppia": "ENJEUR",
+      "controvalorioMediano": 4284.994639193083,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "ENS",
+      "coppia": "ENSEUR",
+      "controvalorioMediano": 4876.875972064499,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "ENSO",
+      "coppia": "ENSOEUR",
+      "controvalorioMediano": 11145.925324200001,
+      "incluso": false,
+      "motivo": "storia insufficiente: 345 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "EOS",
+      "coppia": "EOSEUR",
+      "controvalorioMediano": 0,
+      "incluso": false,
+      "motivo": "storia insufficiente: 488 giorni senza candela, il primo il 2025-07-01"
+    },
+    {
+      "base": "EPT",
+      "coppia": "EPTEUR",
+      "controvalorioMediano": 182.33563265424,
+      "incluso": false,
+      "motivo": "storia insufficiente: 247 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "ES",
+      "coppia": "ESEUR",
+      "controvalorioMediano": 427.339512371,
+      "incluso": false,
+      "motivo": "storia insufficiente: 255 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "ESP",
+      "coppia": "ESPEUR",
+      "controvalorioMediano": 3051.74608509655,
+      "incluso": false,
+      "motivo": "storia insufficiente: 466 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "ESX",
+      "coppia": "ESXEUR",
+      "controvalorioMediano": 1414.7103523220899,
+      "incluso": false,
+      "motivo": "storia insufficiente: 533 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "ETC",
+      "coppia": "ETCEUR",
+      "controvalorioMediano": 23110.672849011517,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "ETH",
+      "coppia": "ETHEUR",
+      "controvalorioMediano": 13859109.104606694,
+      "incluso": true,
+      "motivo": "inclusa"
+    },
+    {
+      "base": "ETHFI",
+      "coppia": "ETHFIEUR",
+      "controvalorioMediano": 5800.397797632,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "ETHW",
+      "coppia": "ETHWEUR",
+      "controvalorioMediano": 0,
+      "incluso": false,
+      "motivo": "storia insufficiente: 488 giorni senza candela, il primo il 2025-07-01"
+    },
+    {
+      "base": "EUL",
+      "coppia": "EULEUR",
+      "controvalorioMediano": 11049.80709902441,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "EURC",
+      "coppia": "EURCEUR",
+      "controvalorioMediano": 342600.3969076905,
+      "incluso": false,
+      "motivo": "stablecoin o token ancorato a una valuta"
+    },
+    {
+      "base": "EUROP",
+      "coppia": "EUROPEUR",
+      "controvalorioMediano": 3228.167625,
+      "incluso": false,
+      "motivo": "stablecoin o token ancorato a una valuta"
+    },
+    {
+      "base": "EURQ",
+      "coppia": "EURQEUR",
+      "controvalorioMediano": 246.99865272,
+      "incluso": false,
+      "motivo": "stablecoin o token ancorato a una valuta"
+    },
+    {
+      "base": "EURR",
+      "coppia": "EURREUR",
+      "controvalorioMediano": 1348.1995972,
+      "incluso": false,
+      "motivo": "stablecoin o token ancorato a una valuta"
+    },
+    {
+      "base": "EURT",
+      "coppia": "EURTEUR",
+      "controvalorioMediano": 0,
+      "incluso": false,
+      "motivo": "stablecoin o token ancorato a una valuta"
+    },
+    {
+      "base": "EV",
+      "coppia": "EVEUR",
+      "controvalorioMediano": 623.8673663111144,
+      "incluso": false,
+      "motivo": "storia insufficiente: 555 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "EWT",
+      "coppia": "EWTEUR",
+      "controvalorioMediano": 3427.7917350363496,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "FARM",
+      "coppia": "FARMEUR",
+      "controvalorioMediano": 66.9712021664,
+      "incluso": false,
+      "motivo": "storia insufficiente: 363 giorni senza candela, il primo il 2025-01-11"
+    },
+    {
+      "base": "FARTCOIN",
+      "coppia": "FARTCOINEUR",
+      "controvalorioMediano": 106401.401958145,
+      "incluso": false,
+      "motivo": "storia insufficiente: 81 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "FET",
+      "coppia": "FETEUR",
+      "controvalorioMediano": 140550.4709898537,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "FF",
+      "coppia": "FFEUR",
+      "controvalorioMediano": 779.3185668583001,
+      "incluso": false,
+      "motivo": "storia insufficiente: 677 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "FHE",
+      "coppia": "FHEEUR",
+      "controvalorioMediano": 16968.462533939797,
+      "incluso": false,
+      "motivo": "storia insufficiente: 158 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "FIDA",
+      "coppia": "FIDAEUR",
+      "controvalorioMediano": 1400.6991335153675,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "FIGHT",
+      "coppia": "FIGHTEUR",
+      "controvalorioMediano": 1444.2782778688,
+      "incluso": false,
+      "motivo": "storia insufficiente: 445 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "FIL",
+      "coppia": "FILEUR",
+      "controvalorioMediano": 48230.4335628064,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "FIS",
+      "coppia": "FISEUR",
+      "controvalorioMediano": 221.45014133853917,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "FLOCK",
+      "coppia": "FLOCKEUR",
+      "controvalorioMediano": 173.7514018752,
+      "incluso": false,
+      "motivo": "storia insufficiente: 432 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "FLOKI",
+      "coppia": "FLOKIEUR",
+      "controvalorioMediano": 15915.489902142823,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "FLOW",
+      "coppia": "FLOWEUR",
+      "controvalorioMediano": 10319.320840414557,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "FLR",
+      "coppia": "FLREUR",
+      "controvalorioMediano": 20035.947215113138,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "FLUX",
+      "coppia": "FLUXEUR",
+      "controvalorioMediano": 3170.074694324,
+      "incluso": false,
+      "motivo": "storia insufficiente: 94 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "FLY",
+      "coppia": "FLYEUR",
+      "controvalorioMediano": 103.868835126,
+      "incluso": false,
+      "motivo": "storia insufficiente: 570 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "FOLKS",
+      "coppia": "FOLKSEUR",
+      "controvalorioMediano": 1525.3392319519999,
+      "incluso": false,
+      "motivo": "storia insufficiente: 695 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "FORTH",
+      "coppia": "FORTHEUR",
+      "controvalorioMediano": 2134.24643265605,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "FTM",
+      "coppia": "FTMEUR",
+      "controvalorioMediano": 0,
+      "incluso": false,
+      "motivo": "storia insufficiente: 579 giorni senza candela, il primo il 2025-04-01"
+    },
+    {
+      "base": "FUN",
+      "coppia": "FUNEUR",
+      "controvalorioMediano": 20626.75576699565,
+      "incluso": false,
+      "motivo": "storia insufficiente: 438 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "FWOG",
+      "coppia": "FWOGEUR",
+      "controvalorioMediano": 629.632308084,
+      "incluso": false,
+      "motivo": "storia insufficiente: 38 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "FXS",
+      "coppia": "FXSEUR",
+      "controvalorioMediano": 369.28743522402,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "G",
+      "coppia": "GEUR",
+      "controvalorioMediano": 63.63688396800001,
+      "incluso": false,
+      "motivo": "storia insufficiente: 463 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "GAIA",
+      "coppia": "GAIAEUR",
+      "controvalorioMediano": 112.8465011813,
+      "incluso": false,
+      "motivo": "storia insufficiente: 269 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "GAL",
+      "coppia": "GALEUR",
+      "controvalorioMediano": 0,
+      "incluso": false,
+      "motivo": "storia insufficiente: 497 giorni senza candela, il primo il 2024-11-29"
+    },
+    {
+      "base": "GALA",
+      "coppia": "GALAEUR",
+      "controvalorioMediano": 14876.653918116206,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "GAME2",
+      "coppia": "GAME2EUR",
+      "controvalorioMediano": 2373.763726267544,
+      "incluso": false,
+      "motivo": "storia insufficiente: 388 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "GARI",
+      "coppia": "GARIEUR",
+      "controvalorioMediano": 1543.0358570875499,
+      "incluso": false,
+      "motivo": "storia insufficiente: 305 giorni senza candela, il primo il 2025-03-16"
+    },
+    {
+      "base": "GAS",
+      "coppia": "GASEUR",
+      "controvalorioMediano": 572.5811947349999,
+      "incluso": false,
+      "motivo": "storia insufficiente: 551 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "GENIUS",
+      "coppia": "GENIUSEUR",
+      "controvalorioMediano": 7331.3963971105,
+      "incluso": false,
+      "motivo": "storia insufficiente: 558 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "GFI",
+      "coppia": "GFIEUR",
+      "controvalorioMediano": 1089.2916023789999,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "GHIBLI",
+      "coppia": "GHIBLIEUR",
+      "controvalorioMediano": 261.09615833892,
+      "incluso": false,
+      "motivo": "storia insufficiente: 144 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "GHST",
+      "coppia": "GHSTEUR",
+      "controvalorioMediano": 557.5281192545849,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "GIGA",
+      "coppia": "GIGAEUR",
+      "controvalorioMediano": 1665.341103413,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "GLMR",
+      "coppia": "GLMREUR",
+      "controvalorioMediano": 3249.0187001408563,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "GMT",
+      "coppia": "GMTEUR",
+      "controvalorioMediano": 811.7717671955653,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "GMX",
+      "coppia": "GMXEUR",
+      "controvalorioMediano": 1713.9710106399998,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "GNO",
+      "coppia": "GNOEUR",
+      "controvalorioMediano": 1159.6711595723,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "GOAT",
+      "coppia": "GOATEUR",
+      "controvalorioMediano": 779.4673504965999,
+      "incluso": false,
+      "motivo": "storia insufficiente: 38 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "GOMINING",
+      "coppia": "GOMININGEUR",
+      "controvalorioMediano": 2488.5769620500005,
+      "incluso": false,
+      "motivo": "storia insufficiente: 276 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "GRASS",
+      "coppia": "GRASSEUR",
+      "controvalorioMediano": 3379.7272124789997,
+      "incluso": false,
+      "motivo": "storia insufficiente: 85 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "GRIFFAIN",
+      "coppia": "GRIFFAINEUR",
+      "controvalorioMediano": 3107.7633170276004,
+      "incluso": false,
+      "motivo": "storia insufficiente: 81 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "GRT",
+      "coppia": "GRTEUR",
+      "controvalorioMediano": 28232.262467469598,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "GST",
+      "coppia": "GSTEUR",
+      "controvalorioMediano": 269.5621266468304,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "GTC",
+      "coppia": "GTCEUR",
+      "controvalorioMediano": 850.7123892626579,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "GUN",
+      "coppia": "GUNEUR",
+      "controvalorioMediano": 5029.657515784,
+      "incluso": false,
+      "motivo": "storia insufficiente: 150 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "H",
+      "coppia": "HEUR",
+      "controvalorioMediano": 38835.90201199501,
+      "incluso": false,
+      "motivo": "storia insufficiente: 603 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "HBAR",
+      "coppia": "HBAREUR",
+      "controvalorioMediano": 129002.8397685261,
+      "incluso": false,
+      "motivo": "storia insufficiente: 249 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "HDX",
+      "coppia": "HDXEUR",
+      "controvalorioMediano": 157.770940686,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "HFT",
+      "coppia": "HFTEUR",
+      "controvalorioMediano": 2330.4048162711074,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "HIPPO",
+      "coppia": "HIPPOEUR",
+      "controvalorioMediano": 1632.9473968929,
+      "incluso": false,
+      "motivo": "storia insufficiente: 205 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "HMSTR",
+      "coppia": "HMSTREUR",
+      "controvalorioMediano": 254.03523301584002,
+      "incluso": false,
+      "motivo": "storia insufficiente: 170 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "HNT",
+      "coppia": "HNTEUR",
+      "controvalorioMediano": 8178.788688804,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "HOLO",
+      "coppia": "HOLOEUR",
+      "controvalorioMediano": 153.366879948,
+      "incluso": false,
+      "motivo": "storia insufficiente: 681 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "HONEY",
+      "coppia": "HONEYEUR",
+      "controvalorioMediano": 500.3312808275,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "HOUSE",
+      "coppia": "HOUSEEUR",
+      "controvalorioMediano": 163.864364357525,
+      "incluso": false,
+      "motivo": "storia insufficiente: 268 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "HPOS10I",
+      "coppia": "HPOS10IEUR",
+      "controvalorioMediano": 161.70748661279998,
+      "incluso": false,
+      "motivo": "storia insufficiente: 87 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "HSK",
+      "coppia": "HSKEUR",
+      "controvalorioMediano": 137.9214069073,
+      "incluso": false,
+      "motivo": "storia insufficiente: 449 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "HYPE",
+      "coppia": "HYPEEUR",
+      "controvalorioMediano": 783861.4249869505,
+      "incluso": false,
+      "motivo": "storia insufficiente: 451 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "IAG",
+      "coppia": "IAGEUR",
+      "controvalorioMediano": 3467.92981124865,
+      "incluso": false,
+      "motivo": "storia insufficiente: 382 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "ICNT",
+      "coppia": "ICNTEUR",
+      "controvalorioMediano": 5602.399635467999,
+      "incluso": false,
+      "motivo": "storia insufficiente: 242 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "ICP",
+      "coppia": "ICPEUR",
+      "controvalorioMediano": 141273.2456673227,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "ICX",
+      "coppia": "ICXEUR",
+      "controvalorioMediano": 4202.142927830581,
+      "incluso": false,
+      "motivo": "storia insufficiente: 213 giorni senza candela, il primo il 2026-01-01"
+    },
+    {
+      "base": "IDEX",
+      "coppia": "IDEXEUR",
+      "controvalorioMediano": 471.75014974850853,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "IDOS",
+      "coppia": "IDOSEUR",
+      "controvalorioMediano": 1588.3041431749998,
+      "incluso": false,
+      "motivo": "storia insufficiente: 487 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "IMX",
+      "coppia": "IMXEUR",
+      "controvalorioMediano": 15384.842724993263,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "IN",
+      "coppia": "INEUR",
+      "controvalorioMediano": 886.205537176,
+      "incluso": false,
+      "motivo": "storia insufficiente: 443 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "INIT",
+      "coppia": "INITEUR",
+      "controvalorioMediano": 3254.5748544025,
+      "incluso": false,
+      "motivo": "storia insufficiente: 172 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "INJ",
+      "coppia": "INJEUR",
+      "controvalorioMediano": 58707.11082527159,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "INTR",
+      "coppia": "INTREUR",
+      "controvalorioMediano": 0,
+      "incluso": false,
+      "motivo": "storia insufficiente: 511 giorni senza candela, il primo il 2025-02-27"
+    },
+    {
+      "base": "INX",
+      "coppia": "INXEUR",
+      "controvalorioMediano": 10263.12503864475,
+      "incluso": false,
+      "motivo": "storia insufficiente: 453 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "IP",
+      "coppia": "IPEUR",
+      "controvalorioMediano": 2455.807190413,
+      "incluso": false,
+      "motivo": "storia insufficiente: 127 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "IR",
+      "coppia": "IREUR",
+      "controvalorioMediano": 1462.6117383758,
+      "incluso": false,
+      "motivo": "storia insufficiente: 409 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "JAILSTOOL",
+      "coppia": "JAILSTOOLEUR",
+      "controvalorioMediano": 127.20468972316002,
+      "incluso": false,
+      "motivo": "storia insufficiente: 465 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "JASMY",
+      "coppia": "JASMYEUR",
+      "controvalorioMediano": 9106.377134133762,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "JITOSOL",
+      "coppia": "JITOSOLEUR",
+      "controvalorioMediano": 801.7126051999999,
+      "incluso": false,
+      "motivo": "storia insufficiente: 235 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "JOE",
+      "coppia": "JOEEUR",
+      "controvalorioMediano": 296.43554434,
+      "incluso": false,
+      "motivo": "storia insufficiente: 248 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "JST",
+      "coppia": "JSTEUR",
+      "controvalorioMediano": 1110.707274582,
+      "incluso": false,
+      "motivo": "storia insufficiente: 149 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "JTO",
+      "coppia": "JTOEUR",
+      "controvalorioMediano": 9286.222390865401,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "JUNO",
+      "coppia": "JUNOEUR",
+      "controvalorioMediano": 280.78789948055066,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "JUP",
+      "coppia": "JUPEUR",
+      "controvalorioMediano": 58547.66860120639,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "K",
+      "coppia": "KEUR",
+      "controvalorioMediano": 0,
+      "incluso": false,
+      "motivo": "storia insufficiente: 680 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "KAITO",
+      "coppia": "KAITOEUR",
+      "controvalorioMediano": 5376.964875555999,
+      "incluso": false,
+      "motivo": "storia insufficiente: 109 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "KAR",
+      "coppia": "KAREUR",
+      "controvalorioMediano": 0,
+      "incluso": false,
+      "motivo": "storia insufficiente: 489 giorni senza candela, il primo il 2025-05-20"
+    },
+    {
+      "base": "KAS",
+      "coppia": "KASEUR",
+      "controvalorioMediano": 132790.1319764747,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "KAT",
+      "coppia": "KATEUR",
+      "controvalorioMediano": 3955.29918914075,
+      "incluso": false,
+      "motivo": "storia insufficiente: 500 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "KAVA",
+      "coppia": "KAVAEUR",
+      "controvalorioMediano": 10118.741094624185,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "KEEP",
+      "coppia": "KEEPEUR",
+      "controvalorioMediano": 0,
+      "incluso": false,
+      "motivo": "storia insufficiente: 580 giorni senza candela, il primo il 2025-01-25"
+    },
+    {
+      "base": "KERNEL",
+      "coppia": "KERNELEUR",
+      "controvalorioMediano": 3174.6920172895007,
+      "incluso": false,
+      "motivo": "storia insufficiente: 162 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "KET",
+      "coppia": "KETEUR",
+      "controvalorioMediano": 231.06077733700002,
+      "incluso": false,
+      "motivo": "storia insufficiente: 572 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "KEY",
+      "coppia": "KEYEUR",
+      "controvalorioMediano": 939.2656539951406,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "KGEN",
+      "coppia": "KGENEUR",
+      "controvalorioMediano": 1156.7347296835,
+      "incluso": false,
+      "motivo": "storia insufficiente: 658 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "KILT",
+      "coppia": "KILTEUR",
+      "controvalorioMediano": 0,
+      "incluso": false,
+      "motivo": "storia insufficiente: 489 giorni senza candela, il primo il 2025-06-30"
+    },
+    {
+      "base": "KIN",
+      "coppia": "KINEUR",
+      "controvalorioMediano": 333.7179643260859,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "KINT",
+      "coppia": "KINTEUR",
+      "controvalorioMediano": 0,
+      "incluso": false,
+      "motivo": "storia insufficiente: 491 giorni senza candela, il primo il 2025-03-20"
+    },
+    {
+      "base": "KMNO",
+      "coppia": "KMNOEUR",
+      "controvalorioMediano": 1597.7168491388002,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "KNC",
+      "coppia": "KNCEUR",
+      "controvalorioMediano": 1413.6073854040048,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "KNTQ",
+      "coppia": "KNTQEUR",
+      "controvalorioMediano": 13671.0265821342,
+      "incluso": false,
+      "motivo": "storia insufficiente: 570 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "KOBAN",
+      "coppia": "KOBANEUR",
+      "controvalorioMediano": 4317.142351109429,
+      "incluso": false,
+      "motivo": "storia insufficiente: 192 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "KP3R",
+      "coppia": "KP3REUR",
+      "controvalorioMediano": 116.43025146388499,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "KSM",
+      "coppia": "KSMEUR",
+      "controvalorioMediano": 27005.9305911756,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "KTA",
+      "coppia": "KTAEUR",
+      "controvalorioMediano": 6754.778196936,
+      "incluso": false,
+      "motivo": "storia insufficiente: 275 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "KUJI",
+      "coppia": "KUJIEUR",
+      "controvalorioMediano": 0,
+      "incluso": false,
+      "motivo": "storia insufficiente: 582 giorni senza candela, il primo il 2024-12-29"
+    },
+    {
+      "base": "KULA",
+      "coppia": "KULAEUR",
+      "controvalorioMediano": 752.2506376875001,
+      "incluso": false,
+      "motivo": "storia insufficiente: 408 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "L3",
+      "coppia": "L3EUR",
+      "controvalorioMediano": 182.99018150400002,
+      "incluso": false,
+      "motivo": "storia insufficiente: 313 giorni senza candela, il primo il 2025-03-16"
+    },
+    {
+      "base": "LAVA",
+      "coppia": "LAVAEUR",
+      "controvalorioMediano": 567.997714055,
+      "incluso": false,
+      "motivo": "storia insufficiente: 402 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "LAYER",
+      "coppia": "LAYEREUR",
+      "controvalorioMediano": 495.746425125,
+      "incluso": false,
+      "motivo": "storia insufficiente: 121 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "LCAP",
+      "coppia": "LCAPEUR",
+      "controvalorioMediano": 202.1266784,
+      "incluso": false,
+      "motivo": "storia insufficiente: 325 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "LCX",
+      "coppia": "LCXEUR",
+      "controvalorioMediano": 1754.3454420042563,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "LDO",
+      "coppia": "LDOEUR",
+      "controvalorioMediano": 29190.894178207403,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "LINEA",
+      "coppia": "LINEAEUR",
+      "controvalorioMediano": 1170.37440369065,
+      "incluso": false,
+      "motivo": "storia insufficiente: 312 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "LINK",
+      "coppia": "LINKEUR",
+      "controvalorioMediano": 601862.2092211131,
+      "incluso": true,
+      "motivo": "inclusa"
+    },
+    {
+      "base": "LION",
+      "coppia": "LIONEUR",
+      "controvalorioMediano": 374.606978791085,
+      "incluso": false,
+      "motivo": "storia insufficiente: 362 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "LIT",
+      "coppia": "LITEUR",
+      "controvalorioMediano": 583.7262014405001,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "LMWR",
+      "coppia": "LMWREUR",
+      "controvalorioMediano": 4057.4455794906,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "LOCKIN",
+      "coppia": "LOCKINEUR",
+      "controvalorioMediano": 274.02822489803003,
+      "incluso": false,
+      "motivo": "storia insufficiente: 79 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "LOFI",
+      "coppia": "LOFIEUR",
+      "controvalorioMediano": 222.89762340209998,
+      "incluso": false,
+      "motivo": "storia insufficiente: 191 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "LPT",
+      "coppia": "LPTEUR",
+      "controvalorioMediano": 8027.693888127061,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "LQTY",
+      "coppia": "LQTYEUR",
+      "controvalorioMediano": 862.5765847540001,
+      "incluso": false,
+      "motivo": "storia insufficiente: 81 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "LRC",
+      "coppia": "LRCEUR",
+      "controvalorioMediano": 2840.37202012971,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "LSETH",
+      "coppia": "LSETHEUR",
+      "controvalorioMediano": 105.37311347849999,
+      "incluso": false,
+      "motivo": "storia insufficiente: 466 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "LSK",
+      "coppia": "LSKEUR",
+      "controvalorioMediano": 3746.306565872487,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "LSSOL",
+      "coppia": "LSSOLEUR",
+      "controvalorioMediano": 173.7941019,
+      "incluso": false,
+      "motivo": "storia insufficiente: 304 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "LTC",
+      "coppia": "LTCEUR",
+      "controvalorioMediano": 1273235.7170204709,
+      "incluso": true,
+      "motivo": "inclusa"
+    },
+    {
+      "base": "LUNA",
+      "coppia": "LUNAEUR",
+      "controvalorioMediano": 8575.913396503982,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "LUNA2",
+      "coppia": "LUNA2EUR",
+      "controvalorioMediano": 0,
+      "incluso": false,
+      "motivo": "storia insufficiente: 488 giorni senza candela, il primo il 2025-07-01"
+    },
+    {
+      "base": "M",
+      "coppia": "MEUR",
+      "controvalorioMediano": 29414.158922065202,
+      "incluso": false,
+      "motivo": "storia insufficiente: 242 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "MANA",
+      "coppia": "MANAEUR",
+      "controvalorioMediano": 17447.157861766784,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "MANTRA",
+      "coppia": "MANTRAEUR",
+      "controvalorioMediano": 8749.768000744165,
+      "incluso": false,
+      "motivo": "storia insufficiente: 486 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "MASK",
+      "coppia": "MASKEUR",
+      "controvalorioMediano": 1117.88412003345,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "MAT",
+      "coppia": "MATEUR",
+      "controvalorioMediano": 103.104388848,
+      "incluso": false,
+      "motivo": "storia insufficiente: 228 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "MATIC",
+      "coppia": "MATICEUR",
+      "controvalorioMediano": 0,
+      "incluso": false,
+      "motivo": "storia insufficiente: 579 giorni senza candela, il primo il 2025-04-01"
+    },
+    {
+      "base": "MC",
+      "coppia": "MCEUR",
+      "controvalorioMediano": 0,
+      "incluso": false,
+      "motivo": "storia insufficiente: 491 giorni senza candela, il primo il 2025-04-18"
+    },
+    {
+      "base": "ME",
+      "coppia": "MEEUR",
+      "controvalorioMediano": 69.458608146,
+      "incluso": false,
+      "motivo": "storia insufficiente: 86 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "MEGA",
+      "coppia": "MEGAEUR",
+      "controvalorioMediano": 8863.377621795002,
+      "incluso": false,
+      "motivo": "storia insufficiente: 543 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "MELANIA",
+      "coppia": "MELANIAEUR",
+      "controvalorioMediano": 17050.386879759997,
+      "incluso": false,
+      "motivo": "storia insufficiente: 78 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "MEME",
+      "coppia": "MEMEEUR",
+      "controvalorioMediano": 1102.28637488088,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "MERL",
+      "coppia": "MERLEUR",
+      "controvalorioMediano": 1968.5615621768,
+      "incluso": false,
+      "motivo": "storia insufficiente: 242 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "MET",
+      "coppia": "METEUR",
+      "controvalorioMediano": 586.8975555019999,
+      "incluso": false,
+      "motivo": "storia insufficiente: 365 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "METIS",
+      "coppia": "METISEUR",
+      "controvalorioMediano": 290.53016685,
+      "incluso": false,
+      "motivo": "storia insufficiente: 158 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "MEW",
+      "coppia": "MEWEUR",
+      "controvalorioMediano": 4396.80275020797,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "MF",
+      "coppia": "MFEUR",
+      "controvalorioMediano": 1179.6792271305,
+      "incluso": false,
+      "motivo": "storia insufficiente: 337 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "MICHI",
+      "coppia": "MICHIEUR",
+      "controvalorioMediano": 80.6910881968,
+      "incluso": false,
+      "motivo": "storia insufficiente: 402 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "MIM",
+      "coppia": "MIMEUR",
+      "controvalorioMediano": 220.17028730020002,
+      "incluso": false,
+      "motivo": "storia insufficiente: 286 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "MINA",
+      "coppia": "MINAEUR",
+      "controvalorioMediano": 12992.149064749534,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "MIR",
+      "coppia": "MIREUR",
+      "controvalorioMediano": 303.5791256961075,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "MIRA",
+      "coppia": "MIRAEUR",
+      "controvalorioMediano": 4628.740370199001,
+      "incluso": false,
+      "motivo": "storia insufficiente: 327 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "MIRROR",
+      "coppia": "MIRROREUR",
+      "controvalorioMediano": 94.36648533600001,
+      "incluso": false,
+      "motivo": "storia insufficiente: 616 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "MKR",
+      "coppia": "MKREUR",
+      "controvalorioMediano": 0,
+      "incluso": false,
+      "motivo": "storia insufficiente: 488 giorni senza candela, il primo il 2025-07-01"
+    },
+    {
+      "base": "MLN",
+      "coppia": "MLNEUR",
+      "controvalorioMediano": 1409.7446325654,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "MNGO",
+      "coppia": "MNGOEUR",
+      "controvalorioMediano": 153.66064441089998,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "MNT",
+      "coppia": "MNTEUR",
+      "controvalorioMediano": 5108.804743965,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "MOCA",
+      "coppia": "MOCAEUR",
+      "controvalorioMediano": 2572.3144202019494,
+      "incluso": false,
+      "motivo": "storia insufficiente: 290 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "MOG",
+      "coppia": "MOGEUR",
+      "controvalorioMediano": 5577.531795148997,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "MON",
+      "coppia": "MONEUR",
+      "controvalorioMediano": 117337.78899369901,
+      "incluso": false,
+      "motivo": "storia insufficiente: 386 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "MOODENG",
+      "coppia": "MOODENGEUR",
+      "controvalorioMediano": 11342.037788552,
+      "incluso": false,
+      "motivo": "storia insufficiente: 45 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "MOON",
+      "coppia": "MOONEUR",
+      "controvalorioMediano": 506.14644861899995,
+      "incluso": false,
+      "motivo": "storia insufficiente: 315 giorni senza candela, il primo il 2025-03-26"
+    },
+    {
+      "base": "MORPHO",
+      "coppia": "MORPHOEUR",
+      "controvalorioMediano": 10967.5297518626,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "MOVE",
+      "coppia": "MOVEEUR",
+      "controvalorioMediano": 0,
+      "incluso": false,
+      "motivo": "storia insufficiente: 576 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "MOVR",
+      "coppia": "MOVREUR",
+      "controvalorioMediano": 5547.799463425922,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "MPL",
+      "coppia": "MPLEUR",
+      "controvalorioMediano": 0,
+      "incluso": false,
+      "motivo": "storia insufficiente: 728 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "MSOL",
+      "coppia": "MSOLEUR",
+      "controvalorioMediano": 59.1905316417,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "MUBARAK",
+      "coppia": "MUBARAKEUR",
+      "controvalorioMediano": 218.768534292,
+      "incluso": false,
+      "motivo": "storia insufficiente: 509 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "MULTI",
+      "coppia": "MULTIEUR",
+      "controvalorioMediano": 184.49077225683,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "MV",
+      "coppia": "MVEUR",
+      "controvalorioMediano": 205.35386502793804,
+      "incluso": false,
+      "motivo": "storia insufficiente: 305 giorni senza candela, il primo il 2025-11-23"
+    },
+    {
+      "base": "MXC",
+      "coppia": "MXCEUR",
+      "controvalorioMediano": 1561.8977722665024,
+      "incluso": false,
+      "motivo": "storia insufficiente: 304 giorni senza candela, il primo il 2026-01-01"
+    },
+    {
+      "base": "MYX",
+      "coppia": "MYXEUR",
+      "controvalorioMediano": 5938.45874115,
+      "incluso": false,
+      "motivo": "storia insufficiente: 344 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "NANO",
+      "coppia": "NANOEUR",
+      "controvalorioMediano": 8117.857371608015,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "NEAR",
+      "coppia": "NEAREUR",
+      "controvalorioMediano": 341701.1061841256,
+      "incluso": true,
+      "motivo": "inclusa"
+    },
+    {
+      "base": "NEIRO",
+      "coppia": "NEIROEUR",
+      "controvalorioMediano": 3764.751026059565,
+      "incluso": false,
+      "motivo": "storia insufficiente: 32 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "NEO",
+      "coppia": "NEOEUR",
+      "controvalorioMediano": 1880.98534391,
+      "incluso": false,
+      "motivo": "storia insufficiente: 551 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "NEX",
+      "coppia": "NEXEUR",
+      "controvalorioMediano": 2859.627917631152,
+      "incluso": false,
+      "motivo": "storia insufficiente: 563 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "NIGHT",
+      "coppia": "NIGHTEUR",
+      "controvalorioMediano": 128351.21751154002,
+      "incluso": false,
+      "motivo": "storia insufficiente: 401 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "NIL",
+      "coppia": "NILEUR",
+      "controvalorioMediano": 4160.316171936,
+      "incluso": false,
+      "motivo": "storia insufficiente: 143 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "NMR",
+      "coppia": "NMREUR",
+      "controvalorioMediano": 2321.9330170624003,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "NOBODY",
+      "coppia": "NOBODYEUR",
+      "controvalorioMediano": 1140.4390212292,
+      "incluso": false,
+      "motivo": "storia insufficiente: 312 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "NODL",
+      "coppia": "NODLEUR",
+      "controvalorioMediano": 0,
+      "incluso": false,
+      "motivo": "storia insufficiente: 492 giorni senza candela, il primo il 2025-02-15"
+    },
+    {
+      "base": "NOS",
+      "coppia": "NOSEUR",
+      "controvalorioMediano": 7929.4028128,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "NOT",
+      "coppia": "NOTEUR",
+      "controvalorioMediano": 373.11571676153,
+      "incluso": false,
+      "motivo": "storia insufficiente: 102 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "NPC",
+      "coppia": "NPCEUR",
+      "controvalorioMediano": 11274.60227253815,
+      "incluso": false,
+      "motivo": "storia insufficiente: 234 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "NTRN",
+      "coppia": "NTRNEUR",
+      "controvalorioMediano": 87.24233135,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "NYM",
+      "coppia": "NYMEUR",
+      "controvalorioMediano": 653.519193998996,
+      "incluso": false,
+      "motivo": "storia insufficiente: 321 giorni senza candela, il primo il 2025-03-18"
+    },
+    {
+      "base": "OBOL",
+      "coppia": "OBOLEUR",
+      "controvalorioMediano": 1530.0115079513653,
+      "incluso": false,
+      "motivo": "storia insufficiente: 369 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "OCEAN",
+      "coppia": "OCEANEUR",
+      "controvalorioMediano": 2134.532542924707,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "ODOS",
+      "coppia": "ODOSEUR",
+      "controvalorioMediano": 19.8423575392,
+      "incluso": false,
+      "motivo": "storia insufficiente: 489 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "OGN",
+      "coppia": "OGNEUR",
+      "controvalorioMediano": 687.9680109242561,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "OM",
+      "coppia": "OMEUR",
+      "controvalorioMediano": 8844.183001367996,
+      "incluso": false,
+      "motivo": "storia insufficiente: 412 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "OMG",
+      "coppia": "OMGEUR",
+      "controvalorioMediano": 179.15661774428372,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "OMI",
+      "coppia": "OMIEUR",
+      "controvalorioMediano": 1904.2615889527308,
+      "incluso": false,
+      "motivo": "storia insufficiente: 415 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "OMNI",
+      "coppia": "OMNIEUR",
+      "controvalorioMediano": 104.37564382,
+      "incluso": false,
+      "motivo": "storia insufficiente: 458 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "ONDO",
+      "coppia": "ONDOEUR",
+      "controvalorioMediano": 147782.6099927487,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "OOB",
+      "coppia": "OOBEUR",
+      "controvalorioMediano": 744.6091091642501,
+      "incluso": false,
+      "motivo": "storia insufficiente: 374 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "OP",
+      "coppia": "OPEUR",
+      "controvalorioMediano": 28506.386036497002,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "OPEN",
+      "coppia": "OPENEUR",
+      "controvalorioMediano": 9513.441597297,
+      "incluso": false,
+      "motivo": "storia insufficiente: 309 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "ORCA",
+      "coppia": "ORCAEUR",
+      "controvalorioMediano": 6960.3659449033,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "ORDER",
+      "coppia": "ORDEREUR",
+      "controvalorioMediano": 349.116865368,
+      "incluso": false,
+      "motivo": "storia insufficiente: 521 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "OSMO",
+      "coppia": "OSMOEUR",
+      "controvalorioMediano": 594.9499030699999,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "OXT",
+      "coppia": "OXTEUR",
+      "controvalorioMediano": 903.5507244031801,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "OXY",
+      "coppia": "OXYEUR",
+      "controvalorioMediano": 0,
+      "incluso": false,
+      "motivo": "storia insufficiente: 488 giorni senza candela, il primo il 2025-07-01"
+    },
+    {
+      "base": "PARA",
+      "coppia": "PARAEUR",
+      "controvalorioMediano": 0,
+      "incluso": false,
+      "motivo": "storia insufficiente: 728 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "PARTI",
+      "coppia": "PARTIEUR",
+      "controvalorioMediano": 1171.6979999999999,
+      "incluso": false,
+      "motivo": "storia insufficiente: 248 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "PAXG",
+      "coppia": "PAXGEUR",
+      "controvalorioMediano": 351834.6920142141,
+      "incluso": true,
+      "motivo": "inclusa"
+    },
+    {
+      "base": "PDA",
+      "coppia": "PDAEUR",
+      "controvalorioMediano": 0,
+      "incluso": false,
+      "motivo": "storia insufficiente: 498 giorni senza candela, il primo il 2025-02-19"
+    },
+    {
+      "base": "PEAQ",
+      "coppia": "PEAQEUR",
+      "controvalorioMediano": 8657.7325633814,
+      "incluso": false,
+      "motivo": "storia insufficiente: 241 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "PENDLE",
+      "coppia": "PENDLEEUR",
+      "controvalorioMediano": 11899.530261270002,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "PENGU",
+      "coppia": "PENGUEUR",
+      "controvalorioMediano": 64601.345531141,
+      "incluso": false,
+      "motivo": "storia insufficiente: 86 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "PEP",
+      "coppia": "PEPEUR",
+      "controvalorioMediano": 244.47258,
+      "incluso": false,
+      "motivo": "storia insufficiente: 466 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "PEPE",
+      "coppia": "PEPEEUR",
+      "controvalorioMediano": 197333.3725204216,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "PERP",
+      "coppia": "PERPEUR",
+      "controvalorioMediano": 586.701723451377,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "PHA",
+      "coppia": "PHAEUR",
+      "controvalorioMediano": 2947.3119642627325,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "PI",
+      "coppia": "PIEUR",
+      "controvalorioMediano": 8030.008692289199,
+      "incluso": false,
+      "motivo": "storia insufficiente: 495 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "PIPE",
+      "coppia": "PIPEEUR",
+      "controvalorioMediano": 213.2764999586,
+      "incluso": false,
+      "motivo": "storia insufficiente: 339 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "PLA",
+      "coppia": "PLAEUR",
+      "controvalorioMediano": 0,
+      "incluso": false,
+      "motivo": "storia insufficiente: 728 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "PLANCK",
+      "coppia": "PLANCKEUR",
+      "controvalorioMediano": 8383.119365972,
+      "incluso": false,
+      "motivo": "storia insufficiente: 679 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "PLAY",
+      "coppia": "PLAYEUR",
+      "controvalorioMediano": 8832.01211144512,
+      "incluso": false,
+      "motivo": "storia insufficiente: 312 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "PLUME",
+      "coppia": "PLUMEEUR",
+      "controvalorioMediano": 17268.988714127998,
+      "incluso": false,
+      "motivo": "storia insufficiente: 171 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "PNUT",
+      "coppia": "PNUTEUR",
+      "controvalorioMediano": 5221.301825069999,
+      "incluso": false,
+      "motivo": "storia insufficiente: 45 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "POL",
+      "coppia": "POLEUR",
+      "controvalorioMediano": 87023.5356388528,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "POLIS",
+      "coppia": "POLISEUR",
+      "controvalorioMediano": 183.7457060703114,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "POLS",
+      "coppia": "POLSEUR",
+      "controvalorioMediano": 74.642949828146,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "POND",
+      "coppia": "PONDEUR",
+      "controvalorioMediano": 241.74837856499997,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "PONKE",
+      "coppia": "PONKEEUR",
+      "controvalorioMediano": 1481.7860432319,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "POPCAT",
+      "coppia": "POPCATEUR",
+      "controvalorioMediano": 13032.393309328,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "PORTAL",
+      "coppia": "PORTALEUR",
+      "controvalorioMediano": 1046.4082339172999,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "POWR",
+      "coppia": "POWREUR",
+      "controvalorioMediano": 3072.856273182948,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "PRCL",
+      "coppia": "PRCLEUR",
+      "controvalorioMediano": 721.4602745832,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "PRIME",
+      "coppia": "PRIMEEUR",
+      "controvalorioMediano": 1936.618414355,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "PRO",
+      "coppia": "PROEUR",
+      "controvalorioMediano": 709.518538774,
+      "incluso": false,
+      "motivo": "storia insufficiente: 318 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "PROMPT",
+      "coppia": "PROMPTEUR",
+      "controvalorioMediano": 3214.3616020130003,
+      "incluso": false,
+      "motivo": "storia insufficiente: 158 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "PROS",
+      "coppia": "PROSEUR",
+      "controvalorioMediano": 4846.8988365615005,
+      "incluso": false,
+      "motivo": "storia insufficiente: 541 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "PROVE",
+      "coppia": "PROVEEUR",
+      "controvalorioMediano": 12927.279295560002,
+      "incluso": false,
+      "motivo": "storia insufficiente: 299 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "PSTAKE",
+      "coppia": "PSTAKEEUR",
+      "controvalorioMediano": 0,
+      "incluso": false,
+      "motivo": "storia insufficiente: 488 giorni senza candela, il primo il 2025-07-01"
+    },
+    {
+      "base": "PTB",
+      "coppia": "PTBEUR",
+      "controvalorioMediano": 7493.17760946495,
+      "incluso": false,
+      "motivo": "storia insufficiente: 304 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "PUFFER",
+      "coppia": "PUFFEREUR",
+      "controvalorioMediano": 611.2907728465999,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "PUMP",
+      "coppia": "PUMPEUR",
+      "controvalorioMediano": 189920.7153739,
+      "incluso": false,
+      "motivo": "storia insufficiente: 253 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "PUPS",
+      "coppia": "PUPSEUR",
+      "controvalorioMediano": 523.32963576375,
+      "incluso": false,
+      "motivo": "storia insufficiente: 285 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "PYTH",
+      "coppia": "PYTHEUR",
+      "controvalorioMediano": 14681.948464070398,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "PYUSD",
+      "coppia": "PYUSDEUR",
+      "controvalorioMediano": 124.80892456000001,
+      "incluso": false,
+      "motivo": "stablecoin o token ancorato a una valuta"
+    },
+    {
+      "base": "Q",
+      "coppia": "QEUR",
+      "controvalorioMediano": 1288.74574643093,
+      "incluso": false,
+      "motivo": "storia insufficiente: 303 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "QI",
+      "coppia": "QIEUR",
+      "controvalorioMediano": 64.41088192000001,
+      "incluso": false,
+      "motivo": "storia insufficiente: 614 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "QNT",
+      "coppia": "QNTEUR",
+      "controvalorioMediano": 57158.9432783291,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "QTUM",
+      "coppia": "QTUMEUR",
+      "controvalorioMediano": 2473.9369325177154,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "QUAI",
+      "coppia": "QUAIEUR",
+      "controvalorioMediano": 1425.3600759918502,
+      "incluso": false,
+      "motivo": "storia insufficiente: 522 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "RAD",
+      "coppia": "RADEUR",
+      "controvalorioMediano": 76.5825452993365,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "RAIIN",
+      "coppia": "RAIINEUR",
+      "controvalorioMediano": 578.6246423393,
+      "incluso": false,
+      "motivo": "storia insufficiente: 568 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "RAILS",
+      "coppia": "RAILSEUR",
+      "controvalorioMediano": 183.266743535,
+      "incluso": false,
+      "motivo": "storia insufficiente: 458 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "RARE",
+      "coppia": "RAREEUR",
+      "controvalorioMediano": 3034.560261389293,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "RARI",
+      "coppia": "RARIEUR",
+      "controvalorioMediano": 464.605665090371,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "RAY",
+      "coppia": "RAYEUR",
+      "controvalorioMediano": 8055.690956470579,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "RBC",
+      "coppia": "RBCEUR",
+      "controvalorioMediano": 169.6504013882992,
+      "incluso": false,
+      "motivo": "storia insufficiente: 321 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "RED",
+      "coppia": "REDEUR",
+      "controvalorioMediano": 2999.99091018,
+      "incluso": false,
+      "motivo": "storia insufficiente: 123 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "REKT",
+      "coppia": "REKTEUR",
+      "controvalorioMediano": 2418.4275065953575,
+      "incluso": false,
+      "motivo": "storia insufficiente: 297 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "REN",
+      "coppia": "RENEUR",
+      "controvalorioMediano": 524.6444493791831,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "RENDER",
+      "coppia": "RENDEREUR",
+      "controvalorioMediano": 110964.17374707,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "REP",
+      "coppia": "REPEUR",
+      "controvalorioMediano": 39.513999999999996,
+      "incluso": false,
+      "motivo": "storia insufficiente: 514 giorni senza candela, il primo il 2025-03-22"
+    },
+    {
+      "base": "REPPO",
+      "coppia": "REPPOEUR",
+      "controvalorioMediano": 2742.23338791048,
+      "incluso": false,
+      "motivo": "storia insufficiente: 536 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "REPV2",
+      "coppia": "REPV2EUR",
+      "controvalorioMediano": 688.199295209175,
+      "incluso": false,
+      "motivo": "storia insufficiente: 233 giorni senza candela, il primo il 2025-08-18"
+    },
+    {
+      "base": "REQ",
+      "coppia": "REQEUR",
+      "controvalorioMediano": 1164.1754986549918,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "RETARDIO",
+      "coppia": "RETARDIOEUR",
+      "controvalorioMediano": 1498.5727132287,
+      "incluso": false,
+      "motivo": "storia insufficiente: 572 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "REZ",
+      "coppia": "REZEUR",
+      "controvalorioMediano": 1822.77863988723,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "RHEA",
+      "coppia": "RHEAEUR",
+      "controvalorioMediano": 2519.7504963059,
+      "incluso": false,
+      "motivo": "storia insufficiente: 651 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "RIVER",
+      "coppia": "RIVEREUR",
+      "controvalorioMediano": 5629.833166799999,
+      "incluso": false,
+      "motivo": "storia insufficiente: 374 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "RIZE",
+      "coppia": "RIZEEUR",
+      "controvalorioMediano": 3971.21180891652,
+      "incluso": false,
+      "motivo": "storia insufficiente: 193 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "RLC",
+      "coppia": "RLCEUR",
+      "controvalorioMediano": 572.0952519091036,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "RLS",
+      "coppia": "RLSEUR",
+      "controvalorioMediano": 4339.161405659,
+      "incluso": false,
+      "motivo": "storia insufficiente: 393 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "RNDR",
+      "coppia": "RNDREUR",
+      "controvalorioMediano": 0,
+      "incluso": false,
+      "motivo": "storia insufficiente: 728 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "ROLL",
+      "coppia": "ROLLEUR",
+      "controvalorioMediano": 971.0631199461,
+      "incluso": false,
+      "motivo": "storia insufficiente: 439 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "ROOK",
+      "coppia": "ROOKEUR",
+      "controvalorioMediano": 0,
+      "incluso": false,
+      "motivo": "storia insufficiente: 492 giorni senza candela, il primo il 2025-03-18"
+    },
+    {
+      "base": "RPL",
+      "coppia": "RPLEUR",
+      "controvalorioMediano": 2273.3090059105198,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "RSC",
+      "coppia": "RSCEUR",
+      "controvalorioMediano": 333.87258643415,
+      "incluso": false,
+      "motivo": "storia insufficiente: 379 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "RSR",
+      "coppia": "RSREUR",
+      "controvalorioMediano": 4000.1620621559996,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "RUJI",
+      "coppia": "RUJIEUR",
+      "controvalorioMediano": 566.5547091579999,
+      "incluso": false,
+      "motivo": "storia insufficiente: 233 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "RUNE",
+      "coppia": "RUNEEUR",
+      "controvalorioMediano": 13384.609922136602,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "S",
+      "coppia": "SEUR",
+      "controvalorioMediano": 11229.40128254,
+      "incluso": false,
+      "motivo": "storia insufficiente: 183 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "SAFE",
+      "coppia": "SAFEEUR",
+      "controvalorioMediano": 347.56706487300005,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "SAGA",
+      "coppia": "SAGAEUR",
+      "controvalorioMediano": 2078.2599603480003,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "SAHARA",
+      "coppia": "SAHARAEUR",
+      "controvalorioMediano": 6909.2751821454,
+      "incluso": false,
+      "motivo": "storia insufficiente: 235 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "SAMO",
+      "coppia": "SAMOEUR",
+      "controvalorioMediano": 165.48590182135752,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "SAND",
+      "coppia": "SANDEUR",
+      "controvalorioMediano": 12527.19308997957,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "SAPIEN",
+      "coppia": "SAPIENEUR",
+      "controvalorioMediano": 10403.944990607999,
+      "incluso": false,
+      "motivo": "storia insufficiente: 290 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "SAROS",
+      "coppia": "SAROSEUR",
+      "controvalorioMediano": 1655.2909287199998,
+      "incluso": false,
+      "motivo": "storia insufficiente: 611 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "SAUCE",
+      "coppia": "SAUCEEUR",
+      "controvalorioMediano": 911.5016744214,
+      "incluso": false,
+      "motivo": "storia insufficiente: 499 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "SBR",
+      "coppia": "SBREUR",
+      "controvalorioMediano": 631.5524393522649,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "SC",
+      "coppia": "SCEUR",
+      "controvalorioMediano": 3780.2364691107555,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "SCA",
+      "coppia": "SCAEUR",
+      "controvalorioMediano": 46.90652376199999,
+      "incluso": false,
+      "motivo": "storia insufficiente: 681 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "SCOR",
+      "coppia": "SCOREUR",
+      "controvalorioMediano": 769.0989974816999,
+      "incluso": false,
+      "motivo": "storia insufficiente: 502 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "SCRT",
+      "coppia": "SCRTEUR",
+      "controvalorioMediano": 9276.410558672982,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "SDN",
+      "coppia": "SDNEUR",
+      "controvalorioMediano": 720.1847392186314,
+      "incluso": false,
+      "motivo": "storia insufficiente: 314 giorni senza candela, il primo il 2025-03-17"
+    },
+    {
+      "base": "SEI",
+      "coppia": "SEIEUR",
+      "controvalorioMediano": 33939.7581944928,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "SENT",
+      "coppia": "SENTEUR",
+      "controvalorioMediano": 6491.6445786356,
+      "incluso": false,
+      "motivo": "storia insufficiente: 445 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "SGB",
+      "coppia": "SGBEUR",
+      "controvalorioMediano": 1852.9551937232693,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "SHIB",
+      "coppia": "SHIBEUR",
+      "controvalorioMediano": 60893.296007456105,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "SHX",
+      "coppia": "SHXEUR",
+      "controvalorioMediano": 16976.96885398735,
+      "incluso": false,
+      "motivo": "storia insufficiente: 353 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "SIDEKICK",
+      "coppia": "SIDEKICKEUR",
+      "controvalorioMediano": 179.07226187675,
+      "incluso": false,
+      "motivo": "storia insufficiente: 344 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "SIGMA",
+      "coppia": "SIGMAEUR",
+      "controvalorioMediano": 117.949101792635,
+      "incluso": false,
+      "motivo": "storia insufficiente: 86 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "SIGN",
+      "coppia": "SIGNEUR",
+      "controvalorioMediano": 272.89083514234994,
+      "incluso": false,
+      "motivo": "storia insufficiente: 530 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "SKR",
+      "coppia": "SKREUR",
+      "controvalorioMediano": 27828.989255162895,
+      "incluso": false,
+      "motivo": "storia insufficiente: 444 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "SKY",
+      "coppia": "SKYEUR",
+      "controvalorioMediano": 31453.9933440234,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "SLAY",
+      "coppia": "SLAYEUR",
+      "controvalorioMediano": 476.00695856769994,
+      "incluso": false,
+      "motivo": "storia insufficiente: 284 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "SLX",
+      "coppia": "SLXEUR",
+      "controvalorioMediano": 3604.8165049680006,
+      "incluso": false,
+      "motivo": "storia insufficiente: 568 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "SNEK",
+      "coppia": "SNEKEUR",
+      "controvalorioMediano": 1282.8194270192753,
+      "incluso": false,
+      "motivo": "storia insufficiente: 176 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "SNX",
+      "coppia": "SNXEUR",
+      "controvalorioMediano": 19816.172839925388,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "SOGNI",
+      "coppia": "SOGNIEUR",
+      "controvalorioMediano": 171.78333632052,
+      "incluso": false,
+      "motivo": "storia insufficiente: 547 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "SOL",
+      "coppia": "SOLEUR",
+      "controvalorioMediano": 6871876.68817751,
+      "incluso": true,
+      "motivo": "inclusa"
+    },
+    {
+      "base": "SOLV",
+      "coppia": "SOLVEUR",
+      "controvalorioMediano": 805.8105671703499,
+      "incluso": false,
+      "motivo": "storia insufficiente: 404 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "SOMI",
+      "coppia": "SOMIEUR",
+      "controvalorioMediano": 1860.381488882,
+      "incluso": false,
+      "motivo": "storia insufficiente: 346 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "SONIC",
+      "coppia": "SONICEUR",
+      "controvalorioMediano": 136.67017700399998,
+      "incluso": false,
+      "motivo": "storia insufficiente: 408 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "SOON",
+      "coppia": "SOONEUR",
+      "controvalorioMediano": 1415.3605879010001,
+      "incluso": false,
+      "motivo": "storia insufficiente: 327 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "SOSO",
+      "coppia": "SOSOEUR",
+      "controvalorioMediano": 1362.9575035425,
+      "incluso": false,
+      "motivo": "storia insufficiente: 256 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "SPACE",
+      "coppia": "SPACEEUR",
+      "controvalorioMediano": 5991.849038328555,
+      "incluso": false,
+      "motivo": "storia insufficiente: 446 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "SPELL",
+      "coppia": "SPELLEUR",
+      "controvalorioMediano": 831.1045503147681,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "SPICE",
+      "coppia": "SPICEEUR",
+      "controvalorioMediano": 1919.6027700226712,
+      "incluso": false,
+      "motivo": "storia insufficiente: 447 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "SPK",
+      "coppia": "SPKEUR",
+      "controvalorioMediano": 3761.762320352807,
+      "incluso": false,
+      "motivo": "storia insufficiente: 231 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "SPX",
+      "coppia": "SPXEUR",
+      "controvalorioMediano": 91068.677397585,
+      "incluso": false,
+      "motivo": "storia insufficiente: 38 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "SRM",
+      "coppia": "SRMEUR",
+      "controvalorioMediano": 589.5882248248132,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "SSV",
+      "coppia": "SSVEUR",
+      "controvalorioMediano": 115.02050864040001,
+      "incluso": false,
+      "motivo": "storia insufficiente: 159 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "ST",
+      "coppia": "STEUR",
+      "controvalorioMediano": 310.96858987716,
+      "incluso": false,
+      "motivo": "storia insufficiente: 528 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "STBL",
+      "coppia": "STBLEUR",
+      "controvalorioMediano": 61656.000344123604,
+      "incluso": false,
+      "motivo": "storia insufficiente: 317 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "STEP",
+      "coppia": "STEPEUR",
+      "controvalorioMediano": 251.29688004175898,
+      "incluso": false,
+      "motivo": "storia insufficiente: 313 giorni senza candela, il primo il 2025-07-05"
+    },
+    {
+      "base": "STG",
+      "coppia": "STGEUR",
+      "controvalorioMediano": 624.681583839192,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "STORJ",
+      "coppia": "STORJEUR",
+      "controvalorioMediano": 4591.0813818185,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "STRD",
+      "coppia": "STRDEUR",
+      "controvalorioMediano": 417.45412296,
+      "incluso": false,
+      "motivo": "storia insufficiente: 354 giorni senza candela, il primo il 2024-11-06"
+    },
+    {
+      "base": "STRK",
+      "coppia": "STRKEUR",
+      "controvalorioMediano": 11086.8833001475,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "STX",
+      "coppia": "STXEUR",
+      "controvalorioMediano": 22240.20321447339,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "SUI",
+      "coppia": "SUIEUR",
+      "controvalorioMediano": 858091.6537995749,
+      "incluso": true,
+      "motivo": "inclusa"
+    },
+    {
+      "base": "SUKU",
+      "coppia": "SUKUEUR",
+      "controvalorioMediano": 278.15938255699996,
+      "incluso": false,
+      "motivo": "storia insufficiente: 340 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "SUN",
+      "coppia": "SUNEUR",
+      "controvalorioMediano": 55.3351179591,
+      "incluso": false,
+      "motivo": "storia insufficiente: 156 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "SUNDOG",
+      "coppia": "SUNDOGEUR",
+      "controvalorioMediano": 54.9414710911,
+      "incluso": false,
+      "motivo": "storia insufficiente: 115 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "SUP",
+      "coppia": "SUPEUR",
+      "controvalorioMediano": 430.29870342276,
+      "incluso": false,
+      "motivo": "storia insufficiente: 459 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "SUPER",
+      "coppia": "SUPEREUR",
+      "controvalorioMediano": 6469.646316569662,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "SUSHI",
+      "coppia": "SUSHIEUR",
+      "controvalorioMediano": 14566.889932611588,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "SWARMS",
+      "coppia": "SWARMSEUR",
+      "controvalorioMediano": 130.4429708295,
+      "incluso": false,
+      "motivo": "storia insufficiente: 95 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "SWEAT",
+      "coppia": "SWEATEUR",
+      "controvalorioMediano": 357.48254545268,
+      "incluso": false,
+      "motivo": "storia insufficiente: 241 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "SWELL",
+      "coppia": "SWELLEUR",
+      "controvalorioMediano": 595.11195634852,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "SXT",
+      "coppia": "SXTEUR",
+      "controvalorioMediano": 3070.5472790803997,
+      "incluso": false,
+      "motivo": "storia insufficiente: 186 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "SYN",
+      "coppia": "SYNEUR",
+      "controvalorioMediano": 5898.041096016832,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "SYND",
+      "coppia": "SYNDEUR",
+      "controvalorioMediano": 1288.1449972415999,
+      "incluso": false,
+      "motivo": "storia insufficiente: 359 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "SYRUP",
+      "coppia": "SYRUPEUR",
+      "controvalorioMediano": 17028.7522729189,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "T",
+      "coppia": "TEUR",
+      "controvalorioMediano": 987.2129334704202,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "TAC",
+      "coppia": "TACEUR",
+      "controvalorioMediano": 132.3868417203,
+      "incluso": false,
+      "motivo": "storia insufficiente: 574 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "TAKE",
+      "coppia": "TAKEEUR",
+      "controvalorioMediano": 438.09768813,
+      "incluso": false,
+      "motivo": "storia insufficiente: 380 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "TANSSI",
+      "coppia": "TANSSIEUR",
+      "controvalorioMediano": 689.4257993176,
+      "incluso": false,
+      "motivo": "storia insufficiente: 553 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "TAO",
+      "coppia": "TAOEUR",
+      "controvalorioMediano": 694754.201379784,
+      "incluso": true,
+      "motivo": "inclusa"
+    },
+    {
+      "base": "TBTC",
+      "coppia": "TBTCEUR",
+      "controvalorioMediano": 161.383635385,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "TEER",
+      "coppia": "TEEREUR",
+      "controvalorioMediano": 523.935055144512,
+      "incluso": false,
+      "motivo": "storia insufficiente: 309 giorni senza candela, il primo il 2025-03-16"
+    },
+    {
+      "base": "TEL",
+      "coppia": "TELEUR",
+      "controvalorioMediano": 6056.921131841679,
+      "incluso": false,
+      "motivo": "storia insufficiente: 445 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "TERM",
+      "coppia": "TERMEUR",
+      "controvalorioMediano": 27.960581251999997,
+      "incluso": false,
+      "motivo": "storia insufficiente: 634 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "THQ",
+      "coppia": "THQEUR",
+      "controvalorioMediano": 2207.1951108309,
+      "incluso": false,
+      "motivo": "storia insufficiente: 408 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "TIA",
+      "coppia": "TIAEUR",
+      "controvalorioMediano": 43014.967945885,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "TITCOIN",
+      "coppia": "TITCOINEUR",
+      "controvalorioMediano": 964.1416783834001,
+      "incluso": false,
+      "motivo": "storia insufficiente: 458 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "TLM",
+      "coppia": "TLMEUR",
+      "controvalorioMediano": 878.6681138568714,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "TNSR",
+      "coppia": "TNSREUR",
+      "controvalorioMediano": 2057.70263085,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "TOKE",
+      "coppia": "TOKEEUR",
+      "controvalorioMediano": 68.124675640476,
+      "incluso": false,
+      "motivo": "storia insufficiente: 319 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "TOKEN",
+      "coppia": "TOKENEUR",
+      "controvalorioMediano": 246.29836789639998,
+      "incluso": false,
+      "motivo": "storia insufficiente: 73 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "TON",
+      "coppia": "TONEUR",
+      "controvalorioMediano": 82173.20538606,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "TOSHI",
+      "coppia": "TOSHIEUR",
+      "controvalorioMediano": 1834.41091025115,
+      "incluso": false,
+      "motivo": "storia insufficiente: 110 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "TRAC",
+      "coppia": "TRACEUR",
+      "controvalorioMediano": 14054.807430571,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "TREE",
+      "coppia": "TREEEUR",
+      "controvalorioMediano": 1336.942511619,
+      "incluso": false,
+      "motivo": "storia insufficiente: 268 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "TREMP",
+      "coppia": "TREMPEUR",
+      "controvalorioMediano": 116.15135779120001,
+      "incluso": false,
+      "motivo": "storia insufficiente: 332 giorni senza candela, il primo il 2025-03-08"
+    },
+    {
+      "base": "TRIA",
+      "coppia": "TRIAEUR",
+      "controvalorioMediano": 8199.292185731536,
+      "incluso": false,
+      "motivo": "storia insufficiente: 457 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "TRIBE",
+      "coppia": "TRIBEEUR",
+      "controvalorioMediano": 0,
+      "incluso": false,
+      "motivo": "storia insufficiente: 728 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "TRU",
+      "coppia": "TRUEUR",
+      "controvalorioMediano": 1176.9030075260325,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "TRUMP",
+      "coppia": "TRUMPEUR",
+      "controvalorioMediano": 50322.60111347999,
+      "incluso": false,
+      "motivo": "storia insufficiente: 76 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "TRUST",
+      "coppia": "TRUSTEUR",
+      "controvalorioMediano": 5571.1168802327,
+      "incluso": false,
+      "motivo": "storia insufficiente: 367 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "TRX",
+      "coppia": "TRXEUR",
+      "controvalorioMediano": 657394.3679624179,
+      "incluso": true,
+      "motivo": "inclusa"
+    },
+    {
+      "base": "TURBO",
+      "coppia": "TURBOEUR",
+      "controvalorioMediano": 6632.205966650335,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "TUSD",
+      "coppia": "TUSDEUR",
+      "controvalorioMediano": 0,
+      "incluso": false,
+      "motivo": "stablecoin o token ancorato a una valuta"
+    },
+    {
+      "base": "TVK",
+      "coppia": "TVKEUR",
+      "controvalorioMediano": 0,
+      "incluso": false,
+      "motivo": "storia insufficiente: 513 giorni senza candela, il primo il 2025-02-16"
+    },
+    {
+      "base": "TX",
+      "coppia": "TXEUR",
+      "controvalorioMediano": 2378.8850718447047,
+      "incluso": false,
+      "motivo": "storia insufficiente: 488 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "U",
+      "coppia": "UEUR",
+      "controvalorioMediano": 910.1087418297,
+      "incluso": false,
+      "motivo": "storia insufficiente: 305 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "U2U",
+      "coppia": "U2UEUR",
+      "controvalorioMediano": 226.620252528,
+      "incluso": false,
+      "motivo": "storia insufficiente: 678 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "UAI",
+      "coppia": "UAIEUR",
+      "controvalorioMediano": 11305.60684392175,
+      "incluso": false,
+      "motivo": "storia insufficiente: 368 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "UFD",
+      "coppia": "UFDEUR",
+      "controvalorioMediano": 89.2741104,
+      "incluso": false,
+      "motivo": "storia insufficiente: 127 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "UMA",
+      "coppia": "UMAEUR",
+      "controvalorioMediano": 1471.40474182494,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "UNFI",
+      "coppia": "UNFIEUR",
+      "controvalorioMediano": 211.46085184,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "UNI",
+      "coppia": "UNIEUR",
+      "controvalorioMediano": 266436.666901775,
+      "incluso": true,
+      "motivo": "inclusa"
+    },
+    {
+      "base": "UNITE",
+      "coppia": "UNITEEUR",
+      "controvalorioMediano": 572.80701043916,
+      "incluso": false,
+      "motivo": "storia insufficiente: 574 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "UP",
+      "coppia": "UPEUR",
+      "controvalorioMediano": 3899.0446332821502,
+      "incluso": false,
+      "motivo": "storia insufficiente: 464 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "US",
+      "coppia": "USEUR",
+      "controvalorioMediano": 363.54355437625,
+      "incluso": false,
+      "motivo": "storia insufficiente: 403 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "USDC",
+      "coppia": "USDCEUR",
+      "controvalorioMediano": 86400924.5134364,
+      "incluso": false,
+      "motivo": "stablecoin o token ancorato a una valuta"
+    },
+    {
+      "base": "USDD",
+      "coppia": "USDDEUR",
+      "controvalorioMediano": 101.89983526,
+      "incluso": false,
+      "motivo": "stablecoin o token ancorato a una valuta"
+    },
+    {
+      "base": "USDE",
+      "coppia": "USDEEUR",
+      "controvalorioMediano": 20951.795031696,
+      "incluso": false,
+      "motivo": "stablecoin o token ancorato a una valuta"
+    },
+    {
+      "base": "USDG",
+      "coppia": "USDGEUR",
+      "controvalorioMediano": 0,
+      "incluso": false,
+      "motivo": "stablecoin o token ancorato a una valuta"
+    },
+    {
+      "base": "USDQ",
+      "coppia": "USDQEUR",
+      "controvalorioMediano": 99.71801835,
+      "incluso": false,
+      "motivo": "stablecoin o token ancorato a una valuta"
+    },
+    {
+      "base": "USDR",
+      "coppia": "USDREUR",
+      "controvalorioMediano": 165.98145528700002,
+      "incluso": false,
+      "motivo": "stablecoin o token ancorato a una valuta"
+    },
+    {
+      "base": "USDS",
+      "coppia": "USDSEUR",
+      "controvalorioMediano": 19.5121948709,
+      "incluso": false,
+      "motivo": "stablecoin o token ancorato a una valuta"
+    },
+    {
+      "base": "USDT",
+      "coppia": "USDTEUR",
+      "controvalorioMediano": 48856861.453632146,
+      "incluso": false,
+      "motivo": "stablecoin o token ancorato a una valuta"
+    },
+    {
+      "base": "USDUC",
+      "coppia": "USDUCEUR",
+      "controvalorioMediano": 492.8838872,
+      "incluso": false,
+      "motivo": "storia insufficiente: 241 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "USELESS",
+      "coppia": "USELESSEUR",
+      "controvalorioMediano": 94329.16167339,
+      "incluso": false,
+      "motivo": "storia insufficiente: 283 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "UST",
+      "coppia": "USTEUR",
+      "controvalorioMediano": 0,
+      "incluso": false,
+      "motivo": "stablecoin o token ancorato a una valuta"
+    },
+    {
+      "base": "USUAL",
+      "coppia": "USUALEUR",
+      "controvalorioMediano": 3124.087697925,
+      "incluso": false,
+      "motivo": "storia insufficiente: 88 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "UXLINK",
+      "coppia": "UXLINKEUR",
+      "controvalorioMediano": 172.33434775799998,
+      "incluso": false,
+      "motivo": "storia insufficiente: 689 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "VANRY",
+      "coppia": "VANRYEUR",
+      "controvalorioMediano": 494.4314102797,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "VELO",
+      "coppia": "VELOEUR",
+      "controvalorioMediano": 3262.92006139134,
+      "incluso": false,
+      "motivo": "storia insufficiente: 499 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "VELODROME",
+      "coppia": "VELODROMEEUR",
+      "controvalorioMediano": 130.525185295,
+      "incluso": false,
+      "motivo": "storia insufficiente: 107 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "VERSE",
+      "coppia": "VERSEEUR",
+      "controvalorioMediano": 64.5147958445,
+      "incluso": false,
+      "motivo": "storia insufficiente: 685 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "VET",
+      "coppia": "VETEUR",
+      "controvalorioMediano": 7691.8535701434,
+      "incluso": false,
+      "motivo": "storia insufficiente: 425 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "VFY",
+      "coppia": "VFYEUR",
+      "controvalorioMediano": 432.25886524199996,
+      "incluso": false,
+      "motivo": "storia insufficiente: 353 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "VINE",
+      "coppia": "VINEEUR",
+      "controvalorioMediano": 1263.8901548998,
+      "incluso": false,
+      "motivo": "storia insufficiente: 93 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "VIRTUAL",
+      "coppia": "VIRTUALEUR",
+      "controvalorioMediano": 33705.6044501,
+      "incluso": false,
+      "motivo": "storia insufficiente: 101 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "VSN",
+      "coppia": "VSNEUR",
+      "controvalorioMediano": 18014.254905799702,
+      "incluso": false,
+      "motivo": "storia insufficiente: 255 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "VTHO",
+      "coppia": "VTHOEUR",
+      "controvalorioMediano": 286.6643616984,
+      "incluso": false,
+      "motivo": "storia insufficiente: 432 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "VULT",
+      "coppia": "VULTEUR",
+      "controvalorioMediano": 145.900466903,
+      "incluso": false,
+      "motivo": "storia insufficiente: 359 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "VVV",
+      "coppia": "VVVEUR",
+      "controvalorioMediano": 86126.07545088,
+      "incluso": false,
+      "motivo": "storia insufficiente: 116 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "W",
+      "coppia": "WEUR",
+      "controvalorioMediano": 23973.751755456,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "WAL",
+      "coppia": "WALEUR",
+      "controvalorioMediano": 1149.70310102045,
+      "incluso": false,
+      "motivo": "storia insufficiente: 144 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "WARD",
+      "coppia": "WARDEUR",
+      "controvalorioMediano": 1619.5772499864,
+      "incluso": false,
+      "motivo": "storia insufficiente: 458 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "WAVES",
+      "coppia": "WAVESEUR",
+      "controvalorioMediano": 0,
+      "incluso": false,
+      "motivo": "storia insufficiente: 728 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "WAXL",
+      "coppia": "WAXLEUR",
+      "controvalorioMediano": 1347.0843096570002,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "WBT",
+      "coppia": "WBTEUR",
+      "controvalorioMediano": 4161.1810244125,
+      "incluso": false,
+      "motivo": "storia insufficiente: 487 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "WBTC",
+      "coppia": "WBTCEUR",
+      "controvalorioMediano": 4139.961503568001,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "WCT",
+      "coppia": "WCTEUR",
+      "controvalorioMediano": 2921.70713607625,
+      "incluso": false,
+      "motivo": "storia insufficiente: 163 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "WELL",
+      "coppia": "WELLEUR",
+      "controvalorioMediano": 1094.2010838534,
+      "incluso": false,
+      "motivo": "storia insufficiente: 115 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "WEN",
+      "coppia": "WENEUR",
+      "controvalorioMediano": 1206.1810313219291,
+      "incluso": false,
+      "motivo": "storia insufficiente: 304 giorni senza candela, il primo il 2026-01-01"
+    },
+    {
+      "base": "WFB",
+      "coppia": "WFBEUR",
+      "controvalorioMediano": 91.1953849525,
+      "incluso": false,
+      "motivo": "storia insufficiente: 492 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "WIF",
+      "coppia": "WIFEUR",
+      "controvalorioMediano": 65442.01941798401,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "WIN",
+      "coppia": "WINEUR",
+      "controvalorioMediano": 425.37781030382837,
+      "incluso": false,
+      "motivo": "storia insufficiente: 156 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "WLD",
+      "coppia": "WLDEUR",
+      "controvalorioMediano": 47754.796034229,
+      "incluso": false,
+      "motivo": "storia insufficiente: 122 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "WLFI",
+      "coppia": "WLFIEUR",
+      "controvalorioMediano": 29247.384110844003,
+      "incluso": false,
+      "motivo": "storia insufficiente: 302 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "WMTX",
+      "coppia": "WMTXEUR",
+      "controvalorioMediano": 467.06253892719997,
+      "incluso": false,
+      "motivo": "storia insufficiente: 305 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "WOO",
+      "coppia": "WOOEUR",
+      "controvalorioMediano": 1967.507349366295,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "XAN",
+      "coppia": "XANEUR",
+      "controvalorioMediano": 10267.04688236555,
+      "incluso": false,
+      "motivo": "storia insufficiente: 330 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "XBT",
+      "coppia": "XBTEUR",
+      "controvalorioMediano": 28558938.08441135,
+      "incluso": true,
+      "motivo": "inclusa"
+    },
+    {
+      "base": "XCN",
+      "coppia": "XCNEUR",
+      "controvalorioMediano": 20455.33256893236,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "XDC",
+      "coppia": "XDCEUR",
+      "controvalorioMediano": 198404.31770199028,
+      "incluso": false,
+      "motivo": "storia insufficiente: 303 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "XDG",
+      "coppia": "XDGEUR",
+      "controvalorioMediano": 972238.5019939365,
+      "incluso": true,
+      "motivo": "inclusa"
+    },
+    {
+      "base": "XION",
+      "coppia": "XIONEUR",
+      "controvalorioMediano": 498.37473400550004,
+      "incluso": false,
+      "motivo": "storia insufficiente: 313 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "XL1",
+      "coppia": "XL1EUR",
+      "controvalorioMediano": 344.013861256975,
+      "incluso": false,
+      "motivo": "storia insufficiente: 317 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "XLM",
+      "coppia": "XLMEUR",
+      "controvalorioMediano": 315254.140048089,
+      "incluso": true,
+      "motivo": "inclusa"
+    },
+    {
+      "base": "XMN",
+      "coppia": "XMNEUR",
+      "controvalorioMediano": 8328.6478382085,
+      "incluso": false,
+      "motivo": "storia insufficiente: 340 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "XMR",
+      "coppia": "XMREUR",
+      "controvalorioMediano": 123867.1533068864,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "XNAP",
+      "coppia": "XNAPEUR",
+      "controvalorioMediano": 1601.6476237134998,
+      "incluso": false,
+      "motivo": "storia insufficiente: 665 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "XNY",
+      "coppia": "XNYEUR",
+      "controvalorioMediano": 15822.27448751558,
+      "incluso": false,
+      "motivo": "storia insufficiente: 264 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "XPL",
+      "coppia": "XPLEUR",
+      "controvalorioMediano": 104670.768080995,
+      "incluso": false,
+      "motivo": "storia insufficiente: 326 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "XRP",
+      "coppia": "XRPEUR",
+      "controvalorioMediano": 5255593.464897938,
+      "incluso": true,
+      "motivo": "inclusa"
+    },
+    {
+      "base": "XRT",
+      "coppia": "XRTEUR",
+      "controvalorioMediano": 1038.1831237701,
+      "incluso": false,
+      "motivo": "storia insufficiente: 304 giorni senza candela, il primo il 2026-01-01"
+    },
+    {
+      "base": "XTER",
+      "coppia": "XTEREUR",
+      "controvalorioMediano": 145.92171922785,
+      "incluso": false,
+      "motivo": "storia insufficiente: 276 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "XTZ",
+      "coppia": "XTZEUR",
+      "controvalorioMediano": 25317.930141386027,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "XU3O8",
+      "coppia": "XU3O8EUR",
+      "controvalorioMediano": 69.16337184,
+      "incluso": false,
+      "motivo": "storia insufficiente: 667 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "XYO",
+      "coppia": "XYOEUR",
+      "controvalorioMediano": 1551.3942131835647,
+      "incluso": false,
+      "motivo": "storia insufficiente: 283 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "YALA",
+      "coppia": "YALAEUR",
+      "controvalorioMediano": 2087.2497500046366,
+      "incluso": false,
+      "motivo": "storia insufficiente: 352 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "YB",
+      "coppia": "YBEUR",
+      "controvalorioMediano": 1110.4981764822,
+      "incluso": false,
+      "motivo": "storia insufficiente: 346 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "YFI",
+      "coppia": "YFIEUR",
+      "controvalorioMediano": 12758.60712936,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "YGG",
+      "coppia": "YGGEUR",
+      "controvalorioMediano": 670.340990834062,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "ZAMA",
+      "coppia": "ZAMAEUR",
+      "controvalorioMediano": 16566.303780380098,
+      "incluso": false,
+      "motivo": "storia insufficiente: 456 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "ZBCN",
+      "coppia": "ZBCNEUR",
+      "controvalorioMediano": 4446.54837218866,
+      "incluso": false,
+      "motivo": "storia insufficiente: 346 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "ZBT",
+      "coppia": "ZBTEUR",
+      "controvalorioMediano": 3975.8567691024,
+      "incluso": false,
+      "motivo": "storia insufficiente: 348 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "ZEC",
+      "coppia": "ZECEUR",
+      "controvalorioMediano": 1766522.996010219,
+      "incluso": true,
+      "motivo": "inclusa"
+    },
+    {
+      "base": "ZEREBRO",
+      "coppia": "ZEREBROEUR",
+      "controvalorioMediano": 5758.76623263,
+      "incluso": false,
+      "motivo": "storia insufficiente: 85 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "ZETA",
+      "coppia": "ZETAEUR",
+      "controvalorioMediano": 335.03997972,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "ZEUS",
+      "coppia": "ZEUSEUR",
+      "controvalorioMediano": 1713.6571227222998,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "ZEX",
+      "coppia": "ZEXEUR",
+      "controvalorioMediano": 348.97385492275,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "ZIG",
+      "coppia": "ZIGEUR",
+      "controvalorioMediano": 6912.658830532,
+      "incluso": false,
+      "motivo": "storia insufficiente: 306 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "ZK",
+      "coppia": "ZKEUR",
+      "controvalorioMediano": 2999.06961162,
+      "incluso": false,
+      "motivo": "doppione di K"
+    },
+    {
+      "base": "ZKP",
+      "coppia": "ZKPEUR",
+      "controvalorioMediano": 3773.9935117458,
+      "incluso": false,
+      "motivo": "storia insufficiente: 411 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "ZORA",
+      "coppia": "ZORAEUR",
+      "controvalorioMediano": 2363.2826489906347,
+      "incluso": false,
+      "motivo": "storia insufficiente: 171 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "ZRC",
+      "coppia": "ZRCEUR",
+      "controvalorioMediano": 690.9356538527101,
+      "incluso": false,
+      "motivo": "storia insufficiente: 360 giorni senza candela, il primo il 2024-11-03"
+    },
+    {
+      "base": "ZRO",
+      "coppia": "ZROEUR",
+      "controvalorioMediano": 45507.548219640004,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    },
+    {
+      "base": "ZRX",
+      "coppia": "ZRXEUR",
+      "controvalorioMediano": 10485.802139006502,
+      "incluso": false,
+      "motivo": "fuori dalle prime 20 per liquidità 2020"
+    }
+  ],
+  "richiesteAPI": {
+    "coppie": 649,
+    "errori": [
+      "AGLDEUR: EQuery:Invalid asset pair",
+      "AI16ZEUR: EQuery:Invalid asset pair",
+      "AIREUR: EQuery:Invalid asset pair",
+      "ALMANAKEUR: EQuery:Invalid asset pair",
+      "ANLOGEUR: EQuery:Invalid asset pair",
+      "ANTEUR: EQuery:Invalid asset pair",
+      "ARTEUR: EQuery:Invalid asset pair",
+      "ASRREUR: EQuery:Invalid asset pair",
+      "ATLASEUR: EQuery:Invalid asset pair",
+      "AURAEUR: EQuery:Invalid asset pair",
+      "AVAAIEUR: EQuery:Invalid asset pair",
+      "BITEUR: EQuery:Invalid asset pair",
+      "BLZEUR: EQuery:Invalid asset pair",
+      "BONDEUR: EQuery:Invalid asset pair",
+      "BRICKEUR: EQuery:Invalid asset pair",
+      "BSXEUR: EQuery:Invalid asset pair",
+      "C98EUR: EQuery:Invalid asset pair",
+      "CHECKEUR: EQuery:Invalid asset pair",
+      "CLOUDEUR: EQuery:Invalid asset pair",
+      "CLVEUR: EQuery:Invalid asset pair",
+      "CORNEUR: EQuery:Invalid asset pair",
+      "CSMEUR: EQuery:Invalid asset pair",
+      "EOSEUR: EQuery:Invalid asset pair",
+      "ESXEUR: EQuery:Invalid asset pair",
+      "ETHWEUR: EQuery:Invalid asset pair",
+      "EURTEUR: EQuery:Invalid asset pair",
+      "FARMEUR: EQuery:Invalid asset pair",
+      "FFEUR: EQuery:Invalid asset pair",
+      "FLYEUR: EQuery:Invalid asset pair",
+      "FOLKSEUR: EQuery:Invalid asset pair",
+      "FTMEUR: EQuery:Invalid asset pair",
+      "GALEUR: EQuery:Invalid asset pair",
+      "GARIEUR: EQuery:Invalid asset pair",
+      "GEUR: EQuery:Invalid asset pair",
+      "HEUR: EQuery:Invalid asset pair",
+      "HOLOEUR: EQuery:Invalid asset pair",
+      "ICXEUR: EQuery:Invalid asset pair",
+      "INTREUR: EQuery:Invalid asset pair",
+      "JAILSTOOLEUR: EQuery:Invalid asset pair",
+      "KAREUR: EQuery:Invalid asset pair",
+      "KEEPEUR: EQuery:Invalid asset pair",
+      "KETEUR: EQuery:Invalid asset pair",
+      "KEUR: EQuery:Invalid asset pair",
+      "KGENEUR: EQuery:Invalid asset pair",
+      "KILTEUR: EQuery:Invalid asset pair",
+      "KINTEUR: EQuery:Invalid asset pair",
+      "KUJIEUR: EQuery:Invalid asset pair",
+      "L3EUR: EQuery:Invalid asset pair",
+      "LSETHEUR: EQuery:Invalid asset pair",
+      "LUNA2EUR: EQuery:Invalid asset pair",
+      "MATICEUR: EQuery:Invalid asset pair",
+      "MCEUR: EQuery:Invalid asset pair",
+      "MICHIEUR: EQuery:Invalid asset pair",
+      "MIRROREUR: EQuery:Invalid asset pair",
+      "MKREUR: EQuery:Invalid asset pair",
+      "MOONEUR: EQuery:Invalid asset pair",
+      "MOVEEUR: EQuery:Invalid asset pair",
+      "MPLEUR: EQuery:Invalid asset pair",
+      "MUBARAKEUR: EQuery:Invalid asset pair",
+      "MVEUR: EQuery:Invalid asset pair",
+      "MXCEUR: EQuery:Invalid asset pair",
+      "NODLEUR: EQuery:Invalid asset pair",
+      "NYMEUR: EQuery:Invalid asset pair",
+      "ODOSEUR: EQuery:Invalid asset pair",
+      "OMEUR: EQuery:Invalid asset pair",
+      "OMNIEUR: EQuery:Invalid asset pair",
+      "ORDEREUR: EQuery:Invalid asset pair",
+      "OXYEUR: EQuery:Invalid asset pair",
+      "PARAEUR: EQuery:Invalid asset pair",
+      "PDAEUR: EQuery:Invalid asset pair",
+      "PLAEUR: EQuery:Invalid asset pair",
+      "PLANCKEUR: EQuery:Invalid asset pair",
+      "PSTAKEEUR: EQuery:Invalid asset pair",
+      "PYUSDEUR: EQuery:Invalid asset pair",
+      "QIEUR: EQuery:Invalid asset pair",
+      "RAIINEUR: EQuery:Invalid asset pair",
+      "RBCEUR: EQuery:Invalid asset pair",
+      "REPEUR: EQuery:Invalid asset pair",
+      "REPV2EUR: EQuery:Invalid asset pair",
+      "RETARDIOEUR: EQuery:Invalid asset pair",
+      "RHEAEUR: EQuery:Invalid asset pair",
+      "RNDREUR: EQuery:Invalid asset pair",
+      "ROOKEUR: EQuery:Invalid asset pair",
+      "SAROSEUR: EQuery:Invalid asset pair",
+      "SCAEUR: EQuery:Invalid asset pair",
+      "SDNEUR: EQuery:Invalid asset pair",
+      "SOGNIEUR: EQuery:Invalid asset pair",
+      "SONICEUR: EQuery:Invalid asset pair",
+      "SPICEEUR: EQuery:Invalid asset pair",
+      "STEPEUR: EQuery:Invalid asset pair",
+      "STRDEUR: EQuery:Invalid asset pair",
+      "TACEUR: EQuery:Invalid asset pair",
+      "TANSSIEUR: EQuery:Invalid asset pair",
+      "TEEREUR: EQuery:Invalid asset pair",
+      "TERMEUR: EQuery:Invalid asset pair",
+      "TITCOINEUR: EQuery:Invalid asset pair",
+      "TOKEEUR: EQuery:Invalid asset pair",
+      "TREMPEUR: EQuery:Invalid asset pair",
+      "TRIBEEUR: EQuery:Invalid asset pair",
+      "TUSDEUR: EQuery:Invalid asset pair",
+      "TVKEUR: EQuery:Invalid asset pair",
+      "U2UEUR: EQuery:Invalid asset pair",
+      "UNITEEUR: EQuery:Invalid asset pair",
+      "USDGEUR: EQuery:Invalid asset pair",
+      "USDQEUR: EQuery:Invalid asset pair",
+      "USTEUR: EQuery:Invalid asset pair",
+      "UXLINKEUR: EQuery:Invalid asset pair",
+      "VERSEEUR: EQuery:Invalid asset pair",
+      "WAVESEUR: EQuery:Invalid asset pair",
+      "WENEUR: EQuery:Invalid asset pair",
+      "XNAPEUR: EQuery:Invalid asset pair",
+      "XRTEUR: EQuery:Invalid asset pair"
+    ]
+  }
+}

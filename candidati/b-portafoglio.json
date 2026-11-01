@@ -1,0 +1,44 @@
+{
+  "nome": "b-portafoglio",
+  "tipo": "settimanale",
+  "portafoglio": true,
+  "variante": "B",
+  "settimaneDentro": 1,
+  "percentile": 0.8,
+  "metodoPercentile": "R7",
+  "lato": "lungo",
+  "partenza": "2026-11-02",
+  "coppie": [
+    "AAVEEUR",
+    "ADAEUR",
+    "AVAXEUR",
+    "BCHEUR",
+    "DOTEUR",
+    "ETHEUR",
+    "LINKEUR",
+    "LTCEUR",
+    "NEAREUR",
+    "PAXGEUR",
+    "SOLEUR",
+    "SUIEUR",
+    "TAOEUR",
+    "TRXEUR",
+    "UNIEUR",
+    "XBTEUR",
+    "XDGEUR",
+    "XLMEUR",
+    "XRPEUR",
+    "ZECEUR"
+  ],
+  "costi": {
+    "commissionePercentoPerLato": 0.1,
+    "slippagePercento": 0.05
+  },
+  "rischio": {
+    "quotaCapitalePercento": 100,
+    "posizioniMassime": 1,
+    "perditaMassimaGiornalieraPercento": 6
+  },
+  "fonte": "Liu e Tsyvinski (2021), NBER w24877; regola identica a liu-b. Prova in avanti su carta pre-registrata in registro/esperimenti.md.",
+  "stato": "candidata: non in esecuzione. Il giro la legge solo dopo lo spostamento in strategie/, fatto a mano con un commit."
+}
