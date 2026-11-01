@@ -1,0 +1,15 @@
+{
+  "configurazione": {
+    "capitaleIniziale": 100,
+    "mercato": "TRXEUR",
+    "intervalloCandele": 1440,
+    "fusoOrario": "Europe/Rome"
+  },
+  "capitale": 100,
+  "posizione": null,
+  "operazioni": [],
+  "istantanee": [],
+  "benchmark": {},
+  "blocchi": [],
+  "lacune": []
+}
