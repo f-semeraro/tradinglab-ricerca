@@ -57,15 +57,19 @@ function unisci(...liste) {
 
 async function main() {
   const partenza = process.argv[2];
+  const datiFinoA = process.argv[3]; // facoltativo: ultimo giorno dei dati, AAAA-MM-GG; di default, il giorno prima della partenza
   if (!partenza || !/^\d{4}-\d{2}-\d{2}$/.test(partenza)) {
-    throw new Error("uso: node scripts/b-portafoglio-universo.js AAAA-MM-GG (il lunedì di partenza)");
+    throw new Error("uso: node scripts/b-portafoglio-universo.js AAAA-MM-GG [AAAA-MM-GG: dati fino a] (il lunedì di partenza)");
   }
   if (new Date(`${partenza}T00:00:00Z`).getUTCDay() !== 1) throw new Error(`${partenza} non è un lunedì`);
 
   const inizioPartenza = Date.parse(partenza);
-  const inizioStoria = inizioPartenza - 728 * GIORNO; // 104 settimane complete prima della partenza
-  const inizioLiquidita = inizioPartenza - 365 * GIORNO; // 365 giorni prima della partenza
-  const fineFinestra = inizioPartenza - GIORNO; // ultimo giorno incluso: il giorno prima della partenza
+  if (datiFinoA !== undefined && !/^\d{4}-\d{2}-\d{2}$/.test(datiFinoA)) throw new Error(`«dati fino a» non è AAAA-MM-GG: ${datiFinoA}`);
+  // ultimo giorno incluso: il giorno prima della partenza, salvo una data indicata; storia e liquidità finiscono lì
+  const fineFinestra = datiFinoA === undefined ? inizioPartenza - GIORNO : Date.parse(`${datiFinoA}T00:00:00Z`);
+  if (!(fineFinestra < inizioPartenza)) throw new Error("i dati devono finire prima della partenza");
+  const inizioStoria = fineFinestra - 727 * GIORNO; // 104 settimane complete, fino all'ultimo giorno dei dati
+  const inizioLiquidita = fineFinestra - 364 * GIORNO; // 365 giorni, fino all'ultimo giorno dei dati
 
   const nomi = fs.readdirSync(CARTELLA_ARCHIVIO)
     .filter((f) => f.endsWith("_1440.csv"))
@@ -79,7 +83,8 @@ async function main() {
     if (i > 0) await sleep(PAUSA_MS);
     const risposta = await candeleChiuse({ coppia: nome, intervalloMinuti: 1440, adessoMs: Date.now() });
     if (risposta.errore) errori.push(`${nome}: ${risposta.errore}`);
-    const candele = unisci(leggiArchivio(nome), risposta.candele);
+    // nessuna candela oltre l'ultimo giorno dei dati: anche se il giro parte più tardi
+    const candele = unisci(leggiArchivio(nome), risposta.candele).filter((c) => c.momento * 1000 <= fineFinestra);
     candelePerCoppia.set(nome, candele);
 
     const presenti = new Set(candele.map((c) => iso(c.momento * 1000)));
@@ -107,8 +112,8 @@ async function main() {
     partenza,
     regole: {
       coppie: "EUR di Kraken, Bitcoin compreso; stablecoin, valute tradizionali e doppioni esclusi",
-      storia: `al massimo ${MAX_MANCANTI} giorni senza candela nei 728 giorni prima della partenza`,
-      liquidita: "le prime 20 per controvalore mediano giornaliero nei 365 giorni prima della partenza"
+      storia: `al massimo ${MAX_MANCANTI} giorni senza candela nei 728 giorni fino al ${iso(fineFinestra)} compreso`,
+      liquidita: `le prime 20 per controvalore mediano giornaliero nei 365 giorni fino al ${iso(fineFinestra)} compreso`
     },
     incluse: incluse.map((r) => ({ base: r.base, coppia: r.coppia, controvalorioMediano: r.mediana2020 })),
     considerate: considerate.map((r) => ({ base: r.base, coppia: r.coppia, controvalorioMediano: r.mediana2020, incluso: r.incluso, motivo: r.motivo })),

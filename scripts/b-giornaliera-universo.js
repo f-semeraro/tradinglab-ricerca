@@ -3,7 +3,7 @@
  *
  *     node scripts/b-giornaliera-universo.js
  *
- * Si lancia una volta sola, il lunedì 26 ottobre 2026, dopo scripts/b-portafoglio-universo.js. Non seleziona nulla:
+ * Si lancia una volta sola, il lunedì 2 novembre 2026 (domenica 1 novembre, con dati fino a sabato 31 ottobre), dopo scripts/b-portafoglio-universo.js. Non seleziona nulla:
  * legge le monete da candidati/b-portafoglio-universo.json e, se il file non c'è o è di un'altra data, si ferma.
  * Per ogni moneta costruisce la storia giornaliera: archivio Kraken più una richiesta API (le ultime 720 candele).
  * Scrive dati/giornaliere/<COPPIA>.csv, la strategia in candidati/b-giornaliera.json e
@@ -22,7 +22,8 @@ const RADICE = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const daRadice = (...parti) => path.join(RADICE, ...parti);
 const CARTELLA_ARCHIVIO = daRadice("dati", "archivio", "b-universo-2020");
 
-const PARTENZA = "2026-10-26";
+const PARTENZA = "2026-11-02";
+const DATI_FINO_A = "2026-10-31"; // ultimo giorno dei dati, come per l'universo di liu-b
 const PAUSA_MS = 1000; // Kraken è pubblico: una richiesta al secondo
 const GIORNO = 86400000;
 const iso = (ms) => new Date(ms).toISOString().slice(0, 10);
@@ -41,7 +42,7 @@ function leggiArchivio(coppia) {
 async function main() {
   const universoPath = daRadice("candidati", "b-portafoglio-universo.json");
   if (!fs.existsSync(universoPath)) {
-    throw new Error("manca candidati/b-portafoglio-universo.json: lancia prima scripts/b-portafoglio-universo.js per il 26 ottobre 2026");
+    throw new Error("manca candidati/b-portafoglio-universo.json: lancia prima node scripts/b-portafoglio-universo.js 2026-11-02 2026-10-31 (per il 2 novembre 2026)");
   }
   const universo = JSON.parse(fs.readFileSync(universoPath, "utf8"));
   if (universo.partenza !== PARTENZA) throw new Error(`l'universo è per ${universo.partenza}, non per ${PARTENZA}`);
@@ -78,7 +79,7 @@ async function main() {
     if (!archivio && risposta.candele.length === 0) throw new Error(`${coppia}: né archivio né API, storia non costruita`);
 
     const dallArchivio = aggiornaStoriaGiornaliera([], archivio ?? []);
-    const storia = aggiornaStoriaGiornaliera(dallArchivio, risposta.candele);
+    const storia = aggiornaStoriaGiornaliera(dallArchivio, risposta.candele).filter((r) => r.data <= DATI_FINO_A);
     scriviStoriaSettimanale(daRadice("dati", "giornaliere", `${coppia}.csv`), storia);
     // la richiesta di oggi è già fatta: il giro non ne fa un'altra questo stesso giorno
     scriviJson(daRadice("dati", "giornaliere", `${coppia}.richieste.json`), { ultimoTentativo: oggi });

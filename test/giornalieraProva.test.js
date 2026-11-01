@@ -27,9 +27,9 @@ test("esposizione: con primaDecisione nessuna posizione prima di quel giorno", (
   assert.ok(expo.every((x) => x === 0), "nessun ingresso prima del giorno 40");
 });
 
-test("richiestaGiornalieraDaFare: una richiesta al giorno, dopo le 01:00 UTC, anche se fallisce", () => {
+test("richiestaGiornalieraDaFare: una richiesta al giorno, dalle 00:00 UTC, anche se fallisce", () => {
   const ore = (h) => Date.parse("2026-10-26T00:00:00Z") + h * 3600000;
-  assert.equal(richiestaGiornalieraDaFare({ adessoMs: ore(0.5), ultimoTentativo: null }).fare, false);
+  assert.equal(richiestaGiornalieraDaFare({ adessoMs: ore(0.5), ultimoTentativo: null }).fare, true);
   assert.equal(richiestaGiornalieraDaFare({ adessoMs: ore(1.2), ultimoTentativo: null }).fare, true);
   assert.equal(richiestaGiornalieraDaFare({ adessoMs: ore(1.2), ultimoTentativo: "2026-10-26" }).fare, false);
   assert.equal(richiestaGiornalieraDaFare({ adessoMs: ore(25), ultimoTentativo: "2026-10-26" }).fare, true);
