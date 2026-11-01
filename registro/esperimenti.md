@@ -290,6 +290,13 @@ Scritta il 24 ottobre 2026, prima di qualsiasi calcolo su questo universo. Test 
 
 ## Pre-registrazione: prova in avanti su carta della regola B su un portafoglio di monete
 
+**Correzione del 1 novembre 2026, prima dell'universo e dell'attivazione.** La partenza si sposta da lunedì 26 ottobre a lunedì 2 novembre 2026, con lo slittamento che questa pre-registrazione già prevede («se si slitta, la partenza diventa il lunedì successivo»). Motivo: il laboratorio non sarà disponibile lunedì, e la pre-registrazione chiede che costruzione e attivazione avvengano lo stesso giorno. Cambia solo questo:
+- Universo: si costruisce domenica 1 novembre 2026, dopo le 00:00 UTC e prima delle 00:00 UTC di lunedì 2 novembre, con dati fino a sabato 31 ottobre compreso. La storia di 104 settimane (728 giorni) e la liquidità di 365 giorni finiscono entrambe il 31 ottobre.
+- Attivazione: la stessa sera, prima delle 00:00 UTC di lunedì 2 novembre.
+- Prezzo della prima esecuzione: invariato, la chiusura della candela oraria del lunedì 00:00–01:00 UTC.
+
+Nient'altro cambia.
+
 Scritta il 24 ottobre 2026, prima di attivare la strategia. Test pre-registrato: universo, regola, durata e giudizio sono fissati adesso, prima del primo giro. La strategia sarà attivata spostando il file da `candidati/` a `strategie/` con un commit separato, solo dopo il push di questa pre-registrazione.
 
 **Perché.** I backtest e le verifiche all'indietro danno risultati discordanti (vedi sezioni precedenti). La prova in avanti misura la regola su dati che nessun test ha usato.
@@ -366,6 +373,14 @@ Scritta il 25 ottobre 2026, prima di qualsiasi calcolo sui rendimenti di questo 
 **Report.** `report/b-giornaliera.md`: per ciascun test, portafoglio contro buy and hold e contro liu-b sulle stesse monete (rendimento totale e annuo, drawdown massimo, operazioni all'anno, p ed esito); per moneta e anno per anno solo come informazione. Curve in `report/dati/b-giornaliera.json`. Una riga nel registro.
 
 ## Pre-registrazione: prova in avanti della variante «B giornaliera» su un portafoglio di monete
+
+**Correzione del 1 novembre 2026, prima del primo giro.** Segue la partenza della prova liu-b, così le due prove partono insieme. Cambia:
+- Partenza: lunedì 2 novembre 2026, non più 26 ottobre. Universo: quello di liu-b, cioè le monete di `candidati/b-portafoglio-universo.json` costruito con dati fino a sabato 31 ottobre compreso.
+- Prima decisione: la candela giornaliera di domenica 1 novembre 2026, chiusa alle 00:00 UTC di lunedì 2 novembre. Non più domenica 25 ottobre.
+- Finestra del verdetto: da lunedì 2 novembre alla domenica D compresa. Il punto (g) degli scostamenti vale da questa data.
+- Richiesta giornaliera: dal primo giro dopo le 00:00 UTC, non più dopo le 01:00. Così la candela del 1 novembre arriva al primo giro del lunedì, come per liu-b. Il prezzo di ogni decisione resta la chiusura del suo giorno: cambia solo il momento del download.
+
+Regola, giudice e momento del verdetto non cambiano. La correzione arriva dopo aver visto le giornate dal 26 al 31 ottobre. La nuova partenza le esclude invece di usarle: nessuna decisione e nessuna posizione da quei giorni entra nella prova.
 
 Scritta il 25 ottobre 2026, prima di attivare la strategia e prima di qualsiasi calcolo sui dati della prova. La variante non ha passato il test retrospettivo: sul ciclo 2018–2020 il portafoglio ha p 0,030 (0,03044), contro una soglia di 0,025. Va in prova per decisione del laboratorio, come ipotesi: non come strategia che ha già passato un test.
 
