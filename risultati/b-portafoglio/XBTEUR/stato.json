@@ -8,8 +8,32 @@
   "capitale": 100,
   "posizione": null,
   "operazioni": [],
-  "istantanee": [],
-  "benchmark": {},
+  "istantanee": [
+    {
+      "momento": 1793577600,
+      "candela": 1793491200,
+      "portafoglio": 100,
+      "mercato": 100.2774275392596,
+      "prezzo": 70186.4
+    }
+  ],
+  "benchmark": {
+    "mercato": {
+      "coppia": "XBTEUR",
+      "prezzoRiferimento": 69922.3,
+      "quantita": 0.0014287301747811488,
+      "commissionePagata": 0.09990009990009992,
+      "momento": 1793581200
+    }
+  },
   "blocchi": [],
-  "lacune": []
+  "lacune": [],
+  "prova": {
+    "impronta": "b77d6170b06a",
+    "K0": 685,
+    "eseguite": [],
+    "ultimaK": 685,
+    "inSospeso": null,
+    "lacune": []
+  }
 }

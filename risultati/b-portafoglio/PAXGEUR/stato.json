@@ -8,8 +8,32 @@
   "capitale": 100,
   "posizione": null,
   "operazioni": [],
-  "istantanee": [],
-  "benchmark": {},
+  "istantanee": [
+    {
+      "momento": 1793577600,
+      "candela": 1793491200,
+      "portafoglio": 100,
+      "mercato": 99.91635596851877,
+      "prezzo": 3503.45
+    }
+  ],
+  "benchmark": {
+    "mercato": {
+      "coppia": "PAXGEUR",
+      "prezzoRiferimento": 3502.88,
+      "quantita": 0.028519418278702073,
+      "commissionePagata": 0.09990009990009992,
+      "momento": 1793581200
+    }
+  },
   "blocchi": [],
-  "lacune": []
+  "lacune": [],
+  "prova": {
+    "impronta": "b77d6170b06a",
+    "K0": 365,
+    "eseguite": [],
+    "ultimaK": 365,
+    "inSospeso": null,
+    "lacune": []
+  }
 }

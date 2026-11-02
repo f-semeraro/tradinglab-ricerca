@@ -8,8 +8,32 @@
   "capitale": 100,
   "posizione": null,
   "operazioni": [],
-  "istantanee": [],
-  "benchmark": {},
+  "istantanee": [
+    {
+      "momento": 1793577600,
+      "candela": 1793491200,
+      "portafoglio": 100,
+      "mercato": 100.50314555357117,
+      "prezzo": 10.20788
+    }
+  ],
+  "benchmark": {
+    "mercato": {
+      "coppia": "LINKEUR",
+      "prezzoRiferimento": 10.14663,
+      "quantita": 9.845643321979802,
+      "commissionePagata": 0.09990009990009992,
+      "momento": 1793581200
+    }
+  },
   "blocchi": [],
-  "lacune": []
+  "lacune": [],
+  "prova": {
+    "impronta": "b77d6170b06a",
+    "K0": 370,
+    "eseguite": [],
+    "ultimaK": 370,
+    "inSospeso": null,
+    "lacune": []
+  }
 }

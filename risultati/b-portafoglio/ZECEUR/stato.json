@@ -8,8 +8,32 @@
   "capitale": 100,
   "posizione": null,
   "operazioni": [],
-  "istantanee": [],
-  "benchmark": {},
+  "istantanee": [
+    {
+      "momento": 1793577600,
+      "candela": 1793491200,
+      "portafoglio": 100,
+      "mercato": 100.54369928793449,
+      "prezzo": 1107.294
+    }
+  ],
+  "benchmark": {
+    "mercato": {
+      "coppia": "ZECEUR",
+      "prezzoRiferimento": 1100.206,
+      "quantita": 0.09080126803534967,
+      "commissionePagata": 0.09990009990009992,
+      "momento": 1793581200
+    }
+  },
   "blocchi": [],
-  "lacune": []
+  "lacune": [],
+  "prova": {
+    "impronta": "b77d6170b06a",
+    "K0": 522,
+    "eseguite": [],
+    "ultimaK": 522,
+    "inSospeso": null,
+    "lacune": []
+  }
 }

@@ -8,8 +8,32 @@
   "capitale": 100,
   "posizione": null,
   "operazioni": [],
-  "istantanee": [],
-  "benchmark": {},
+  "istantanee": [
+    {
+      "momento": 1793577600,
+      "candela": 1793491200,
+      "portafoglio": 100,
+      "mercato": 100.31018862963137,
+      "prezzo": 0.8072
+    }
+  ],
+  "benchmark": {
+    "mercato": {
+      "coppia": "SUIEUR",
+      "prezzoRiferimento": 0.8039,
+      "quantita": 124.26931197922617,
+      "commissionePagata": 0.09990009990009992,
+      "momento": 1793581200
+    }
+  },
   "blocchi": [],
-  "lacune": []
+  "lacune": [],
+  "prova": {
+    "impronta": "b77d6170b06a",
+    "K0": 182,
+    "eseguite": [],
+    "ultimaK": 182,
+    "inSospeso": null,
+    "lacune": []
+  }
 }

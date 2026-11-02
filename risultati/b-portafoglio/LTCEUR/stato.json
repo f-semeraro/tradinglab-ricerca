@@ -8,8 +8,32 @@
   "capitale": 100,
   "posizione": null,
   "operazioni": [],
-  "istantanee": [],
-  "benchmark": {},
+  "istantanee": [
+    {
+      "momento": 1793577600,
+      "candela": 1793491200,
+      "portafoglio": 100,
+      "mercato": 100.1815652650831,
+      "prezzo": 49.83
+    }
+  ],
+  "benchmark": {
+    "mercato": {
+      "coppia": "LTCEUR",
+      "prezzoRiferimento": 49.69,
+      "quantita": 2.0104668927369675,
+      "commissionePagata": 0.09990009990009992,
+      "momento": 1793581200
+    }
+  },
   "blocchi": [],
-  "lacune": []
+  "lacune": [],
+  "prova": {
+    "impronta": "b77d6170b06a",
+    "K0": 683,
+    "eseguite": [],
+    "ultimaK": 683,
+    "inSospeso": null,
+    "lacune": []
+  }
 }

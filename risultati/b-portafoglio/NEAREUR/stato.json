@@ -8,8 +8,32 @@
   "capitale": 100,
   "posizione": null,
   "operazioni": [],
-  "istantanee": [],
-  "benchmark": {},
+  "istantanee": [
+    {
+      "momento": 1793577600,
+      "candela": 1793491200,
+      "portafoglio": 100,
+      "mercato": 100.55952377245305,
+      "prezzo": 3.8429
+    }
+  ],
+  "benchmark": {
+    "mercato": {
+      "coppia": "NEAREUR",
+      "prezzoRiferimento": 3.8177,
+      "quantita": 26.16761398226679,
+      "commissionePagata": 0.09990009990009992,
+      "momento": 1793581200
+    }
+  },
   "blocchi": [],
-  "lacune": []
+  "lacune": [],
+  "prova": {
+    "impronta": "b77d6170b06a",
+    "K0": 228,
+    "eseguite": [],
+    "ultimaK": 228,
+    "inSospeso": null,
+    "lacune": []
+  }
 }

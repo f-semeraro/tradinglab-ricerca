@@ -8,8 +8,32 @@
   "capitale": 100,
   "posizione": null,
   "operazioni": [],
-  "istantanee": [],
-  "benchmark": {},
+  "istantanee": [
+    {
+      "momento": 1793577600,
+      "candela": 1793491200,
+      "portafoglio": 100,
+      "mercato": 100.06724009595447,
+      "prezzo": 0.173025
+    }
+  ],
+  "benchmark": {
+    "mercato": {
+      "coppia": "ADAEUR",
+      "prezzoRiferimento": 0.172736,
+      "quantita": 578.3397780433721,
+      "commissionePagata": 0.09990009990009992,
+      "momento": 1793581200
+    }
+  },
   "blocchi": [],
-  "lacune": []
+  "lacune": [],
+  "prova": {
+    "impronta": "b77d6170b06a",
+    "K0": 422,
+    "eseguite": [],
+    "ultimaK": 422,
+    "inSospeso": null,
+    "lacune": []
+  }
 }
