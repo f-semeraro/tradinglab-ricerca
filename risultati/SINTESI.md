@@ -1,11 +1,11 @@
 # Sintesi del laboratorio
 
 Ogni riga è un portafoglio di carta indipendente, partito con 100,00 €. Il confronto è con il «comprato e basta» sulla stessa coppia, dallo stesso punto di partenza.
-Ultima candela elaborata: quella che apre alle 08 nov 2026, 23:00 (ora di Europe/Rome).
+Ultima candela elaborata: quella che apre alle 09 nov 2026, 06:00 (ora di Europe/Rome).
 
 | strategia | coppia | candele | capitale | vs comprato e basta | operazioni chiuse | drawdown massimo | posizione aperta |
 |---|---|---|---:|---:|---:|---:|---|
-| rsi-base | SOLEUR | 60 min | 100,00 € (0,00%) | 16,25 punti | 0 | 0,00% | no |
+| rsi-base | SOLEUR | 60 min | 100,00 € (0,00%) | 16,21 punti | 0 | 0,00% | no |
 
 ## Strategie settimanali (prova in avanti)
 
@@ -13,14 +13,14 @@ Esecuzione al prezzo di chiusura della candela oraria del lunedì 00:00–01:00 
 
 | strategia | coppia | operazioni chiuse | settimane dentro | rendimento contro buy and hold | drawdown massimo | campione |
 |---|---|---:|---:|---|---:|---|
-| liu-b | XBTUSD | 0 | 0,0% | 0,00% contro -6,81% | 0,00% | campione troppo piccolo per concludere qualcosa |
-| liu-b | XBTEUR | 0 | 0,0% | 0,00% contro -6,28% | 0,00% | campione troppo piccolo per concludere qualcosa |
+| liu-b | XBTUSD | 0 | 0,0% | 0,00% contro -10,98% | 0,00% | campione troppo piccolo per concludere qualcosa |
+| liu-b | XBTEUR | 0 | 0,0% | 0,00% contro -10,45% | 0,00% | campione troppo piccolo per concludere qualcosa |
 
 ## Portafoglio di monete (prova in avanti)
 
 | strategia | monete | settimane trascorse | operazioni chiuse | rendimento contro buy and hold | drawdown massimo | verdetto | campione |
 |---|---:|---:|---:|---|---|---|---|
-| b-portafoglio | 20 | 1 | 0 | 0,00% contro 0,30% (-0,30 punti) | 0,00% (buy and hold 0,00%) | in attesa: mancano 51 settimane e 100 operazioni | prova in avanti: tendenza, non indipendente da liu-b e detzel-140 |
+| b-portafoglio | 20 | 2 | 0 | -0,06% contro -7,47% (7,42 punti) | -0,06% (buy and hold -7,75%) | in attesa: mancano 50 settimane e 100 operazioni | prova in avanti: tendenza, non indipendente da liu-b e detzel-140 |
 
 liu-b, detzel-140 e questo portafoglio seguono tutti la stessa tendenza: i loro risultati non sono prove indipendenti.
 
@@ -29,9 +29,9 @@ liu-b, detzel-140 e questo portafoglio seguono tutti la stessa tendenza: i loro 
 
 | strategia | monete | giorni trascorsi | operazioni chiuse | rendimento contro buy and hold | drawdown massimo | verdetto | campione |
 |---|---:|---:|---:|---|---|---|---|
-| b-giornaliera | 20 | 6 | 0 | -0,01% contro -4,68% (4,67 punti) | -0,01% (buy and hold -6,14%) | in attesa del verdetto di liu-b | prova in avanti: tendenza, non indipendente da liu-b |
+| b-giornaliera | 20 | 7 | 0 | -0,05% contro -8,03% (7,98 punti) | -0,05% (buy and hold -8,72%) | in attesa del verdetto di liu-b | prova in avanti: tendenza, non indipendente da liu-b |
 
-Informativo: rendimento annuo -0,62%, rendimento annuo diviso drawdown -60,69, operazioni all'anno 0,0 per moneta. liu-b sulle stesse monete: rendimento 0,00%, drawdown 0,00%.
+Informativo: rendimento annuo -2,73%, rendimento annuo diviso drawdown -51,48, operazioni all'anno 0,0 per moneta. liu-b sulle stesse monete: rendimento -0,06%, drawdown -0,06%.
 
 Capitale di partenza 100,00 € per moneta. Le decisioni si ricalcolano dalla storia a ogni giro, al prezzo di chiusura del loro giorno.
 

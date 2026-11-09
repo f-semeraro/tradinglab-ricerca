@@ -15,6 +15,13 @@
       "portafoglio": 100,
       "mercato": 100.31150493519166,
       "prezzo": 209.2764
+    },
+    {
+      "momento": 1794182400,
+      "candela": 1794096000,
+      "portafoglio": 100,
+      "mercato": 93.23666126985994,
+      "prezzo": 194.5164
     }
   ],
   "benchmark": {
@@ -32,7 +39,7 @@
     "impronta": "b77d6170b06a",
     "K0": 122,
     "eseguite": [],
-    "ultimaK": 122,
+    "ultimaK": 123,
     "inSospeso": null,
     "lacune": []
   }

@@ -4,23 +4,23 @@ Solo come informazione: il giudizio è sul portafoglio.
 
 | moneta | operazioni chiuse | posizione aperta | rendimento | buy and hold |
 |---|---:|---|---:|---:|
-| AAVEEUR | 0 | no | 0,00% | -0,07% |
-| ADAEUR | 0 | no | 0,00% | 0,07% |
-| AVAXEUR | 0 | no | 0,00% | 0,23% |
-| BCHEUR | 0 | no | 0,00% | 0,36% |
-| DOTEUR | 0 | no | 0,00% | 0,68% |
-| ETHEUR | 0 | no | 0,00% | 0,12% |
-| LINKEUR | 0 | no | 0,00% | 0,50% |
-| LTCEUR | 0 | no | 0,00% | 0,18% |
-| NEAREUR | 0 | no | 0,00% | 0,56% |
-| PAXGEUR | 0 | no | 0,00% | -0,08% |
-| SOLEUR | 0 | no | 0,00% | 0,48% |
-| SUIEUR | 0 | no | 0,00% | 0,31% |
-| TAOEUR | 0 | no | 0,00% | 0,31% |
-| TRXEUR | 0 | no | 0,00% | 0,02% |
-| UNIEUR | 0 | no | 0,00% | 0,65% |
-| XBTEUR | 0 | no | 0,00% | 0,28% |
-| XDGEUR | 0 | no | 0,00% | 0,39% |
-| XLMEUR | 0 | no | 0,00% | 0,18% |
-| XRPEUR | 0 | no | 0,00% | 0,32% |
-| ZECEUR | 0 | no | 0,00% | 0,54% |
+| AAVEEUR | 0 | no | 0,00% | -6,39% |
+| ADAEUR | 0 | no | 0,00% | -9,11% |
+| AVAXEUR | 0 | no | 0,00% | -8,65% |
+| BCHEUR | 0 | no | 0,00% | -15,60% |
+| DOTEUR | 0 | no | 0,00% | -8,93% |
+| ETHEUR | 0 | no | 0,00% | -6,39% |
+| LINKEUR | 0 | no | 0,00% | -8,16% |
+| LTCEUR | 0 | no | 0,00% | -9,67% |
+| NEAREUR | 0 | no | 0,00% | -15,95% |
+| PAXGEUR | 0 | sì | -1,10% | 3,61% |
+| SOLEUR | 0 | no | 0,00% | -7,97% |
+| SUIEUR | 0 | no | 0,00% | -8,64% |
+| TAOEUR | 0 | no | 0,00% | -6,76% |
+| TRXEUR | 0 | no | 0,00% | 2,03% |
+| UNIEUR | 0 | no | 0,00% | -5,31% |
+| XBTEUR | 0 | no | 0,00% | -4,18% |
+| XDGEUR | 0 | no | 0,00% | -8,52% |
+| XLMEUR | 0 | no | 0,00% | -12,91% |
+| XRPEUR | 0 | no | 0,00% | -10,67% |
+| ZECEUR | 0 | no | 0,00% | -1,28% |

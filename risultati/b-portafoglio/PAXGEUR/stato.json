@@ -5,8 +5,20 @@
     "intervalloCandele": 1440,
     "fusoOrario": "Europe/Rome"
   },
-  "capitale": 100,
-  "posizione": null,
+  "capitale": 0,
+  "posizione": {
+    "mercato": "PAXGEUR",
+    "prezzoIngresso": 3669.7639649999996,
+    "prezzoMercatoIngresso": 3667.93,
+    "quantita": 0.027222486474031287,
+    "controvaloreIngresso": 99.90009990009992,
+    "commissioneIngresso": 0.09990009990009992,
+    "momentoIngresso": 1794186000,
+    "candelaIngresso": 1794182400,
+    "motivoIngresso": "quinto più alto",
+    "condizioniIngresso": null,
+    "segnaleId": "PAXGEUR-367"
+  },
   "operazioni": [],
   "istantanee": [
     {
@@ -15,6 +27,13 @@
       "portafoglio": 100,
       "mercato": 99.91635596851877,
       "prezzo": 3503.45
+    },
+    {
+      "momento": 1794182400,
+      "candela": 1794096000,
+      "portafoglio": 98.89629888664352,
+      "mercato": 103.60790947051397,
+      "prezzo": 3632.89
     }
   ],
   "benchmark": {
@@ -31,8 +50,10 @@
   "prova": {
     "impronta": "b77d6170b06a",
     "K0": 365,
-    "eseguite": [],
-    "ultimaK": 365,
+    "eseguite": [
+      367
+    ],
+    "ultimaK": 366,
     "inSospeso": null,
     "lacune": []
   }
