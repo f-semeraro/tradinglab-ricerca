@@ -1,11 +1,11 @@
 # Sintesi del laboratorio
 
 Ogni riga è un portafoglio di carta indipendente, partito con 100,00 €. Il confronto è con il «comprato e basta» sulla stessa coppia, dallo stesso punto di partenza.
-Ultima candela elaborata: quella che apre alle 10 nov 2026, 22:00 (ora di Europe/Rome).
+Ultima candela elaborata: quella che apre alle 11 nov 2026, 02:00 (ora di Europe/Rome).
 
 | strategia | coppia | candele | capitale | vs comprato e basta | operazioni chiuse | drawdown massimo | posizione aperta |
 |---|---|---|---:|---:|---:|---:|---|
-| rsi-base | SOLEUR | 60 min | 100,00 € (0,00%) | 19,39 punti | 0 | 0,00% | no |
+| rsi-base | SOLEUR | 60 min | 100,00 € (0,00%) | 19,56 punti | 0 | 0,00% | no |
 
 ## Strategie settimanali (prova in avanti)
 
@@ -29,9 +29,9 @@ liu-b, detzel-140 e questo portafoglio seguono tutti la stessa tendenza: i loro 
 
 | strategia | monete | giorni trascorsi | operazioni chiuse | rendimento contro buy and hold | drawdown massimo | verdetto | campione |
 |---|---:|---:|---:|---|---|---|---|
-| b-giornaliera | 20 | 8 | 0 | -0,06% contro -7,36% (7,31 punti) | -0,06% (buy and hold -8,58%) | in attesa del verdetto di liu-b | prova in avanti: tendenza, non indipendente da liu-b |
+| b-giornaliera | 20 | 9 | 0 | -0,13% contro -9,76% (9,64 punti) | -0,13% (buy and hold -10,44%) | in attesa del verdetto di liu-b | prova in avanti: tendenza, non indipendente da liu-b |
 
-Informativo: rendimento annuo -2,52%, rendimento annuo diviso drawdown -45,09, operazioni all'anno 0,0 per moneta. liu-b sulle stesse monete: rendimento -0,06%, drawdown -0,06%.
+Informativo: rendimento annuo -5,02%, rendimento annuo diviso drawdown -39,58, operazioni all'anno 0,0 per moneta. liu-b sulle stesse monete: rendimento -0,06%, drawdown -0,06%.
 
 Capitale di partenza 100,00 € per moneta. Le decisioni si ricalcolano dalla storia a ogni giro, al prezzo di chiusura del loro giorno.
 
