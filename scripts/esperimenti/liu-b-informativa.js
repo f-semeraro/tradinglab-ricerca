@@ -1,8 +1,8 @@
 /**
- * scripts/liu-b-informativa.js — verifica informativa di B sui dati messi da parte (da luglio 2026
+ * scripts/esperimenti/liu-b-informativa.js — verifica informativa di B sui dati messi da parte (da luglio 2026
  * all'ultima domenica chiusa). Nessun giudizio: solo quante operazioni e che risultato.
  *
- *     node scripts/liu-b-informativa.js
+ *     node scripts/esperimenti/liu-b-informativa.js
  *
  * Rigioca la prova, settimana per settimana, con la stessa logica del giro (lib/prova.js), usando
  * solo i dati noti in ogni momento. Non scrive stato né storico: solo una riga nel registro.
@@ -12,13 +12,13 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { candeleChiuse } from "../lib/kraken.js";
-import { aggiornaStoria, passoPerCoppia, nuovoStatoProva, decisioniSettimanali, improntaRegola } from "../lib/prova.js";
-import { calcolaMetriche } from "../lib/metriche.js";
-import { drawdownMassimo } from "../lib/settimane.js";
-import { leggiJson, leggiStoriaSettimanale } from "../lib/persistenza.js";
+import { candeleChiuse } from "../../lib/kraken.js";
+import { aggiornaStoria, passoPerCoppia, nuovoStatoProva, decisioniSettimanali, improntaRegola } from "../../lib/prova.js";
+import { calcolaMetriche } from "../../lib/metriche.js";
+import { drawdownMassimo } from "../../lib/settimane.js";
+import { leggiJson, leggiStoriaSettimanale } from "../../lib/persistenza.js";
 
-const RADICE = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const RADICE = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..");
 const dentro = (...parti) => path.join(RADICE, ...parti);
 const COPPIE = ["XBTUSD", "XBTEUR"];
 const PRIMA_DOMENICA_DELLA_PROVA = "2026-06-28"; // ultima domenica prima di luglio: l'attivazione

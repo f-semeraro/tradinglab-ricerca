@@ -1,12 +1,13 @@
 /**
- * scripts/b-indietro-2018.js — verifica all'indietro della regola B di Liu e Tsyvinski su un secondo ciclo
- * di mercato, luglio 2018 – dicembre 2020. Pre-registrata in registro/esperimenti.md (sezione del 24 ottobre 2026).
+ * scripts/esperimenti/b-indietro-2018-estensione.js — secondo tentativo sulla verifica all'indietro della regola B,
+ * luglio 2018 – dicembre 2020, con un universo corretto: la storia ammette al massimo 30 giorni senza candela
+ * sui 728 prima del 2 luglio 2018. Pre-registrato in registro/esperimenti.md (sezione del 24 ottobre 2026).
  *
- *     node scripts/b-indietro-2018.js
+ *     node scripts/esperimenti/b-indietro-2018-estensione.js
  *
  * Un'esecuzione sola. Legge le candele giornaliere in EUR (dati/archivio/b-universo-2020/) fino al 27 dicembre
- * 2020 compreso, applica la regola di universo della pre-registrazione, scrive report/b-indietro-2018.md,
- * report/dati/b-indietro-2018.json e una riga nel registro.
+ * 2020 compreso, applica la regola di universo della pre-registrazione, scrive
+ * report/b-indietro-2018-estensione.md, report/dati/b-indietro-2018-estensione.json e una riga nel registro.
  */
 
 import fs from "node:fs";
@@ -14,31 +15,36 @@ import path from "node:path";
 import crypto from "node:crypto";
 import { fileURLToPath } from "node:url";
 
-import { separaCoppia, costruisciUniverso, STABLECOIN, BITCOIN, VALUTE } from "../lib/bUniverso.js";
-import { serieSettimanale, periodo, equity, curvaPortafoglio, giudica, COSTO, LATO } from "../lib/bSettimane.js";
-import { permanenzeLineari, rendimentoSettimane } from "../lib/rotazione.js";
-import { drawdownMassimo } from "../lib/settimane.js";
+import { separaCoppia, costruisciUniverso, STABLECOIN, BITCOIN, VALUTE } from "../../lib/bUniverso.js";
+import { serieSettimanale, periodo, equity, curvaPortafoglio, giudica, COSTO, LATO } from "../../lib/bSettimane.js";
+import { permanenzeLineari, rendimentoSettimane } from "../../lib/rotazione.js";
+import { drawdownMassimo } from "../../lib/settimane.js";
 
-const RADICE = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const RADICE = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..");
 const daRadice = (...parti) => path.join(RADICE, ...parti);
-// la stessa estrazione EUR/USD del test 2020: contiene anche le coppie in EUR di questo periodo
+// la stessa estrazione EUR/USD dei test precedenti
 const CARTELLA = daRadice("dati", "archivio", "b-universo-2020");
 
-const INIZIO_STORIA = "2016-07-04"; // 104 settimane complete prima del 2 luglio 2018
+const INIZIO_STORIA = "2016-07-04"; // 104 settimane complete prima del 2 luglio 2018 (728 giorni)
 const FINE_STORIA = "2018-07-01";
+const MAX_GIORNI_MANCANTI = 30; // tolleranza sulla storia: su 728 giorni
 const LIQ_DA = "2018-01-01"; // finestra della liquidità: primo semestre 2018
 const LIQ_A = "2018-06-30";
 const DA_PERIODO = "2018-07-01"; // la domenica che decide la prima settimana del periodo
 const FINE = "2020-12-27"; // ultima domenica del periodo: il test non legge le candele successive
 const W = 130; // dal 2 luglio 2018 al 27 dicembre 2020
 const TOP = 20;
+const ESCLUDI_BASI = ["ETH"]; // esclusa per decisione del test: il suo risultato su questo periodo è già noto
 const ESCLUDI = 4; // spostamenti entro 4 settimane dallo zero, in entrambe le direzioni
 const ALFA = 0.05;
 const GIORNO = 86400000;
 const GIORNI_ANNO = 365.25;
 
-// il test sull'universo 2020 (report/b-universo-2020.md), per il confronto
-const CONFRONTO_2020 = { monete: 15, portafoglio: 238.07, buyAndHold: 54.04, p: 0.0036 };
+// i risultati dei test precedenti sullo stesso periodo, per il confronto
+const CONFRONTO = {
+  universo2020: { monete: 15, portafoglio: 238.07, buyAndHold: 54.04, p: 0.0036 },
+  primoTentativoEth: { monete: 1, portafoglio: 231.01, buyAndHold: 43.39, p: 0.0082 }
+};
 
 const numero = (v, d = 2) => (Number.isFinite(v) ? v.toFixed(d).replace(".", ",") : "—");
 const percento = (v, d = 2) => `${numero(v * 100, d)}%`;
@@ -78,18 +84,14 @@ function giorniMancanti(presenti, da, a) {
 function main() {
   const registroPath = daRadice("registro", "esperimenti.md");
   const registro = fs.readFileSync(registroPath, "utf8");
-  if (registro.includes("| b-indietro-2018 |")) throw new Error("il test sul ciclo 2018–2020 è già stato eseguito");
+  if (registro.includes("| b-indietro-2018-estensione |")) throw new Error("l'estensione del test 2018–2020 è già stata eseguita");
 
   // primo passaggio: solo coppie in EUR; storia e liquidità del primo semestre 2018
   const riepilogo = [];
-  let saltate = 0;
   for (const file of fs.readdirSync(CARTELLA).filter((f) => f.endsWith("_1440.csv"))) {
     const nome = file.replace(/_1440\.csv$/, "");
     const sep = separaCoppia(nome);
-    if (!sep || sep.quota !== "EUR") {
-      saltate += 1;
-      continue;
-    }
+    if (!sep || sep.quota !== "EUR") continue;
     const { date, close, volume } = leggiRighe(nome);
     if (date.length === 0) continue;
     const presenti = new Set(date);
@@ -109,7 +111,7 @@ function main() {
 
   const considerate = costruisciUniverso(
     riepilogo.map((s) => ({ nome: s.nome, base: s.base, mediana2020: s.mediana, mancanti: s.mancanti })),
-    { top: TOP, soloEur: true, ammettiBitcoin: true }
+    { top: TOP, soloEur: true, ammettiBitcoin: true, maxGiorniMancanti: MAX_GIORNI_MANCANTI, escludiBasi: ESCLUDI_BASI }
   );
   const incluse = considerate.filter((r) => r.incluso);
   if (incluse.length === 0) throw new Error("nessuna moneta supera la regola di universo");
@@ -165,31 +167,30 @@ function main() {
 
   fs.mkdirSync(daRadice("report", "dati"), { recursive: true });
   fs.writeFileSync(
-    daRadice("report", "dati", "b-indietro-2018.json"),
-    JSON.stringify({ test: "b-indietro-2018", monete: monete.map((m) => m.coppia), giorni, portafoglio: curva, buyAndHold: curvaBH }) + "\n",
+    daRadice("report", "dati", "b-indietro-2018-estensione.json"),
+    JSON.stringify({ test: "b-indietro-2018-estensione", monete: monete.map((m) => m.coppia), giorni, portafoglio: curva, buyAndHold: curvaBH }) + "\n",
     "utf8"
   );
 
   const tolte = monete.filter((m) => m.ultimo < FINE);
   const righe = [
-    "# Regola B su un secondo ciclo di mercato (luglio 2018 – dicembre 2020)",
+    "# Estensione della verifica all'indietro della regola B su un secondo ciclo (luglio 2018 – dicembre 2020)",
     "",
-    "Pre-registrazione: registro/esperimenti.md, sezione «verifica all'indietro della regola B su un secondo ciclo di mercato», scritta il 24 ottobre 2026 prima di qualsiasi calcolo.",
+    "Pre-registrazione: registro/esperimenti.md, sezione «estensione della verifica all'indietro della regola B, 2018–2020», scritta il 24 ottobre 2026 prima di qualsiasi calcolo su questo universo. Secondo tentativo sulla stessa domanda, dopo un universo ridotto per un errore di disegno.",
     "",
     `**Verdetto:** ${giudizio.passa ? "passa" : "non passa"}. p ${numero(giudizio.p, 5)} contro soglia ${numero(ALFA, 2)}; somma netta per operazione ${numero(giudizio.osservata * 100)} punti.`,
     "",
     `Periodo: dal 2 luglio 2018 al 27 dicembre 2020, ${W} settimane. Giudice: rotazione circolare comune, ${giudizio.spostamenti} spostamenti (s = 5…125), senza seme. N = 1, alfa ${numero(ALFA, 2)}. Il minimo raggiungibile di p è ${numero(1 / (giudizio.spostamenti + 1), 5)}.`,
     `Costi: ${numero(LATO * 100)}% per lato, ${numero(COSTO * 100)}% per operazione.`,
     "",
-    "## Confronto con il test sull'universo 2020",
+    "## Confronto con i test precedenti sullo stesso periodo",
     "",
-    "| | universo 2020 (dati fino al 2020) | questo test (ciclo 2018–2020) |",
-    "|---|---:|---:|",
-    `| monete | ${CONFRONTO_2020.monete} | ${N} |`,
-    `| portafoglio a pesi uguali | +${numero(CONFRONTO_2020.portafoglio)}% | ${percento(rendimentoTotale)} |`,
-    `| buy and hold a pesi uguali | +${numero(CONFRONTO_2020.buyAndHold)}% | ${percento(rendimentoBH)} |`,
-    `| p | ${numero(CONFRONTO_2020.p, 5)} | ${numero(giudizio.p, 5)} |`,
-    `| esito | passa | ${giudizio.passa ? "passa" : "non passa"} |`,
+    "| | universo 2020 | primo tentativo (solo ETH) | questa estensione |",
+    "|---|---:|---:|---:|",
+    `| monete | ${CONFRONTO.universo2020.monete} | ${CONFRONTO.primoTentativoEth.monete} | ${N} |`,
+    `| portafoglio a pesi uguali | +${numero(CONFRONTO.universo2020.portafoglio)}% | +${numero(CONFRONTO.primoTentativoEth.portafoglio)}% | ${percento(rendimentoTotale)} |`,
+    `| buy and hold a pesi uguali | +${numero(CONFRONTO.universo2020.buyAndHold)}% | +${numero(CONFRONTO.primoTentativoEth.buyAndHold)}% | ${percento(rendimentoBH)} |`,
+    `| p | ${numero(CONFRONTO.universo2020.p, 5)} | ${numero(CONFRONTO.primoTentativoEth.p, 5)} | ${numero(giudizio.p, 5)} |`,
     "",
     "## Universo: tutte le monete considerate (solo coppie in EUR)",
     "",
@@ -199,7 +200,7 @@ function main() {
       (r) => `| ${r.base} | ${r.coppia} | ${r.mediana2020 === null ? "—" : numero(r.mediana2020, 0)} | ${r.incluso ? "**inclusa**" : "esclusa"} | ${r.motivo} |`
     ),
     "",
-    `Monete considerate: solo coppie in EUR. Esclusioni di tipo: stablecoin e token ancorati (${STABLECOIN.length} simboli), valute tradizionali (${VALUTE.join(", ")}). Bitcoin ammesso (XBTEUR).`,
+    `Regola di storia: al massimo ${MAX_GIORNI_MANCANTI} giorni senza candela sui 728 dal 4 luglio 2016 al 1 luglio 2018. Esclusioni di tipo: stablecoin e token ancorati (${STABLECOIN.length} simboli), valute tradizionali (${VALUTE.join(", ")}). Bitcoin ammesso (XBTEUR).`,
     "",
     "## Monete tolte dal listino durante il periodo",
     "",
@@ -231,28 +232,28 @@ function main() {
     "",
     "## Scostamenti dal metodo",
     "",
-    "(a) Test nuovo su un secondo ciclo di mercato, non replica di Liu e Tsyvinski. (b) Universo solo in EUR, Bitcoin incluso: scelta del test, dettata dall'archivio. (c) Giudice: rotazione circolare comune con esclusione entro 4 settimane dallo zero. (d) Percentile sul primo dato disponibile di ciascuna moneta. (e) Settimana senza scambi, moneta tolta dal listino e nulla come da pre-registrazione. (f) Periodo dello studio: la versione di lavoro finisce il 31 maggio 2018; la versione pubblicata non è verificata.",
+    "(a) Secondo tentativo sulla stessa domanda: non indipendente dal primo, il cui risultato è noto. (b) ETH esclusa per decisione del test, presa dopo aver visto il suo risultato su questo periodo. (c) Soglia di storia di 30 giorni, scelta guardando i conteggi del primo tentativo. (d) Universo solo in EUR, Bitcoin incluso. (e) Giudice: rotazione circolare comune con esclusione entro 4 settimane dallo zero. (f) Periodo dello studio: la versione di lavoro finisce il 31 maggio 2018; la versione pubblicata non è verificata.",
     "",
     "---",
     "",
     "Simulazione su carta. Nessuna operazione reale, nessuna chiave, nessuna consulenza."
   ];
-  fs.writeFileSync(daRadice("report", "b-indietro-2018.md"), righe.join("\n") + "\n", "utf8");
+  fs.writeFileSync(daRadice("report", "b-indietro-2018-estensione.md"), righe.join("\n") + "\n", "utf8");
 
   const dataOggi = new Date().toISOString().slice(0, 16).replace("T", " ");
   const impronta = crypto
     .createHash("sha256")
-    .update(JSON.stringify({ TOP, ESCLUDI, ALFA, DA_PERIODO, W, FINE, LATO, COSTO, INIZIO_STORIA, FINE_STORIA, LIQ_DA, LIQ_A }))
+    .update(JSON.stringify({ TOP, ESCLUDI, ALFA, DA_PERIODO, W, FINE, LATO, COSTO, INIZIO_STORIA, FINE_STORIA, LIQ_DA, LIQ_A, MAX_GIORNI_MANCANTI, ESCLUDI_BASI }))
     .digest("hex")
     .slice(0, 10);
   const riga =
-    `| ${dataOggi} | b-indietro-2018 | portafoglio (${N} monete) | ${impronta} | 2 lug 2018 → 27 dic 2020 | ${operazioni} | ` +
+    `| ${dataOggi} | b-indietro-2018-estensione | portafoglio (${N} monete) | ${impronta} | 2 lug 2018 → 27 dic 2020 | ${operazioni} | ` +
     `rendimento ${percento(rendimentoTotale)} (buy and hold ${percento(rendimentoBH)}) | ` +
     `${numero((rendimentoTotale - rendimentoBH) * 100)} punti | ${percento(drawdown)} | ` +
-    `regola B su ciclo 2018–2020: ${giudizio.passa ? "passa" : "non passa"}; somma netta ${numero(giudizio.osservata * 100)} punti; p ${numero(giudizio.p, 5)} |`;
+    `estensione della verifica 2018–2020, secondo tentativo: ${giudizio.passa ? "passa" : "non passa"}; somma netta ${numero(giudizio.osservata * 100)} punti; p ${numero(giudizio.p, 5)} |`;
   fs.appendFileSync(registroPath, riga + "\n", "utf8");
 
-  console.log(`Test scritto in report/b-indietro-2018.md: ${N} monete, ${giudizio.passa ? "passa" : "non passa"}. Saltate ${saltate} coppie non in EUR.`);
+  console.log(`Estensione scritta in report/b-indietro-2018-estensione.md: ${N} monete, ${giudizio.passa ? "passa" : "non passa"}.`);
 }
 
 try {

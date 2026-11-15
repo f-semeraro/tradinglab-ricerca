@@ -26,11 +26,13 @@ Ogni strategia ha il suo portafoglio e il suo benchmark «comprato e basta», fi
 | `ricerca.json` | i parametri del generatore: quante strategie, quale seme, i criteri di verifica |
 | `registro/ricerca.csv` | ogni strategia provata dal generatore, con i suoi numeri. Sola aggiunta |
 | `risultati/` | stato di ogni strategia e sintesi, aggiornati a ogni giro |
-| `report/` | report dei backtest, uno per strategia (sovrascritti a ogni esecuzione) |
-| `registro/esperimenti.md` | una riga per ogni backtest, sola aggiunta |
+| `report/` | report dei backtest (`<strategia>-<coppia>-<intervallo>.md`, sovrascritti a ogni esecuzione) e dei test pre-registrati |
+| `registro/esperimenti.md` | le pre-registrazioni e una riga per ogni backtest o test, sola aggiunta |
 | `dati/storico/` | candele per il backtest, in CSV |
+| `dati/archivio/` | l'archivio Kraken scaricato a mano: resta in locale, non è nel repository |
 | `lib/` | il nucleo di calcolo, copiato dal progetto principale, più i pezzi nuovi |
-| `scripts/` | `giro.js` (il giro orario), `backtest.js` (la strategia sul passato), `dati.js` (scarica le candele giornaliere), `ricerca.js` (il generatore) |
+| `scripts/` | gli strumenti: `giro.js` (il giro orario), `backtest.js` (la strategia sul passato), `dati.js` (scarica le candele giornaliere), `ricerca.js` (il generatore), `settimanali.js` e i due `*-universo.js` (la partenza delle prove in avanti) |
+| `scripts/esperimenti/` | gli script dei test pre-registrati già eseguiti: un registro, non uno strumento |
 | `test/` | i test del nucleo e dei pezzi nuovi |
 
 ## Il nucleo puro
@@ -40,6 +42,34 @@ Ogni strategia ha il suo portafoglio e il suo benchmark «comprato e basta», fi
 Ci sono poi altri quattro file copiati per lo stesso motivo. `blocchi.js`, `benchmark.js` e `rischio.js` sono pure. `configurazione.js` non lo è: contiene l'unica lettura del file della strategia (`leggiStrategia`), e serve agli script per validarla. Il calcolo non la importa.
 
 Il codice nuovo di questo repository segue la stessa regola: `simulazione.js` è pura, `kraken.js` è l'unico punto che parla con la rete, `persistenza.js` è l'unico che scrive su disco.
+
+## Il backtest: due strumenti, gli stessi mattoni
+
+**Una strategia a blocchi sul passato.** `npm run backtest` rigioca le strategie di `strategie/` sulle candele di `dati/storico/`. Lo script legge argomenti e file; il calcolo è in `lib/backtest.js`: `finestraCandele()` taglia le date, `eseguiBacktest()` fa la corsa con `avanza()`, la stessa funzione del giro, e `reportBacktest()` e `rigaRegistroBacktest()` la raccontano. Anche il generatore passa da `eseguiBacktest()`: non esiste una seconda strada.
+
+**Una regola nuova, con un test pre-registrato.** I test su regole a posizioni (la regola B settimanale, la variante giornaliera) si costruiscono con questi moduli, tutti puri e tutti con i loro test:
+
+| modulo | che cosa dà |
+|---|---|
+| `storico.js` | le candele da file: CSV di `dati/storico/` e archivio Kraken, con qualunque fine riga |
+| `bUniverso.js` | l'universo delle monete: esclusioni, storia minima, liquidità |
+| `settimane.js`, `bSettimane.js`, `giornaliera.js` | le regole già testate: segnali e posizioni, a settimane o a giorni |
+| `curve.js` | la curva di una moneta, il portafoglio a pesi uguali senza ribilanciamento, rendimento totale e annuo, drawdown, anno per anno |
+| `rotazione.js` | il giudice: `giudicaRotazione()`, a rotazione circolare comune, anche con monete tolte dal listino |
+| `formato.js`, `registro.js`, `impronta.js` | i numeri nei report, la riga di registro, l'impronta dei parametri |
+
+Un test nuovo è uno script corto: prima la pre-registrazione in `registro/esperimenti.md`, committata da sola; poi lo script, che si ferma se `giaRegistrato()` trova già la sua riga.
+
+```js
+const candele = leggiArchivio(percorso);                       // persistenza.js
+const moneta = periodo(serieSettimanale(serie, FINE), { da, W }); // la regola: H, R0, attiva
+const curva = mediaCurve(monete.map((m) => curvaPosizione(m.H, m.R0, LATO)));
+const { rendimento, annuo, drawdown } = metricheCurva(curva, anni);
+const giudizio = giudicaRotazione({ monete: monete.map((m) => ({ R: m.R0, H: m.H, attiva: m.attiva })), costo, alfa, escludi });
+aggiungiAlRegistro(REGISTRO, rigaRegistro({ data, strategia, coppia, impronta: improntaDi(parametri), ... }));
+```
+
+Gli script in `scripts/esperimenti/` sono i test già eseguiti. Non si rilanciano e non si copiano: servono a sapere che cosa è stato calcolato.
 
 **Quando cambi uno dei file copiati nel progetto principale, ricopialo qui e fai girare i test in entrambi i posti.** Non c'è un controllo automatico che lo faccia per te.
 
@@ -75,13 +105,13 @@ npm test
 npm run backtest -- --usa-ultimo-anno --strategia rsi-base --da 2026-03-01 --a 2026-05-31 --nota "primo confronto"
 ```
 
-Il backtest non tocca `risultati/`. Scrive `report/<strategia>.md` e aggiunge una riga a `registro/esperimenti.md`.
+Il backtest non tocca `risultati/`. Scrive `report/<strategia>-<coppia>-<intervallo>.md` e aggiunge una riga a `registro/esperimenti.md`. Senza `--strategia` rigioca tutte le strategie a blocchi di `strategie/`; le prove in avanti settimanali e giornaliere hanno un motore loro e si saltano. Prima valida tutte le strategie richieste, poi scrive: un errore non lascia mai il registro aggiornato a metà.
 
 **L'ultimo anno è escluso per default** (`escludiUltimiGiorni` in `laboratorio.json`). Si include solo con `--usa-ultimo-anno`, scritto apposta nel comando.
 
 `npm run giro` in locale scrive in `risultati/` del tuo clone. Di solito non serve: lo fa il workflow.
 
-`npm run dati` scarica le candele giornaliere delle venti coppie. `npm run ricerca` lancia il generatore: è lento (una decina di minuti) e scrive in `registro/ricerca.csv`, in `report/` e, se qualcosa passa, in `strategie/`. Per la corsa vera usa il workflow `ricerca`, non il terminale.
+`npm run dati` scarica le candele giornaliere delle venti coppie e le aggiunge a quelle già nei CSV: la storia si allunga a ogni esecuzione, invece di restare alle ultime 720 candele di Kraken. `npm run ricerca` lancia il generatore: è lento (una decina di minuti) e scrive in `registro/ricerca.csv`, in `report/` e, se qualcosa passa, in `strategie/`. Per la corsa vera usa il workflow `ricerca`, non il terminale.
 
 ## Il protocollo
 

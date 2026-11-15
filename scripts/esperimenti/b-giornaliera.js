@@ -1,8 +1,8 @@
 /**
- * scripts/b-giornaliera.js — la variante «B giornaliera», due test: A sull'universo 2020, B sul ciclo 2018–2020.
+ * scripts/esperimenti/b-giornaliera.js — la variante «B giornaliera», due test: A sull'universo 2020, B sul ciclo 2018–2020.
  * Pre-registrata in registro/esperimenti.md (sezione del 25 ottobre 2026, commit 32c7415).
  *
- *     node scripts/b-giornaliera.js
+ *     node scripts/esperimenti/b-giornaliera.js
  *
  * Un'esecuzione sola. Legge le candele giornaliere in EUR da dati/archivio/b-universo-2020/, calcola il
  * portafoglio giornaliero, il buy and hold e liu-b sulle stesse monete, applica il giudizio dei due test
@@ -14,13 +14,13 @@ import path from "node:path";
 import crypto from "node:crypto";
 import { fileURLToPath } from "node:url";
 
-import { serieGiornaliera, esposizione, giudicaGiornaliera } from "../lib/giornaliera.js";
-import { serieSettimanale, periodo, curvaPortafoglio as curvaSettimanale, giudica as giudicaSettimanale } from "../lib/bSettimane.js";
-import { curvaPortafoglio as curvaDaily } from "../lib/verifica140.js";
-import { permanenzeLineari } from "../lib/rotazione.js";
-import { drawdownMassimo } from "../lib/settimane.js";
+import { serieGiornaliera, esposizione, giudicaGiornaliera } from "../../lib/giornaliera.js";
+import { serieSettimanale, periodo, curvaPortafoglio as curvaSettimanale, giudica as giudicaSettimanale } from "../../lib/bSettimane.js";
+import { curvaPortafoglio as curvaDaily } from "../../lib/verifica140.js";
+import { permanenzeLineari } from "../../lib/rotazione.js";
+import { drawdownMassimo } from "../../lib/settimane.js";
 
-const RADICE = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const RADICE = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..");
 const daRadice = (...parti) => path.join(RADICE, ...parti);
 const CARTELLA = daRadice("dati", "archivio", "b-universo-2020");
 

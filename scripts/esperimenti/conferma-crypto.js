@@ -1,7 +1,7 @@
 /**
- * scripts/conferma-crypto.js — test di conferma della regola B su altre crypto (pre-registrato).
+ * scripts/esperimenti/conferma-crypto.js — test di conferma della regola B su altre crypto (pre-registrato).
  *
- *     node scripts/conferma-crypto.js
+ *     node scripts/esperimenti/conferma-crypto.js
  *
  * Universo: le coppie EUR di laboratorio.json, tolto il Bitcoin, con i nomi dell'archivio Kraken.
  * Entrano le monete con almeno 104 domeniche con prezzo prima del 4 gennaio 2021 e al massimo il
@@ -15,11 +15,11 @@ import path from "node:path";
 import crypto from "node:crypto";
 import { fileURLToPath } from "node:url";
 
-import { aggiornaStoria } from "../lib/prova.js";
-import { rendimentiSettimanali, segnali, settimaneDentro, curvaCapitale, drawdownMassimo } from "../lib/settimane.js";
-import { giudicaRotazione, permanenzeLineari } from "../lib/rotazione.js";
+import { aggiornaStoria } from "../../lib/prova.js";
+import { rendimentiSettimanali, segnali, settimaneDentro, curvaCapitale, drawdownMassimo } from "../../lib/settimane.js";
+import { giudicaRotazione, permanenzeLineari } from "../../lib/rotazione.js";
 
-const RADICE = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const RADICE = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..");
 const dentro = (...parti) => path.join(RADICE, ...parti);
 
 const UNIVERSO = [

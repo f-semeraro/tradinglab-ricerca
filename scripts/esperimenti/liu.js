@@ -1,8 +1,8 @@
 /**
- * scripts/liu.js — la replica fuori campione di Liu e Tsyvinski (2021).
+ * scripts/esperimenti/liu.js — la replica fuori campione di Liu e Tsyvinski (2021).
  *
- *     node scripts/liu.js --solo-copertura   (conta le domeniche valide, senza risultati)
- *     node scripts/liu.js                    (il test pre-registrato, una sola volta)
+ *     node scripts/esperimenti/liu.js --solo-copertura   (conta le domeniche valide, senza risultati)
+ *     node scripts/esperimenti/liu.js                    (il test pre-registrato, una sola volta)
  *
  * Coppia giudicata: XBTUSD. XBTEUR è solo un confronto, fuori dal giudizio.
  * Periodo: da domenica 3 gennaio 2021 a domenica 28 giugno 2026, cioè le domeniche di
@@ -22,11 +22,11 @@ import {
   permanenze,
   curvaCapitale,
   drawdownMassimo
-} from "../lib/settimane.js";
-import { giudicaPermutazione } from "../lib/giudice.js";
-import { generatore } from "../lib/ricerca.js";
+} from "../../lib/settimane.js";
+import { giudicaPermutazione } from "../../lib/giudice.js";
+import { generatore } from "../../lib/ricerca.js";
 
-const RADICE = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const RADICE = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..");
 const dentro = (...parti) => path.join(RADICE, ...parti);
 
 // i parametri della pre-registrazione

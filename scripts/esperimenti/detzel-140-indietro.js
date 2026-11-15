@@ -1,8 +1,8 @@
 /**
- * scripts/detzel-140-indietro.js — verifica all'indietro della media a 140 giorni (Detzel et al., L = 20
+ * scripts/esperimenti/detzel-140-indietro.js — verifica all'indietro della media a 140 giorni (Detzel et al., L = 20
  * settimane), su dati mai usati dal laboratorio. Pre-registrata in registro/esperimenti.md (commit 0b975ef).
  *
- *     node scripts/detzel-140-indietro.js
+ *     node scripts/esperimenti/detzel-140-indietro.js
  *
  * Un'esecuzione sola. Legge le candele giornaliere fino al 31 dicembre 2020, applica la regola di copertura
  * della pre-registrazione, scrive report/detzel-140-indietro.md, report/dati/detzel-140-indietro.json e una
@@ -14,11 +14,11 @@ import path from "node:path";
 import crypto from "node:crypto";
 import { fileURLToPath } from "node:url";
 
-import { segnali, esposizione, turnoverLineare } from "../lib/detzel.js";
-import { valutaCopertura, giudicaPortafoglio, curvaPortafoglio } from "../lib/verifica140.js";
-import { drawdownMassimo } from "../lib/settimane.js";
+import { segnali, esposizione, turnoverLineare } from "../../lib/detzel.js";
+import { valutaCopertura, giudicaPortafoglio, curvaPortafoglio } from "../../lib/verifica140.js";
+import { drawdownMassimo } from "../../lib/settimane.js";
 
-const RADICE = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const RADICE = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..");
 const daRadice = (...parti) => path.join(RADICE, ...parti);
 
 // XBTUSD e le coppie EUR di laboratorio.json, tranne XXBTZEUR (lo stesso asset di XBTUSD), con i nomi dell'archivio

@@ -1,8 +1,8 @@
 /**
- * scripts/shen.js — la replica fuori campione di Shen, Urquhart e Wang (2022).
+ * scripts/esperimenti/shen.js — la replica fuori campione di Shen, Urquhart e Wang (2022).
  *
- *     node scripts/shen.js --solo-copertura   (conta i giorni validi, senza risultati)
- *     node scripts/shen.js                    (il test pre-registrato)
+ *     node scripts/esperimenti/shen.js --solo-copertura   (conta i giorni validi, senza risultati)
+ *     node scripts/esperimenti/shen.js                    (il test pre-registrato)
  *
  * Coppia giudicata: XBTUSD. XBTEUR è solo un confronto, fuori dal giudizio.
  * Il test si fa una volta sola: il report sovrascrive quello precedente solo se
@@ -22,11 +22,11 @@ import {
   rendimentiGiorno,
   segnoVariante,
   eleggibile
-} from "../lib/sessioni.js";
-import { giudicaGiorni } from "../lib/giudice.js";
-import { generatore } from "../lib/ricerca.js";
+} from "../../lib/sessioni.js";
+import { giudicaGiorni } from "../../lib/giudice.js";
+import { generatore } from "../../lib/ricerca.js";
 
-const RADICE = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const RADICE = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..");
 const dentro = (...parti) => path.join(RADICE, ...parti);
 
 // i parametri della pre-registrazione

@@ -1,9 +1,9 @@
 /**
- * scripts/b-universo-2020.js — la regola B di Liu e Tsyvinski su un universo senza senno di poi:
+ * scripts/esperimenti/b-universo-2020.js — la regola B di Liu e Tsyvinski su un universo senza senno di poi:
  * monete scelte con i dati fino al 31 dicembre 2020. Pre-registrata in registro/esperimenti.md
  * (commit 4cdd7e3, corretta in aa388bf prima dell'esecuzione).
  *
- *     node scripts/b-universo-2020.js
+ *     node scripts/esperimenti/b-universo-2020.js
  *
  * Un'esecuzione sola. Legge le candele giornaliere estratte in dati/archivio/b-universo-2020/,
  * applica la regola di universo, scrive report/b-universo-2020.md, report/dati/b-universo-2020.json
@@ -15,12 +15,12 @@ import path from "node:path";
 import crypto from "node:crypto";
 import { fileURLToPath } from "node:url";
 
-import { separaCoppia, costruisciUniverso, STABLECOIN, BITCOIN, VALUTE } from "../lib/bUniverso.js";
-import { serieSettimanale, periodo, equity, curvaPortafoglio, giudica, COSTO, LATO } from "../lib/bSettimane.js";
-import { permanenzeLineari, rendimentoSettimane } from "../lib/rotazione.js";
-import { drawdownMassimo } from "../lib/settimane.js";
+import { separaCoppia, costruisciUniverso, STABLECOIN, BITCOIN, VALUTE } from "../../lib/bUniverso.js";
+import { serieSettimanale, periodo, equity, curvaPortafoglio, giudica, COSTO, LATO } from "../../lib/bSettimane.js";
+import { permanenzeLineari, rendimentoSettimane } from "../../lib/rotazione.js";
+import { drawdownMassimo } from "../../lib/settimane.js";
 
-const RADICE = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const RADICE = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..");
 const daRadice = (...parti) => path.join(RADICE, ...parti);
 const CARTELLA = daRadice("dati", "archivio", "b-universo-2020");
 

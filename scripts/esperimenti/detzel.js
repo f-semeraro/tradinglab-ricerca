@@ -1,8 +1,8 @@
 /**
- * scripts/detzel.js — test di Detzel, Liu, Strauss, Zhou e Zhu (2021), medie mobili logaritmiche su
+ * scripts/esperimenti/detzel.js — test di Detzel, Liu, Strauss, Zhou e Zhu (2021), medie mobili logaritmiche su
  * Bitcoin. Pre-registrato in registro/esperimenti.md, prima di qualsiasi calcolo.
  *
- *     node scripts/detzel.js
+ *     node scripts/esperimenti/detzel.js
  *
  * Un'esecuzione sola, con due test: il principale (media a 7 giorni su XBTUSD, dal 1 aprile 2022 al
  * 28 giugno 2026, N = 1) decide il verdetto; la replica delle sei esposizioni (2021–2026, N = 6) è
@@ -23,10 +23,10 @@ import {
   statisticaMedia,
   giudicaEsposizione,
   costoDiPareggio
-} from "../lib/detzel.js";
-import { drawdownMassimo } from "../lib/settimane.js";
+} from "../../lib/detzel.js";
+import { drawdownMassimo } from "../../lib/settimane.js";
 
-const RADICE = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const RADICE = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..");
 const daRadice = (...parti) => path.join(RADICE, ...parti);
 
 // le cinque medie dello studio, con il costo per lato che azzera il vantaggio (tabella 6)
