@@ -6,6 +6,7 @@ import { fileURLToPath } from "node:url";
 
 import { leggiStrategia } from "../lib/configurazione.js";
 import { problemiSettimanale } from "../lib/prova.js";
+import { problemiGiornaliera } from "../lib/giornalieraProva.js";
 
 const RADICE = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const CARTELLA = path.join(RADICE, "strategie");
@@ -23,6 +24,11 @@ for (const nome of file) {
     // le strategie settimanali (la prova di Liu e Tsyvinski) hanno il loro validatore
     if (grezza.tipo === "settimanale") {
       assert.deepEqual(problemiSettimanale(grezza), []);
+      return;
+    }
+    // la variante «B giornaliera» pure: lo stesso validatore che usa il giro
+    if (grezza.tipo === "giornaliera") {
+      assert.deepEqual(problemiGiornaliera(grezza), []);
       return;
     }
     // leggiStrategia lancia se qualcosa non torna: il test fallisce con il motivo esatto

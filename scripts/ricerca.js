@@ -33,7 +33,8 @@ import {
 import { giudicaPermutazione } from "../lib/giudice.js";
 import { problemiStrategia } from "../lib/configurazione.js";
 import { formattaMomento } from "../lib/tempo.js";
-import { leggiJson, scriviAtomico, scriviJson } from "../lib/persistenza.js";
+import { numero } from "../lib/formato.js";
+import { leggiJson, leggiCandele, scriviAtomico, scriviJson } from "../lib/persistenza.js";
 
 const RADICE = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dentro = (...parti) => path.join(RADICE, ...parti);
@@ -45,19 +46,11 @@ const COLONNA_ESITO = 11;
 const DURATA = 86400; // le candele di ricerca sono giornaliere
 const INTERVALLO = 1440;
 
-const numero = (v, d = 2) => (Number.isFinite(v) ? v.toFixed(d).replace(".", ",") : "—");
-
-function leggiCsv(percorso) {
-  if (!fs.existsSync(percorso)) throw new Error(`manca ${path.relative(RADICE, percorso)}: lancia prima npm run dati`);
-  const righe = fs.readFileSync(percorso, "utf8").trim().split("\n");
-  righe.shift();
-  return righe
-    .map((r) => {
-      const v = r.split(",").map(Number);
-      return { momento: v[0], apertura: v[1], massimo: v[2], minimo: v[3], chiusura: v[4], volume: v[5] };
-    })
-    .filter((c) => Object.values(c).every(Number.isFinite))
-    .sort((a, b) => a.momento - b.momento);
+/** Le candele giornaliere di una coppia, da dati/storico/. */
+function candeleDi(coppia) {
+  const relativo = `dati/storico/${coppia}-${INTERVALLO}.csv`;
+  if (!fs.existsSync(dentro(relativo))) throw new Error(`manca ${relativo}: lancia prima npm run dati`);
+  return leggiCandele(dentro(relativo));
 }
 
 /** Le righe dei due registri: colonne seme, id, fase; l'esito solo per questo registro. */
@@ -99,7 +92,7 @@ function main() {
   if (!lab || !cfg || !base) throw new Error("mancano laboratorio.json, ricerca.json o strategie/rsi-base.json");
 
   const coppie = lab.coppieGiornaliere;
-  const serie = Object.fromEntries(coppie.map((c) => [c, leggiCsv(dentro("dati", "storico", `${c}-${INTERVALLO}.csv`))]));
+  const serie = Object.fromEntries(coppie.map((c) => [c, candeleDi(c)]));
   const fuso = lab.fusoOrario;
   const rng = generatore(cfg.seme);
 

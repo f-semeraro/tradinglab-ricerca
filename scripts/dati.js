@@ -3,39 +3,32 @@
  *
  *     npm run dati
  *
- * Per ogni coppia in laboratorio.json (`coppieGiornaliere`) prende le ultime
- * candele giornaliere chiuse da Kraken e le scrive in
- * dati/storico/<COPPIA>-1440.csv, la stessa convenzione del backtest. Kraken ne restituisce al massimo 720:
- * la storia più lunga di 720 giorni va costruita nel tempo, rilanciando questo
- * comando prima che le candele più vecchie escano dalla finestra.
+ * Per ogni coppia in laboratorio.json (`coppieGiornaliere`) prende le ultime candele giornaliere
+ * chiuse da Kraken e le AGGIUNGE a dati/storico/<COPPIA>-1440.csv, la stessa convenzione del
+ * backtest. Kraken ne restituisce al massimo 720: le candele già nel file restano, quelle nuove si
+ * aggiungono, e a parità di giorno vale il dato appena scaricato. La storia più lunga di 720 giorni
+ * si costruisce così, rilanciando il comando prima che le candele più vecchie escano dalla finestra
+ * di Kraken; se passa più tempo, il buco resta e viene contato.
  *
- * Una coppia che non risponde non ferma le altre: si segnala, e il comando
- * termina con errore alla fine, così non si lavora su un insieme incompleto
- * senza saperlo.
+ * Una coppia che non risponde non ferma le altre: si segnala, e il comando termina con errore alla
+ * fine, così non si lavora su un insieme incompleto senza saperlo.
  */
 
+import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { candeleChiuse } from "../lib/kraken.js";
-import { leggiJson, scriviAtomico } from "../lib/persistenza.js";
+import { unisciCandele, candeleMancanti } from "../lib/storico.js";
+import { dataISO } from "../lib/formato.js";
+import { leggiJson, leggiCandele, scriviCandele } from "../lib/persistenza.js";
 
 const RADICE = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const CARTELLA = path.join(RADICE, "dati", "storico");
 const INTERVALLO = 1440;
 const PAUSA_MS = 1000; // il pubblico di Kraken è gratuito: si chiede con calma
 
-const giorni = (secondi) => new Date(secondi * 1000).toISOString().slice(0, 10);
-
-/** Quante giornate mancano dentro la serie, senza contare le ultime candele chiuse fuori finestra. */
-function giornateMancanti(candele) {
-  let mancanti = 0;
-  for (let i = 1; i < candele.length; i++) {
-    const salto = (candele[i].momento - candele[i - 1].momento) / INTERVALLO / 60;
-    if (salto > 1) mancanti += salto - 1;
-  }
-  return mancanti;
-}
+const giorno = (candela) => dataISO(candela.momento * 1000);
 
 async function main() {
   const lab = leggiJson(path.join(RADICE, "laboratorio.json"));
@@ -47,25 +40,23 @@ async function main() {
   const falliti = [];
 
   for (const coppia of lab.coppieGiornaliere) {
-    const { candele, errore } = await candeleChiuse({ coppia, intervalloMinuti: INTERVALLO, adessoMs });
+    const { candele: scaricate, errore } = await candeleChiuse({ coppia, intervalloMinuti: INTERVALLO, adessoMs });
 
-    if (errore || candele.length === 0) {
+    if (errore || scaricate.length === 0) {
       falliti.push(`${coppia}: ${errore ?? "nessuna candela"}`);
       console.log(`${coppia.padEnd(10)} ERRORE: ${errore ?? "nessuna candela"}`);
       continue;
     }
 
-    const righe = candele.map((c) =>
-      [c.momento, c.apertura, c.massimo, c.minimo, c.chiusura, c.volume].join(",")
-    );
-    scriviAtomico(
-      path.join(CARTELLA, `${coppia}-${INTERVALLO}.csv`),
-      ["momento,apertura,massimo,minimo,chiusura,volume", ...righe].join("\n") + "\n"
-    );
+    const percorso = path.join(CARTELLA, `${coppia}-${INTERVALLO}.csv`);
+    const precedenti = fs.existsSync(percorso) ? leggiCandele(percorso) : [];
+    const candele = unisciCandele(precedenti, scaricate);
+    scriviCandele(percorso, candele);
 
-    const buchi = giornateMancanti(candele);
+    const buchi = candeleMancanti(candele, INTERVALLO);
     console.log(
-      `${coppia.padEnd(10)} ${String(candele.length).padStart(3)} giorni · ${giorni(candele[0].momento)} → ${giorni(candele.at(-1).momento)}` +
+      `${coppia.padEnd(10)} ${String(candele.length).padStart(4)} giorni (${candele.length - precedenti.length} nuovi) · ` +
+      `${giorno(candele[0])} → ${giorno(candele.at(-1))}` +
       (buchi > 0 ? ` · ${buchi} giorni mancanti` : "")
     );
 

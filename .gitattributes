@@ -1,0 +1,3 @@
+# I file di testo stanno nel repository e nella copia di lavoro con fine riga LF, su ogni sistema:
+# un CSV di dati non deve cambiare byte passando da Windows.
+* text=auto eol=lf

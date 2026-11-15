@@ -5,52 +5,48 @@
  *     npm run backtest -- --strategia rsi-base --da 2025-01-01 --a 2025-06-30
  *     npm run backtest -- --nota "primo confronto"
  *
- * Coppia e intervallo predefiniti sono quelli di laboratorio.json. Il file letto
- * è dati/storico/<COPPIA>-<intervallo>.csv.
+ * Coppia e intervallo predefiniti sono quelli di laboratorio.json. Il file letto è
+ * dati/storico/<COPPIA>-<intervallo>.csv. Senza --strategia si rigiocano tutte le strategie a
+ * blocchi di strategie/; le prove in avanti settimanali e giornaliere hanno un motore loro e si saltano.
  *
- * Usa le stesse funzioni del giro (lib/simulazione.js → lib/strategia.js →
- * valuta()) su un CSV di candele chiuse.
+ * Il calcolo è in lib/backtest.js, sulle stesse funzioni del giro (lib/simulazione.js →
+ * lib/strategia.js → valuta()). Questo file legge gli argomenti e i file, e scrive i risultati.
  *
- * L'ultimo anno di dati è ESCLUSO per configurazione (laboratorio.json,
- * escludiUltimiGiorni). Si include solo con --usa-ultimo-anno, che va scritto
- * apposta nel comando: l'ultimo anno è quello che si guarda per primo, e quello
- * su cui è più facile sbagliare.
+ * L'ultimo anno di dati è ESCLUSO per configurazione (laboratorio.json, escludiUltimiGiorni). Si
+ * include solo con --usa-ultimo-anno, che va scritto apposta nel comando: l'ultimo anno è quello
+ * che si guarda per primo, e quello su cui è più facile sbagliare.
  *
- * Non tocca risultati/: quello è lo stato dal vivo. Scrive
- * report/<strategia>-<coppia>-<intervallo>.md (sovrascritto) e aggiunge una riga a
- * registro/esperimenti.md (mai riscritto).
+ * Non tocca risultati/: quello è lo stato dal vivo. Scrive report/<strategia>-<coppia>-<intervallo>.md
+ * (sovrascritto) e aggiunge una riga a registro/esperimenti.md (mai riscritto). Prima valida tutte
+ * le strategie richieste, poi scrive: un errore non lascia mai il registro aggiornato a metà.
  */
 
 import fs from "node:fs";
 import path from "node:path";
-import crypto from "node:crypto";
 import { fileURLToPath } from "node:url";
 
-import { leggiStrategia, candeleNecessarie } from "../lib/configurazione.js";
-import { nuovoStato, avanza } from "../lib/simulazione.js";
-import { calcolaMetriche } from "../lib/metriche.js";
-import { giornoUTCInSecondi, formattaMomento } from "../lib/tempo.js";
-import { leggiJson, scriviAtomico } from "../lib/persistenza.js";
+import { leggiStrategia } from "../lib/configurazione.js";
+import {
+  rigiocabile,
+  finestraCandele,
+  primaCandelaValutabile,
+  eseguiBacktest,
+  periodoDi,
+  reportBacktest,
+  rigaRegistroBacktest,
+  riepilogoBacktest
+} from "../lib/backtest.js";
+import { impronta } from "../lib/impronta.js";
+import { dataOraUTC } from "../lib/formato.js";
+import { giornoUTCInSecondi } from "../lib/tempo.js";
+import { leggiJson, leggiCandele, scriviAtomico, aggiungiAlRegistro } from "../lib/persistenza.js";
 
 const RADICE = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dentro = (...parti) => path.join(RADICE, ...parti);
 const REGISTRO = dentro("registro", "esperimenti.md");
 
-const INTESTAZIONE_REGISTRO = [
-  "# Registro degli esperimenti",
-  "",
-  "Sola aggiunta: ogni backtest aggiunge una riga e non riscrive mai quelle precedenti.",
-  "Il risultato è sempre confrontato col «comprato e basta» sullo stesso periodo.",
-  "",
-  "| data (UTC) | strategia | coppia | impronta | periodo | operazioni | capitale | vs comprato e basta | drawdown | nota |",
-  "|---|---|---|---|---|---:|---:|---:|---:|---|",
-  ""
-].join("\n");
-
-function parseArgomenti(argv) {
-  const opzioni = {
-    strategie: [], coppia: null, intervallo: null, da: null, a: null, usaUltimoAnno: false, nota: ""
-  };
+function leggiArgomenti(argv) {
+  const opzioni = { strategie: [], coppia: null, intervallo: null, da: null, a: null, usaUltimoAnno: false, nota: "" };
   const valore = (i, nome) => {
     if (argv[i + 1] === undefined) throw new Error(`${nome} vuole un valore`);
     return argv[i + 1];
@@ -70,83 +66,37 @@ function parseArgomenti(argv) {
   return opzioni;
 }
 
-/** Il CSV: intestazione fissa, righe numeriche. Le righe guaste si scartano. */
-function leggiCsv(percorso) {
-  if (!fs.existsSync(percorso)) {
-    throw new Error(`manca ${path.relative(RADICE, percorso)}`);
-  }
-  const righe = fs.readFileSync(percorso, "utf8").trim().split("\n");
-  const intestazione = righe.shift().split(",");
-  const attesa = ["momento", "apertura", "massimo", "minimo", "chiusura", "volume"];
-  if (intestazione.join(",") !== attesa.join(",")) {
-    throw new Error("intestazione del CSV diversa da quella attesa");
-  }
-  return righe
-    .map((r) => {
-      const v = r.split(",").map(Number);
-      return { momento: v[0], apertura: v[1], massimo: v[2], minimo: v[3], chiusura: v[4], volume: v[5] };
-    })
-    .filter((c) => Object.values(c).every(Number.isFinite))
-    .sort((x, y) => x.momento - y.momento);
+/** Una data AAAA-MM-GG come mezzanotte UTC in secondi; null se l'opzione non è stata data. */
+function giorno(testo, opzione) {
+  if (testo === null) return null;
+  const secondi = giornoUTCInSecondi(testo);
+  if (secondi === null) throw new Error(`${opzione} vuole una data AAAA-MM-GG vera, non ${testo}`);
+  return secondi;
 }
 
-const numero = (valore, decimali = 2) =>
-  Number.isFinite(valore) ? valore.toFixed(decimali).replace(".", ",") : "—";
-
-const pulisci = (testo) => String(testo).replace(/[|\r\n]+/g, " ").trim();
-
-function appendiRegistro(riga) {
-  if (!fs.existsSync(REGISTRO)) {
-    scriviAtomico(REGISTRO, INTESTAZIONE_REGISTRO);
-  }
-  fs.appendFileSync(REGISTRO, riga + "\n", "utf8");
-}
-
-function reportStrategia({ nome, impronta, lab, coppia, intervallo, csvRel, candele, periodo, esclusi, stato, m }) {
-  const operazioni = stato.operazioni;
-  const etichetta = intervallo === 1440 ? "giornaliere" : `da ${intervallo} minuti`;
-  const righe = [
-    `# Backtest — ${nome} su ${coppia}`,
-    "",
-    `Dati: \`${csvRel}\`, candele ${etichetta}.`,
-    `Periodo: ${periodo} (${numero(candele.length * intervallo / 1440, 1)} giorni di candele).`,
-    esclusi > 0
-      ? `Escluse ${esclusi} candele dell'ultimo anno (configurazione: ${lab.escludiUltimiGiorni} giorni). Per includerle: \`--usa-ultimo-anno\`.`
-      : "Ultimo anno incluso per scelta esplicita (`--usa-ultimo-anno`).",
-    `Impronta della configurazione: \`${impronta}\`.`,
-    "",
-    "| | |",
-    "|---|---|",
-    `| capitale finale | ${numero(m.capitaleAttuale)} € (${numero(m.variazionePercento)}%) |`,
-    `| vs comprato e basta | ${numero(m.benchmark.differenzaDalMercato)} punti |`,
-    `| operazioni chiuse | ${m.operazioni.chiuse} |`,
-    `| win rate | ${m.operazioni.winRate === null ? "—" : numero(m.operazioni.winRate, 1) + "%"} |`,
-    `| drawdown massimo | ${m.drawdownMassimo === null ? "—" : numero(m.drawdownMassimo) + "%"} |`,
-    `| segnali fermati dal rischio | ${stato.blocchi.length} |`,
-    `| posizione ancora aperta a fine periodo | ${stato.posizione ? "sì" : "no"} |`,
-    ""
-  ];
-
-  if (operazioni.length > 0) {
-    righe.push("## Operazioni", "", "| # | ingresso | uscita | prezzo ingresso | prezzo uscita | risultato | come è uscita |", "|---:|---|---|---:|---:|---:|---|");
-    for (const o of operazioni) {
-      righe.push(
-        `| ${o.numero} | ${formattaMomento(o.momentoIngresso, lab.fusoOrario, { conAnno: true })} | ` +
-        `${formattaMomento(o.momentoUscita, lab.fusoOrario, { conAnno: true })} | ` +
-        `${numero(o.prezzoIngresso)} | ${numero(o.prezzoUscita)} | ${numero(o.risultatoPercento)}% | ${o.uscitaScattata ?? "—"} |`
-      );
+/** I nomi delle strategie da rigiocare: quelle chieste, oppure tutte quelle a blocchi di strategie/. */
+function nomiStrategie(richieste) {
+  const configurazione = (nome) => leggiJson(dentro("strategie", `${nome}.json`));
+  if (richieste.length > 0) {
+    for (const nome of richieste) {
+      const grezza = configurazione(nome);
+      if (!grezza) throw new Error(`manca strategie/${nome}.json`);
+      if (!rigiocabile(grezza)) {
+        throw new Error(`${nome} è una prova in avanti di tipo «${grezza.tipo}»: non si rigioca con questo comando`);
+      }
     }
-    righe.push("");
+    return richieste;
   }
-
-  righe.push("---", "", "Simulazione su carta. Nessun soldo vero, nessuna chiave, nessuna consulenza.");
-  return righe.join("\n") + "\n";
+  const tutte = fs.readdirSync(dentro("strategie")).filter((f) => f.endsWith(".json")).map((f) => path.basename(f, ".json")).sort();
+  const nomi = tutte.filter((nome) => rigiocabile(configurazione(nome)));
+  if (nomi.length === 0) throw new Error("in strategie/ non c'è nessuna strategia a blocchi da rigiocare");
+  return nomi;
 }
 
 function main() {
   const lab = leggiJson(dentro("laboratorio.json"));
   if (!lab) throw new Error("manca laboratorio.json");
-  const opzioni = parseArgomenti(process.argv.slice(2));
+  const opzioni = leggiArgomenti(process.argv.slice(2));
 
   const coppia = opzioni.coppia ?? lab.mercato;
   const intervallo = opzioni.intervallo ?? lab.intervalloMinuti;
@@ -154,92 +104,67 @@ function main() {
     throw new Error(`--intervallo vuole un numero di minuti positivo, non ${opzioni.intervallo}`);
   }
 
-  const nomi = opzioni.strategie.length > 0
-    ? opzioni.strategie
-    : fs.readdirSync(dentro("strategie")).filter((f) => f.endsWith(".json")).map((f) => path.basename(f, ".json")).sort();
+  const fonte = `dati/storico/${coppia}-${intervallo}.csv`;
+  if (!fs.existsSync(dentro(fonte))) throw new Error(`manca ${fonte}`);
 
-  const csvRel = `dati/storico/${coppia}-${intervallo}.csv`;
-  const durata = intervallo * 60;
-  let candele = leggiCsv(dentro(csvRel));
-
-  if (opzioni.da) {
-    const da = giornoUTCInSecondi(opzioni.da);
-    if (da === null) throw new Error(`--da vuole una data AAAA-MM-GG vera, non ${opzioni.da}`);
-    candele = candele.filter((c) => c.momento >= da);
-  }
-  if (opzioni.a) {
-    const a = giornoUTCInSecondi(opzioni.a);
-    if (a === null) throw new Error(`--a vuole una data AAAA-MM-GG vera, non ${opzioni.a}`);
-    candele = candele.filter((c) => c.momento < a + 86400); // il giorno indicato è compreso
-  }
-
-  // l'orologio si legge qui: serve solo a decidere dove finisce «l'ultimo anno»
-  const limite = Math.floor(Date.now() / 1000) - lab.escludiUltimiGiorni * 86400;
-  let esclusi = 0;
-  if (!opzioni.usaUltimoAnno) {
-    const prima = candele.length;
-    candele = candele.filter((c) => c.momento + durata <= limite);
-    esclusi = prima - candele.length;
-  }
-
+  // l'orologio si legge qui: serve a decidere dove finisce «l'ultimo anno» e a datare la riga di registro
+  const adessoMs = Date.now();
+  const { candele, escluse } = finestraCandele(leggiCandele(dentro(fonte)), {
+    da: giorno(opzioni.da, "--da"),
+    a: giorno(opzioni.a, "--a"),
+    chiuseEntro: opzioni.usaUltimoAnno ? null : Math.floor(adessoMs / 1000) - lab.escludiUltimiGiorni * 86400,
+    intervalloMinuti: intervallo
+  });
   if (candele.length === 0) {
     throw new Error("nessuna candela nella finestra richiesta (ricorda: l'ultimo anno è escluso di default)");
   }
 
-  const periodo = `${formattaMomento(candele[0].momento, lab.fusoOrario, { conAnno: true })} → ` +
-                  `${formattaMomento(candele.at(-1).momento, lab.fusoOrario, { conAnno: true })}`;
-
-  for (const nome of nomi) {
+  // prima si valida tutto, poi si scrive: il registro è a sola aggiunta
+  const strategie = nomiStrategie(opzioni.strategie).map((nome) => {
     const strategia = leggiStrategia(dentro("strategie", `${nome}.json`));
-    const primaValutabile = candeleNecessarie(strategia) - 1;
-    if (candele.length <= primaValutabile) {
-      throw new Error(`${nome}: servono almeno ${primaValutabile + 1} candele, nella finestra ce ne sono ${candele.length}`);
+    const servono = primaCandelaValutabile(strategia) + 1;
+    if (candele.length < servono) {
+      throw new Error(`${nome}: servono almeno ${servono} candele, nella finestra ce ne sono ${candele.length}`);
     }
+    return { nome, strategia };
+  });
 
-    const stato = nuovoStato({
-      capitaleIniziale: lab.capitaleIniziale,
-      mercato: coppia,
-      intervalloMinuti: intervallo,
-      fusoOrario: lab.fusoOrario
-    });
-    avanza(stato, candele, primaValutabile, candele.length, strategia);
+  const base = { capitaleIniziale: lab.capitaleIniziale, mercato: coppia, intervalloMinuti: intervallo, fusoOrario: lab.fusoOrario };
+  const periodo = periodoDi(candele, lab.fusoOrario);
+  const corse = strategie.map(({ nome, strategia }) => ({
+    nome,
+    impronta: impronta(strategia),
+    ...eseguiBacktest({ strategia, candele, base })
+  }));
 
-    const ultimo = stato.istantanee.at(-1);
-    const m = calcolaMetriche(stato, {
-      prezzoMercato: ultimo.prezzo,
-      prezzoBenchmark: null,
-      adessoSecondi: ultimo.momento
-    });
-
-    // l'impronta: stessa configurazione, stessa impronta. Serve a riconoscere un esperimento ripetuto
-    const impronta = crypto.createHash("sha256").update(JSON.stringify(strategia)).digest("hex").slice(0, 10);
-
-    scriviAtomico(dentro("report", `${nome}-${coppia}-${intervallo}.md`), reportStrategia({
-      nome, impronta, lab, coppia, intervallo, csvRel, candele, periodo, esclusi, stato, m
-    }));
-
-    const data = new Date().toISOString().slice(0, 16).replace("T", " ");
-    appendiRegistro([
-      `| ${data}`,
-      nome,
+  for (const corsa of corse) {
+    scriviAtomico(dentro("report", `${corsa.nome}-${coppia}-${intervallo}.md`), reportBacktest({
+      nome: corsa.nome,
+      impronta: corsa.impronta,
       coppia,
-      impronta,
+      intervalloMinuti: intervallo,
+      fonte,
+      candele,
+      fuso: lab.fusoOrario,
+      escluse,
+      giorniEsclusi: lab.escludiUltimiGiorni,
+      stato: corsa.stato,
+      metriche: corsa.metriche
+    }));
+    aggiungiAlRegistro(REGISTRO, rigaRegistroBacktest({
+      data: dataOraUTC(adessoMs),
+      nome: corsa.nome,
+      coppia,
+      impronta: corsa.impronta,
       periodo,
-      m.operazioni.chiuse,
-      `${numero(m.capitaleAttuale)} € (${numero(m.variazionePercento)}%)`,
-      `${numero(m.benchmark.differenzaDalMercato)} punti`,
-      m.drawdownMassimo === null ? "—" : `${numero(m.drawdownMassimo)}%`,
-      `${pulisci(opzioni.nota)} |`
-    ].join(" | "));
-
-    console.log(
-      `${nome} · ${coppia}: ${m.operazioni.chiuse} operazioni · capitale ${numero(m.capitaleAttuale)} € ` +
-      `(${numero(m.variazionePercento)}%) · vs comprato e basta ${numero(m.benchmark.differenzaDalMercato)} punti`
-    );
+      metriche: corsa.metriche,
+      nota: opzioni.nota
+    }));
+    console.log(riepilogoBacktest({ nome: corsa.nome, coppia, metriche: corsa.metriche }));
   }
 
-  if (esclusi > 0) {
-    console.log(`\n(${esclusi} candele dell'ultimo anno escluse: configurazione. Per includerle: --usa-ultimo-anno)`);
+  if (escluse > 0) {
+    console.log(`\n(${escluse} candele dell'ultimo anno escluse: configurazione. Per includerle: --usa-ultimo-anno)`);
   }
   console.log("Report in report/. Riga aggiunta a registro/esperimenti.md.");
 }
