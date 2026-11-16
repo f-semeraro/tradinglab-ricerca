@@ -9906,6 +9906,83 @@
       "portafoglio": 100,
       "mercato": 69.39703226140989,
       "prezzo": 64.24
+    },
+    {
+      "momento": 1794823200,
+      "candela": 1794819600,
+      "portafoglio": 100,
+      "mercato": 69.47265169257892,
+      "prezzo": 64.31
+    },
+    {
+      "momento": 1794826800,
+      "candela": 1794823200,
+      "portafoglio": 100,
+      "mercato": 70.31526821131958,
+      "prezzo": 65.09
+    },
+    {
+      "momento": 1794830400,
+      "candela": 1794826800,
+      "portafoglio": 100,
+      "mercato": 70.00198771076215,
+      "prezzo": 64.8
+    },
+    {
+      "momento": 1794834000,
+      "candela": 1794830400,
+      "portafoglio": 100,
+      "mercato": 69.2782017267157,
+      "prezzo": 64.13
+    },
+    {
+      "momento": 1794837600,
+      "candela": 1794834000,
+      "portafoglio": 100,
+      "mercato": 69.42944058905375,
+      "prezzo": 64.27
+    },
+    {
+      "momento": 1794841200,
+      "candela": 1794837600,
+      "portafoglio": 100,
+      "mercato": 70.48811262542023,
+      "prezzo": 65.25
+    },
+    {
+      "momento": 1794844800,
+      "candela": 1794841200,
+      "portafoglio": 100,
+      "mercato": 69.45104614081635,
+      "prezzo": 64.29
+    },
+    {
+      "momento": 1794848400,
+      "candela": 1794844800,
+      "portafoglio": 100,
+      "mercato": 70.0560015901686,
+      "prezzo": 64.85
+    },
+    {
+      "momento": 1794852000,
+      "candela": 1794848400,
+      "portafoglio": 100,
+      "mercato": 69.88315717606795,
+      "prezzo": 64.69
+    },
+    {
+      "momento": 1794855600,
+      "candela": 1794852000,
+      "portafoglio": 100,
+      "mercato": 70.16402934898151,
+      "prezzo": 64.95
+    },
+    {
+      "momento": 1794859200,
+      "candela": 1794855600,
+      "portafoglio": 100,
+      "mercato": 70.1964376766254,
+      "prezzo": 64.98
     }
   ],
   "benchmark": {
