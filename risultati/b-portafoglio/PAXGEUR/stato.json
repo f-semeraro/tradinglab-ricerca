@@ -5,21 +5,32 @@
     "intervalloCandele": 1440,
     "fusoOrario": "Europe/Rome"
   },
-  "capitale": 0,
-  "posizione": {
-    "mercato": "PAXGEUR",
-    "prezzoIngresso": 3669.7639649999996,
-    "prezzoMercatoIngresso": 3667.93,
-    "quantita": 0.027222486474031287,
-    "controvaloreIngresso": 99.90009990009992,
-    "commissioneIngresso": 0.09990009990009992,
-    "momentoIngresso": 1794186000,
-    "candelaIngresso": 1794182400,
-    "motivoIngresso": "quinto più alto",
-    "condizioniIngresso": null,
-    "segnaleId": "PAXGEUR-367"
-  },
-  "operazioni": [],
+  "capitale": 95.48538847380472,
+  "posizione": null,
+  "operazioni": [
+    {
+      "numero": 1,
+      "mercato": "PAXGEUR",
+      "quantita": 0.027222486474031287,
+      "prezzoIngresso": 3669.7639649999996,
+      "prezzoUscita": 3511.10357,
+      "prezzoMercatoIngresso": 3667.93,
+      "prezzoMercatoUscita": 3512.86,
+      "momentoIngresso": 1794186000,
+      "momentoUscita": 1794790800,
+      "durataSecondi": 604800,
+      "risultatoEuro": -4.514611526195296,
+      "risultatoPercento": -4.514611526195296,
+      "commissioniTotali": 0.19548106934334789,
+      "commissioneIngresso": 0.09990009990009992,
+      "commissioneUscita": 0.09558096944324797,
+      "motivoIngresso": "quinto più alto",
+      "motivoUscita": "fine della settimana",
+      "condizioniIngresso": null,
+      "condizioniUscita": null,
+      "uscitaScattata": null
+    }
+  ],
   "istantanee": [
     {
       "momento": 1793577600,
@@ -34,6 +45,13 @@
       "portafoglio": 98.89629888664352,
       "mercato": 103.60790947051397,
       "prezzo": 3632.89
+    },
+    {
+      "momento": 1794787200,
+      "candela": 1794700800,
+      "portafoglio": 95.48538847380472,
+      "mercato": 100.59198098754122,
+      "prezzo": 3527.14
     }
   ],
   "benchmark": {
@@ -51,9 +69,10 @@
     "impronta": "b77d6170b06a",
     "K0": 365,
     "eseguite": [
-      367
+      367,
+      368
     ],
-    "ultimaK": 366,
+    "ultimaK": 367,
     "inSospeso": null,
     "lacune": []
   }
