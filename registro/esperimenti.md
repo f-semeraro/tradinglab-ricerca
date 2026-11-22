@@ -331,6 +331,8 @@ Scritta il 24 ottobre 2026, prima di attivare la strategia. Test pre-registrato:
 
 **Monitoraggio.** In testa a `SINTESI.md` l'ora dell'ultimo giro. Se il giro non gira da più di 24 ore, o se una domenica non è elaborata entro le 23:59 di lunedì, ora di Roma, la segnalazione va in evidenza. Il dettaglio per moneta va in `report/b-portafoglio-monete.md`; `SINTESI.md` ha una riga per il portafoglio, con settimane trascorse, operazioni chiuse, rendimento contro il buy and hold, drawdown e l'etichetta «prova in avanti: tendenza, non indipendente da liu-b e detzel-140».
 
+**Nota del 22 novembre 2026, a prova in corso: PAXGEUR.** PAXGEUR è un token ancorato all'oro, non una criptovaluta. La correzione proposta il 1 novembre per escluderlo dall'universo non è stata fatta prima della partenza. PAXGEUR resta quindi nell'universo, e il verdetto si calcola sulle 20 monete pre-registrate. Questa nota è aggiunta il 22 novembre 2026, a prova in corso, dopo aver visto che l'unica operazione chiusa di questa prova è su PAXGEUR (−4,5%, dal 9 al 16 novembre). Nel report del verdetto, solo come informazione, si mostrerà anche il risultato di questa prova e della variante «B giornaliera» senza PAXGEUR, con lo stesso giudice. L'esito ufficiale non cambia.
+
 ## Pre-registrazione: variante «B giornaliera» della regola B, con controllo giornaliero dell'ingresso
 
 Scritta il 25 ottobre 2026, prima di qualsiasi calcolo sui rendimenti di questo test. Ipotesi nuova e pre-registrata. Non tocca liu-b né la prova in avanti del portafoglio. L'idea nasce dopo aver visto i risultati di liu-b su questi periodi: il test A non è quindi indipendente da quei risultati.
@@ -422,6 +424,8 @@ Scritta il 25 ottobre 2026, prima di attivare la strategia e prima di qualsiasi 
 (i) Verdetto legato alla durata di liu-b.
 
 **Monitoraggio.** In `risultati/SINTESI.md`, una sezione propria per la variante, con etichetta «prova in avanti: tendenza, non indipendente da liu-b», giorni trascorsi, operazioni chiuse, rendimento contro buy and hold, drawdown e verdetto. Un avviso se una giornata non è entrata nello storico entro 24 ore dalla sua chiusura, oltre a quello già previsto sul giro fermo. Il workflow committa `dati/giornaliere/`, se esiste.
+
+**Nota del 22 novembre 2026, a prova in corso: PAXGEUR.** Come per la prova del portafoglio liu-b: PAXGEUR, token ancorato all'oro e non una criptovaluta, resta nell'universo, perché la correzione proposta il 1 novembre per escluderlo non è stata fatta prima della partenza. Il verdetto si calcola sulle 20 monete pre-registrate. Questa nota è aggiunta il 22 novembre 2026, a prova in corso, dopo aver visto che l'unica operazione chiusa del portafoglio liu-b è su PAXGEUR (−4,5%). Delle due operazioni chiuse di questa variante, una è su PAXGEUR e l'altra su TRXEUR. Nel report del verdetto, solo come informazione, si mostrerà anche il risultato di entrambe le prove senza PAXGEUR, con lo stesso giudice. L'esito ufficiale non cambia.
 
 | data (UTC) | strategia | coppia | impronta | periodo | operazioni | capitale | vs comprato e basta | drawdown | nota |
 |---|---|---|---|---|---:|---:|---:|---:|---|
