@@ -8,7 +8,8 @@ import {
   datiPortafoglio,
   avvisiGiornaliera,
   giudizio,
-  curvaSenzaRibilanciamento
+  curvaSenzaRibilanciamento,
+  dettaglioGiornaliera
 } from "../lib/giornalieraProva.js";
 import { richiestaGiornalieraDaFare } from "../lib/politicaRichieste.js";
 
@@ -122,4 +123,21 @@ test("curvaSenzaRibilanciamento: due monete uguali danno la curva di una sola", 
   const m = { e: [1, 1, 0, 0], R: [0.01, -0.02, 0.03, 0.01] };
   assert.deepEqual(curvaSenzaRibilanciamento([m, { ...m }]), curvaSenzaRibilanciamento([m]));
   assert.deepEqual(curvaSenzaRibilanciamento([]), [1]);
+});
+
+test("dettaglioGiornaliera: una permanenza finita prima dell'ultimo giorno è chiusa, una che lo tocca è aperta", () => {
+  const dati = {
+    giorni: 10,
+    monete: [{ coppia: "AAAEUR", tolta: false, e: [0, 1, 1, 0, 0, 0, 0, 1, 1, 1], R: Array(10).fill(0.01), attiva: Array(10).fill(1) }]
+  };
+  const [moneta] = dettaglioGiornaliera(dati, "2026-11-02");
+  assert.equal(moneta.dentro, true);
+  assert.equal(moneta.operazioniChiuse.length, 1);
+  const [chiusa] = moneta.operazioniChiuse;
+  assert.equal(chiusa.giorni, 2);
+  assert.equal(chiusa.momentoIngresso, Date.parse("2026-11-03T00:00:00Z") / 1000, "l'ingresso è la chiusura del 2 novembre");
+  assert.equal(chiusa.momentoUscita, Date.parse("2026-11-05T00:00:00Z") / 1000, "l'uscita è la chiusura del 4 novembre");
+  assert.ok(Math.abs(chiusa.risultato - (0.9985 ** 2 * 1.01 ** 2 - 1)) < 1e-12, "due lati di costo");
+  assert.equal(moneta.posizioneAperta.giorni, 3);
+  assert.ok(Math.abs(moneta.posizioneAperta.risultato - (0.9985 * 1.01 ** 3 - 1)) < 1e-12, "solo il costo d'ingresso");
 });

@@ -20,3 +20,6 @@ Thumbs.db
 desktop.ini
 .vscode/
 .idea/
+
+# la pagina pubblica: la genera scripts/dashboard.js e la pubblica il workflow, non si committa
+_site/

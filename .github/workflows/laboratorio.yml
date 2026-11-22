@@ -47,3 +47,40 @@ jobs:
             git pull --rebase --quiet
             git push
           fi
+
+  # La pagina pubblica, da risultati/ e dati/ appena salvati, su GitHub Pages: non si committa.
+  # È un job a parte, che parte anche se il giro è fallito (la pagina deve poter dire che è fermo).
+  # Se non si genera o non si pubblica, il giro e il commit dei risultati sono già fatti e restano validi:
+  # continue-on-error tiene il workflow verde, e l'errore resta visibile in questo job.
+  pagina:
+    needs: giro
+    if: always()
+    continue-on-error: true
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.pubblicazione.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main # i risultati appena committati dal giro, non il commit che ha fatto partire il workflow
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Genera la pagina
+        run: node scripts/dashboard.js
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Pubblica su GitHub Pages
+        id: pubblicazione
+        uses: actions/deploy-pages@v4

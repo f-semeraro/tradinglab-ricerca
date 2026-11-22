@@ -111,6 +111,12 @@ Il backtest non tocca `risultati/`. Scrive `report/<strategia>-<coppia>-<interva
 
 `npm run giro` in locale scrive in `risultati/` del tuo clone. Di solito non serve: lo fa il workflow.
 
+## La dashboard pubblica
+
+Dopo ogni giro il workflow `laboratorio` genera `_site/index.html` con `npm run dashboard` e la pubblica su GitHub Pages, senza committarla: <https://f-semeraro.github.io/tradinglab-ricerca/>. È un file solo, con CSS e grafici dentro, e non fa nessuna richiesta di rete. Legge soltanto `risultati/` e `dati/`, e prende i numeri dalle stesse funzioni di `risultati/SINTESI.md` (`lib/sintesi.js`): un test verifica che sugli stessi dati la pagina e la sintesi scrivano le stesse cifre. Un dato che non esiste ancora è scritto come tale, mai come uno zero. L'avviso sul giro fermo si ricontrolla nel browser, con l'orologio di chi guarda: una pagina che smette di aggiornarsi lo dice da sola.
+
+Se la pagina non si genera o non si pubblica, il giro e il commit dei risultati sono già fatti: il job `pagina` è separato e non fa fallire il workflow. Per pubblicarla la prima volta, in *Settings → Pages* la sorgente va impostata su *GitHub Actions*.
+
 `npm run dati` scarica le candele giornaliere delle venti coppie e le aggiunge a quelle già nei CSV: la storia si allunga a ogni esecuzione, invece di restare alle ultime 720 candele di Kraken. `npm run ricerca` lancia il generatore: è lento (una decina di minuti) e scrive in `registro/ricerca.csv`, in `report/` e, se qualcosa passa, in `strategie/`. Per la corsa vera usa il workflow `ricerca`, non il terminale.
 
 ## Il protocollo
