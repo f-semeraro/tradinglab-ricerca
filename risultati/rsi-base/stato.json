@@ -11222,6 +11222,90 @@
       "portafoglio": 100,
       "mercato": 70.76898479833379,
       "prezzo": 65.51
+    },
+    {
+      "momento": 1795500000,
+      "candela": 1795496400,
+      "portafoglio": 100,
+      "mercato": 71.03905419536605,
+      "prezzo": 65.76
+    },
+    {
+      "momento": 1795503600,
+      "candela": 1795500000,
+      "portafoglio": 100,
+      "mercato": 71.16868750594152,
+      "prezzo": 65.88
+    },
+    {
+      "momento": 1795507200,
+      "candela": 1795503600,
+      "portafoglio": 100,
+      "mercato": 70.75818202245249,
+      "prezzo": 65.5
+    },
+    {
+      "momento": 1795510800,
+      "candela": 1795507200,
+      "portafoglio": 100,
+      "mercato": 70.34767653896346,
+      "prezzo": 65.12
+    },
+    {
+      "momento": 1795514400,
+      "candela": 1795510800,
+      "portafoglio": 100,
+      "mercato": 69.81834052078021,
+      "prezzo": 64.63
+    },
+    {
+      "momento": 1795518000,
+      "candela": 1795514400,
+      "portafoglio": 100,
+      "mercato": 69.46184891669763,
+      "prezzo": 64.3
+    },
+    {
+      "momento": 1795521600,
+      "candela": 1795518000,
+      "portafoglio": 100,
+      "mercato": 69.87235440018668,
+      "prezzo": 64.68
+    },
+    {
+      "momento": 1795525200,
+      "candela": 1795521600,
+      "portafoglio": 100,
+      "mercato": 69.63469333079827,
+      "prezzo": 64.46
+    },
+    {
+      "momento": 1795528800,
+      "candela": 1795525200,
+      "portafoglio": 100,
+      "mercato": 68.66244350148214,
+      "prezzo": 63.56
+    },
+    {
+      "momento": 1795532400,
+      "candela": 1795528800,
+      "portafoglio": 100,
+      "mercato": 68.8244851397015,
+      "prezzo": 63.71
+    },
+    {
+      "momento": 1795536000,
+      "candela": 1795532400,
+      "portafoglio": 100,
+      "mercato": 67.93865751743569,
+      "prezzo": 62.89
+    },
+    {
+      "momento": 1795539600,
+      "candela": 1795536000,
+      "portafoglio": 100,
+      "mercato": 67.99267139684213,
+      "prezzo": 62.94
     }
   ],
   "benchmark": {
